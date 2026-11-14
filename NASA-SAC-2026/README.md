@@ -21,8 +21,8 @@ what is already done, what the focus is today, what we honestly don't know,
 and **who actually pays** for it.
 
 ## Astronaut crew
-Six selectable characters: Theo, Davi, Henrique, Caio, Nathan, plus a nameless
-astronaut any player can claim and name themselves (defaults to "Astronaut").
+Six selectable characters, one per team member: **Theo, Davi, Henrique, Caio,
+Nathan and Luca**. Luca's portrait carries the Brazil flag but no name tag.
 
 Each player picks one at the start; duplicates lock out. The crew rotates duty
 one astronaut per sol — the on-duty astronaut appears in the HUD and is named in
