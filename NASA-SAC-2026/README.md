@@ -59,6 +59,34 @@ Verified winnable at every combination (smart play, 10 runs each):
 | Standard   | 100%  | 100%      | 30%       |
 | Expedition | 100%  | 80%       | 60%       |
 
+## Crew specialisms
+Each astronaut is genuinely better at one job and genuinely worse at another,
+so **who is on duty changes what today's best move is**:
+
+| Astronaut | Role | Good at | Weak at |
+|---|---|---|---|
+| Theo | Engineer | Power systems (+40%) | Not a medic |
+| Davi | Geologist | Finding good ground (+38%) | Stays out too long |
+| Henrique | Flight surgeon | Keeping the crew alive (+45%) | Slows the mission |
+| Caio | Radiation officer | Shielding (+45%) | Heavy on power |
+| Nathan | Systems operator | Wastes nothing (costs -18%) | Never pushes |
+| Luca | Rover pilot | Covering ground (+30%) | Light on shielding |
+
+Action cards show the numbers *after* the on-duty astronaut's specialism, so
+players can see the difference rather than being told about it.
+
+Verified: every astronaut can win solo at every difficulty, and none dominates.
+
+## Situational scenes
+The surface reacts to what is happening that sol:
+- **Solar storm** (severity 3 or a direct hit) — the sky pulses red, off-duty
+  crew break off and huddle against the habitat
+- **Dust storm** (Mars) — drifting butterscotch haze across the scene
+- **Lunar night** (Moon) — everything darkens, solar output stops
+- **Choosing an action** walks the on-duty astronaut to that job: the arrays
+  for solar work, the habitat for shielding or life support, out along the
+  mission line to push progress
+
 ## Events
 Two kinds, and the game never confuses them:
 

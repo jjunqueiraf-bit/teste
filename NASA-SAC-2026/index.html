@@ -72,12 +72,16 @@
   .av{background:var(--panel2);border:var(--px) solid var(--line);padding:0;cursor:pointer;
     overflow:hidden;position:relative;font:inherit;color:var(--ink)}
   .av img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 38%;image-rendering:auto}
-  .av .nm{padding:7px 4px;font-size:13px;text-align:center;letter-spacing:1px}
+  .av .nm{padding:7px 5px;font-size:13px;text-align:center;letter-spacing:1px}
+  .av .nm em{display:block;font-style:normal;font-size:10px;color:var(--shd);margin-top:3px;letter-spacing:0}
+  .av .nm .gb{display:block;font-size:10px;color:var(--dim);margin-top:4px;line-height:1.5;letter-spacing:0}
   .av:hover{border-color:#4a5f93}
   .av.sel{border-color:var(--shd);box-shadow:inset 0 0 0 2px var(--shd)}
   .av.taken{opacity:.3;pointer-events:none;filter:grayscale(1)}
   .av .num{position:absolute;top:0;left:0;background:var(--shd);color:#04101f;
     font-size:11px;padding:2px 6px;font-weight:bold}
+  #fxtag{display:none;border:var(--px) solid var(--line);background:#0a1020;
+    padding:7px 10px;font-size:12px;letter-spacing:1px;margin-top:-4px}
   .duty{display:flex;align-items:center;gap:10px;background:var(--panel);
     border:var(--px) solid var(--line);padding:8px 10px;margin-bottom:12px}
   .duty img{width:46px;height:46px;border:2px solid var(--line);display:block}
@@ -172,6 +176,7 @@
 <!-- GAME -->
 <section id="s-game" class="screen">
   <canvas id="scene" width="320" height="140"></canvas>
+  <div id="fxtag"></div>
   <div class="card" style="margin-top:12px;padding:10px">
     <div style="display:flex;justify-content:space-between;font-size:13px">
       <span id="solLab">SOL 1</span><span id="missLab" class="dim"></span>
@@ -256,6 +261,7 @@ const MISSIONS = {
 };
 
 /* ---------- ACTIONS: every one costs something. No free option. ---------- */
+const SITE = {prog:null, shield:75, solar:186, life:84, hold:70};  // where the work happens
 const ACTIONS = {
  moon:[
   {id:"harvest",n:"RUN THE HARVESTER",d:"Dig regolith and bake out helium-3. Heavy power draw, and the crew is outside.",
@@ -296,6 +302,38 @@ const DIFFS = {
         pwr:70, life:74, shd:48, rad:1.05, drain:1},
  cmdr: {k:'cmdr',  n:'COMMANDER', d:'Thin margins. Storms bite.',
         pwr:58, life:62, shd:36, rad:1.55, drain:1}
+};
+
+/* ---------- CREW SPECIALISMS ----------
+   Real crews carry specialists. Each astronaut is genuinely better at one job
+   and genuinely worse at another - so WHO is on duty changes what today's
+   best move is. gain = multiplier on what an action gives you,
+   cost = multiplier on what it takes away. */
+const TRAITS = {
+ theo:{role:'ENGINEER', icon:'\u26a1',
+   good:'Power systems', bad:'Not a medic',
+   d:'Squeezes more from the reactor and arrays, but is clumsy with the medical bay.',
+   gain:{pwr:1.40, life:0.82}},
+ davi:{role:'GEOLOGIST', icon:'\u26cf',
+   good:'Finding the good ground', bad:'Stays out too long',
+   d:'Reads the terrain better than anyone, and keeps working past the safe hour.',
+   gain:{prog:1.38}, cost:{life:1.22}},
+ henrique:{role:'FLIGHT SURGEON', icon:'\u2695',
+   good:'Keeping the crew alive', bad:'Slows the mission',
+   d:'Runs life support beautifully, and calls a halt whenever anyone looks tired.',
+   gain:{life:1.45, prog:0.86}},
+ caio:{role:'RADIATION OFFICER', icon:'\u2622',
+   good:'Shielding', bad:'Heavy on power',
+   d:'Builds shielding nobody else could, and runs the equipment hard to do it.',
+   gain:{shd:1.45}, cost:{pwr:1.20}},
+ nathan:{role:'SYSTEMS OPERATOR', icon:'\u2699',
+   good:'Wastes nothing', bad:'Never pushes',
+   d:'Everything costs less when Nathan runs it, but he will not take a risk.',
+   gain:{prog:0.86, pwr:0.95, life:0.95, shd:0.95}, cost:{pwr:0.82, life:0.82, shd:0.82}},
+ luca:{role:'ROVER PILOT', icon:'\u2708',
+   good:'Covering ground', bad:'Light on shielding',
+   d:'Moves the mission forward fast, and skips the slow job of piling regolith.',
+   gain:{prog:1.30, shd:0.82}}
 };
 
 /* ---------- OPERATIONAL EVENTS ----------
@@ -340,6 +378,16 @@ const OPS = {
 
 // a shorter mission must advance faster per action, or it cannot be finished
 function pk(){ return Math.pow(24 / (S.len ? S.len.sols : 24), 0.6); }
+function traitE(e){
+  const t = S.duty && TRAITS[S.duty.id];
+  if(!t) return e;
+  const o={...e};
+  for(const k in o){
+    if(o[k]>0 && t.gain && t.gain[k]) o[k]=Math.round(o[k]*t.gain[k]);
+    if(o[k]<0 && t.cost && t.cost[k]) o[k]=Math.round(o[k]*t.cost[k]);
+  }
+  return o;
+}
 function scaleE(e){
   const o={...e};
   if(o.prog>0) o.prog = Math.round(o.prog * pk());
@@ -392,9 +440,10 @@ function paintCrew(){
   const b=document.createElement('button');
   const i=taken.indexOf(a.id);
   b.className='av'+(i>=0?' taken':'')+(S.pending&&S.pending.id===a.id?' sel':'');
+  const t=TRAITS[a.id];
   b.innerHTML=(i>=0?`<span class="num">P${i+1}</span>`:'')+
-    `<img src="${a.card}" alt="${a.name}"><div class="nm">${
-      a.name.toUpperCase()}</div>`;
+    `<img src="${a.card}" alt="${a.name}"><div class="nm">${a.name.toUpperCase()}${
+      t?`<em>${t.icon} ${t.role}</em><span class="gb">+ ${t.good}<br>\u2212 ${t.bad}</span>`:''}</div>`;
   b.onclick=()=>{
     S.pending={id:a.id,name:a.name,face:a.face,card:a.card};
     document.getElementById('crewGo').disabled=false;paintCrew();};
@@ -484,20 +533,41 @@ function nextTurn(){
    S.ops=null; S.ev=S.deck[(S.sol-1) % S.deck.length];
  }
  S.duty = S.crew.length ? S.crew[(S.sol-1) % S.crew.length] : null;
- S.pick=null;
+ S.pick=null; S.site=null;
+ // what the surface should look like this sol
+ S.fx=null;
+ if(S.ops){
+   const n=S.ops.n.toLowerCase();
+   if(n.includes('dust')) S.fx='dust';
+   else if(n.includes('night')) S.fx='night';
+ } else if(S.ev){
+   const g=geometry(S.ev);
+   if((S.ev.severity||1)>=3 || g.k==='direct') S.fx='storm';
+ }
  document.getElementById('solLab').textContent=`SOL ${S.sol} / ${S.maxSol}`;
  document.getElementById('missLab').textContent=S.mission.name;
- drawDuty();drawBars();drawEvent();drawActions();drawScene();
+ drawDuty();drawBars();drawEvent();drawActions();drawScene();drawFxTag();
  document.getElementById('actGo').disabled=true;
 }
 
+function drawFxTag(){
+ const m={storm:['\u26a0 SOLAR STORM \u00b7 CREW SHELTERING','#ff5c5c'],
+          dust: ['\u2601 DUST STORM \u00b7 LOW LIGHT','#ffc93c'],
+          night:['\u263e LUNAR NIGHT \u00b7 NO SOLAR POWER','#8fa0c4']};
+ const el=document.getElementById('fxtag');
+ if(!el) return;
+ if(S.fx&&m[S.fx]){el.style.display='block';el.style.color=m[S.fx][1];
+   el.style.borderColor=m[S.fx][1];el.textContent=m[S.fx][0];}
+ else el.style.display='none';
+}
 function drawDuty(){
  const d=document.getElementById('duty');
+ const t=S.duty&&TRAITS[S.duty.id];
  if(!S.duty){d.style.display='none';return;}
  d.style.display='flex';
  d.innerHTML=`<img src="${S.duty.face}" alt="${S.duty.name}">
-   <div class="who"><b style="color:${SUITS[S.duty.suit].rgb}">${S.duty.name}</b> is on duty<small>${
-     S.crew.length>1?'the crew rotates each sol':'solo mission'} \u00b7 ${S.duty.suit} suit</small></div>
+   <div class="who"><b style="color:${SUITS[S.duty.suit].rgb}">${S.duty.name}</b> is on duty
+     <small>${t?`${t.icon} <b style="color:var(--ink)">${t.role}</b> \u00b7 good at ${t.good.toLowerCase()} \u00b7 weak at ${t.bad.toLowerCase()}`:''}</small></div>
    <div class="roster">${S.crew.map(c=>
      `<img src="${c.face}" class="${c.id===S.duty.id?'on':''}" title="${c.name}">`).join('')}</div>`;
 }
@@ -556,8 +626,9 @@ function drawActions(){
  const w=document.getElementById('actions');w.innerHTML='';
  ACTIONS[S.mission.key].forEach(a=>{
   const b=document.createElement('button');b.className='btn';
-  b.innerHTML=`<b>${a.n}</b><small>${a.d}<br>${costStr(scaleE(a.e))}</small>`;
-  b.onclick=()=>{S.pick=a;[...w.children].forEach(c=>c.classList.remove('sel'));
+  b.innerHTML=`<b>${a.n}</b><small>${a.d}<br>${costStr(scaleE(traitE(a.e)))}</small>`;
+  b.onclick=()=>{S.pick=a;S.site=SITE[a.id]!==undefined?SITE[a.id]:null;
+    [...w.children].forEach(c=>c.classList.remove('sel'));
     b.classList.add('sel');document.getElementById('actGo').disabled=false;
     document.getElementById('actTally').textContent=
       S.players>1?`Crew of ${S.players} agrees: ${a.n}`:'';};
@@ -571,7 +642,7 @@ function costStr(e){
 
 function resolveTurn(){
  const a=S.pick; if(!a) return;
- Object.entries(scaleE(a.e)).forEach(([k,v])=>{S[k]+=v;});
+ Object.entries(scaleE(traitE(a.e))).forEach(([k,v])=>{S[k]+=v;});
  logit(`Sol ${S.sol} \u00b7 ${S.duty?S.duty.name:'Crew'}: ${a.n.toLowerCase()}.`);
 
  if(S.ops){
@@ -657,14 +728,21 @@ function initAnim(){
 }
 function stepAnim(dt){
  const SPEED=14/1000;                       // px per ms
+ const sheltering = S.fx==='storm';
+ let k=0;
  S.crew.forEach((m,i)=>{
   const a=S.anim[m.id]; if(!a) return;
   const onDuty = S.duty && m.id===S.duty.id;
   if(onDuty){
-   a.tx = 96 + (S.prog/100)*194;            // walks out with the mission
+   // walk to whatever job was chosen; otherwise out along the mission line
+   a.tx = (S.site!=null) ? S.site : 96 + (S.prog/100)*194;
+   if(sheltering && S.site==null) a.tx = 92;     // storm and no job yet: head in
+  } else if(sheltering){
+   a.tx = 54 + (k++)*15;                         // huddle against the habitat
+   a.wait = 0;
   } else {
    a.wait-=dt;
-   if(a.wait<=0 && Math.abs(a.tx-a.x)<1){   // pick a new spot to amble to
+   if(a.wait<=0 && Math.abs(a.tx-a.x)<1){        // pick a new spot to amble to
     a.tx = 6 + Math.random()*72; a.wait = 1200+Math.random()*2600;
    }
   }
@@ -695,6 +773,24 @@ function drawScene(){
  const lit=S.pwr>40?'#ffc93c':S.pwr>15?'#8a6a20':'#3a3a3a';
  for(let i=0;i<4;i++)px(c,176+i*13,72,10,16,lit);
  px(c,176,88,49,3,'#2c3a5c');
+ // --- weather and light for this sol ---
+ if(S.fx==='night'){                       // lunar night: everything goes dark
+  c.fillStyle='rgba(2,4,12,0.62)'; c.fillRect(0,0,320,140);
+ }
+ if(S.fx==='dust'){                        // dust storm: drifting butterscotch haze
+  const t=performance.now()/1000;
+  c.fillStyle='rgba(190,120,60,0.26)'; c.fillRect(0,0,320,140);
+  c.fillStyle='rgba(225,170,110,0.5)';
+  for(let i=0;i<34;i++){
+   const x=((i*53 + t*58) % 340)-10, y=(i*17+((i*7)%23))%130;
+   c.fillRect(x, y, 5+(i%4), 1);
+  }
+ }
+ if(S.fx==='storm'){                       // solar storm: the sky flickers
+  const pulse=0.16+0.12*Math.sin(performance.now()/180);
+  c.fillStyle=`rgba(255,90,60,${pulse.toFixed(3)})`; c.fillRect(0,0,320,140);
+ }
+
  // --- animated, walking crew ---
  const now=performance.now();
  const dt=Math.min(64, now-(S.lastT||now)); S.lastT=now;
