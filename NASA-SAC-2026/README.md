@@ -1,26 +1,94 @@
-# NASA Space Apps 2026 · Space Mission Design Game
+# Junior Astronaut Mission Trainer
 
-São Paulo team project for the Space Mission Design Game challenge.
+**NASA Space Apps Challenge 2026 · São Paulo · 14–15 Nov 2026**
+Challenge: [Build a Junior Astronaut Mission Trainer](https://www.spaceappschallenge.org/2026/challenges/junior-astronaut-mission-trainer/)
 
-## Challenge resources
+A browser game for ages 7–12. You run a real outpost and discover that
+**every choice costs something else** — including doing nothing.
 
-- [Challenge details](https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/?tab=details)
-- [Challenge resources](https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/?tab=resources)
-- [NASA Space Apps on GitHub](https://github.com/nasa/spaceapps/)
-- [Space Apps brand resources](https://www.spaceappschallenge.org/brand/)
+## Play it
+Open `index.html`. That's it. No install, no build, no account, no server.
+Works offline from `file://` — all data is embedded.
 
-## Original project materials
+## Two missions, both real
+| | |
+|---|---|
+| **Moon — Harvest Helium-3** | NASA awarded Interlune a $6.9M contract in May 2026 to extract helium-3 from lunar soil. Payload "Prospect Moon", targeting 2028. |
+| **Mars — Recover Sapphire Canyon** | Perseverance drilled a core in July 2024 that NASA announced as a *potential biosignature* in Sept 2025. It is still on Mars — Mars Sample Return was defunded 23 Jan 2026. |
 
-These links open the original files for the account that owns them.
+1–4 players vote on the mission; majority flies. Then a briefing screen shows
+what is already done, what the focus is today, what we honestly don't know,
+and **who actually pays** for it.
 
-- [Space_Apps_2026_Team_Preparation_Handbook.pdf](https://chatgpt.com/library?file_id=libfile_e32d2f8c2a208191bc416f67d717c970&account_id=personal)
-- [Space_Apps_2026_Parents_Tonight_Tutorial_EN.pdf](https://chatgpt.com/library?file_id=libfile_a6bfb4312d408191a7cac8e25ce53e56&account_id=personal)
-- [Space_Apps_Brand_Guide_VUGpVJm.pdf](https://chatgpt.com/library?file_id=libfile_03734e678c488191b0a4d9ef4cc4155d&account_id=personal)
-- [image(4).png](https://chatgpt.com/library?file_id=libfile_8105c9d104848191a6655fb18410beba&account_id=personal)
-- [image(3).png](https://chatgpt.com/library?file_id=libfile_a2299aeb0ca481919b3cd8bfe1be6434&account_id=personal)
-- [image(2).png](https://chatgpt.com/library?file_id=libfile_a9a9c13fe2ac8191abb8e9bbdc82f13a&account_id=personal)
-- [image(1).png](https://chatgpt.com/library?file_id=libfile_0ba256d948d08191aa71c0601a63562e&account_id=personal)
-- [image.png](https://chatgpt.com/library?file_id=libfile_3e0928daf7bc8191ac2a26d9e55574b0&account_id=personal)
-- [Space_Apps_Patterns.zip](https://chatgpt.com/library?file_id=libfile_869b8ddbe95c8191b42cb6ba6b694f71&account_id=personal)
-- [NASA_Space_Apps_Logos_2026.zip](https://chatgpt.com/library?file_id=libfile_b6e506f12dd08191a82ab692d9976092&account_id=personal)
-- [Space_Apps_Awards.zip](https://chatgpt.com/library?file_id=libfile_045d3633a9ac8191ae81f61afe8db31c&account_id=personal)
+## Astronaut crew
+Six selectable characters: Theo, Davi, Henrique, Caio, Nathan, plus a nameless
+astronaut any player can claim and name themselves (defaults to "Astronaut").
+
+Each player picks one at the start; duplicates lock out. The crew rotates duty
+one astronaut per sol — the on-duty astronaut appears in the HUD and is named in
+every mission log entry, so each player gets their own turns in the record.
+
+Portraits are embedded as base64, so the single file still works offline.
+
+> **Note for submission:** the handbook (p.11) says to keep minors' recognizable
+> names and faces out of submission materials. These are illustrations, not
+> photos, but they do pair real first names with likenesses. Decide whether this
+> build is the public submission or the local version the team plays.
+
+## Real NASA data
+- **132 real coronal mass ejections** from NASA's **DONKI** database,
+  1 Oct – 14 Nov 2026. Each in-game storm shows its real event ID, real speed
+  (218–1048 km/s) and links to the actual DONKI record.
+- Severity tiers derived from the **real speed distribution**, not invented.
+- Data is **archived and labelled as archived** in-game. Nothing is presented
+  as live. (A browser game cannot hold an API key safely, and a rate-limited
+  live call would break during judging.)
+
+## Three resources, one rule
+Power · Life Support · Shielding. Every action gives one and takes another.
+Even "shelter and wait" costs oxygen — there is no free option, because there
+isn't one in space either.
+
+Radiation damage is computed from the real CME speed tier against your
+shielding level. Fast storm + thin shield = the crew pays.
+
+## Balance (verified, not guessed)
+`tools/` contains the simulator used to tune the game:
+- Sensible play ("fix the lowest bar, else push the goal") wins **~65%**
+- Mindless resource-grabbing wins **0%**
+- Random play wins **~2%**
+
+Verified against the real page with Playwright: **8/12 wins** with sensible play.
+
+## Pixel art — dropping in Pixilart assets
+Art is procedural placeholder right now. To swap in real sprites:
+1. Export from Pixilart as **PNG with transparency**, tile size **32×32**.
+2. Register them in `index.html`:
+   ```js
+   const TILE = 32;
+   SPRITES.hab   = Object.assign(new Image(), {src:'art/hab.png'});
+   SPRITES.rover = Object.assign(new Image(), {src:'art/rover.png'});
+   SPRITES.solar = Object.assign(new Image(), {src:'art/solar.png'});
+   ```
+3. `drawScene()` uses `SPRITES.x` when present, else draws the placeholder.
+   Canvas is already `image-rendering: pixelated`, so no blurring.
+
+## Submission checklist
+- [x] Working browser prototype, no download, no account
+- [x] Real NASA data, attributed in-tool, archived clearly labelled
+- [x] 3 core resources, no free action
+- [x] Replayability — 132-event shuffled deck, two missions
+- [x] Mission context with real evidence and real funders
+- [ ] 1-page data explainer (content is in `docs/MISSIONS.md`)
+- [ ] Demo video
+- [ ] Real Pixilart sprites
+
+## Files
+```
+index.html              the whole game, standalone
+docs/challenge-brief.md the NASA challenge
+docs/MISSIONS.md        mission science + sources + honest caveats
+docs/PROJECT-CONTEXT.md event facts, constraints, decisions
+data/                   raw DONKI pull + built event deck
+tools/                  balance simulator and Playwright verifier
+```

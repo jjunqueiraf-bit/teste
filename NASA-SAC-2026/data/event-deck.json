@@ -1,0 +1,1322 @@
+[
+ {
+  "id": "2026-10-01T02:36:00-CME-001",
+  "time": "2026-10-01T02:36Z",
+  "speed": 476.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Faint CME observed to the NE in SOHO LASCO C2/C3 and GOES CCOR-1. May be observed to the NE in STEREO A COR2, but difficult to reliably resolve in white light imagery. The source i",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48911/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-01T03:12:00-CME-001",
+  "time": "2026-10-01T03:12Z",
+  "speed": 432.0,
+  "halfAngle": 13.0,
+  "type": "S",
+  "note": "Faint CME observed to the NW in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source is far-sided, approximately ~N12W120, as observed in STEREO A EUVI 195/304 as brighteni",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48913/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-02T00:53:00-CME-001",
+  "time": "2026-10-02T00:53Z",
+  "speed": 255.0,
+  "halfAngle": 28.0,
+  "type": "S",
+  "note": "CME faintly visible to the NE in STEREO A COR2 and the NW in SOHO LASCO C2/C3 and GOES CCOR-1. The source is likely a gradual eruption with moving field lines best seen in SDO AIA ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48924/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-02T06:48:00-CME-001",
+  "time": "2026-10-02T06:48Z",
+  "speed": 356.0,
+  "halfAngle": 17.0,
+  "type": "S",
+  "note": "Faint CME seen to the NNE in GOES CCOR-1 and SOHO LASCO C2/C3. The CME is also possibly faintly visible in STEREO A COR2 imagery to the NE. The potential source may be a filament l",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48928/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-02T08:24:00-CME-001",
+  "time": "2026-10-02T08:24Z",
+  "speed": 270.0,
+  "halfAngle": 33.0,
+  "type": "S",
+  "note": "CME visible to the NW in SOHO LASCO C2/C3 and GOES CCOR-1. The CME overlaps in the field of view with the CME first seen in STEREO A COR2 at 2026-10-02T00:53Z.  The CME may potenti",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48931/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-02T17:36:00-CME-001",
+  "time": "2026-10-02T17:36Z",
+  "speed": 317.0,
+  "halfAngle": 25.0,
+  "type": "S",
+  "note": "Very faint CME/outflow with an unclear leading edge seen to the NW in SOHO LASCO C2/C3 and GOES CCOR-1. This CME is not seen in STEREO A COR2 due to a data gap. No source was found",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48943/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-02T19:48:00-CME-001",
+  "time": "2026-10-02T19:48Z",
+  "speed": 595.0,
+  "halfAngle": 20.0,
+  "type": "C",
+  "note": "Faint narrow CME with an anvil-like front seen to the NE in SOHO LASCO C2/C3 and GOES CCOR-1 and fully covered by a large data gap in STEREO A COR2. Its source is likely the notabl",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48941/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-02T23:36:00-CME-001",
+  "time": "2026-10-02T23:36Z",
+  "speed": 654.0,
+  "halfAngle": 11.0,
+  "type": "C",
+  "note": "This CME is visible to the east in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. The source is likely far-sided as there are no source signatures on the Earth-facing disk around the ti",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48946/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-03T21:24:00-CME-001",
+  "time": "2026-10-03T21:24Z",
+  "speed": 273.0,
+  "halfAngle": 25.0,
+  "type": "S",
+  "note": "Extremely faint CME/outflow with an unclear leading edge seen to the NE in SOHO LASCO C2 and in early C3 and GOES CCOR-1 running difference imagery. This CME is not seen in STEREO ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48949/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-04T07:24:00-CME-001",
+  "time": "2026-10-04T07:24Z",
+  "speed": 336.0,
+  "halfAngle": 20.0,
+  "type": "S",
+  "note": "Faint CME observed to the SW in SOHO LASCO C2, poorly observed in LASCO C3 and GOES CCOR-1, and not in STEREO A COR2; mostly overlapped with following CME: 2026-10-04T07:36Z. The s",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48958/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-04T07:36:00-CME-001",
+  "time": "2026-10-04T07:36Z",
+  "speed": 313.0,
+  "halfAngle": 13.0,
+  "type": "S",
+  "note": "Faint CME observed to the SW in SOHO LASCO C2, poorly observed in LASCO C3 and GOES CCOR-1, and not in STEREO A COR2;  mostly overlapped with preceeding CME: 2026-10-04T07:24Z. The",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48960/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-04T17:00:00-CME-001",
+  "time": "2026-10-04T17:00Z",
+  "speed": 289.0,
+  "halfAngle": 45.0,
+  "type": "S",
+  "note": "Filament eruption observed to the SE in SOHO LASCO C2. In real-time the event is slow and not yet observed in other coronagraphs, but will likely be partially obscured by the LASCO",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48964/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-05T01:26:00-CME-001",
+  "time": "2026-10-05T01:26Z",
+  "speed": 340.0,
+  "halfAngle": 18.0,
+  "type": "S",
+  "note": "Faint CME observed to the W in SOHO LASCO C2/C3 and GOES CCOR-1, not observed in STEREO A COR2. The source is AR 14546 starting around 2026-10-05T00:33Z, with brightening and field",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48982/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-05T07:48:00-CME-001",
+  "time": "2026-10-05T07:48Z",
+  "speed": 701.0,
+  "halfAngle": 40.0,
+  "type": "C",
+  "note": "Wide CME observed to the NE in SOHO LASCO C2/C3 and GOES CCOR-1, and to the NW in STEREO A COR2. The source is a far-sided filament eruption over the NE limb, observed in SDO AIA 1",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48969/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-05T11:24:00-CME-001",
+  "time": "2026-10-05T11:24Z",
+  "speed": 629.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "Faint CME observed to the SE in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source is in the vicinity of AR 14548 (S11E46), as a weak eruption centered around S17E60 star",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48974/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-05T21:12:00-CME-001",
+  "time": "2026-10-05T21:12Z",
+  "speed": 266.0,
+  "halfAngle": 35.0,
+  "type": "S",
+  "note": "This CME is visible to the northwest in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2 imagery. The source is likely related to a far-sided filament eruption which begins to lift",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48989/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-06T00:00:00-CME-001",
+  "time": "2026-10-06T00:00Z",
+  "speed": 325.0,
+  "halfAngle": 17.0,
+  "type": "S",
+  "note": "This CME is visible to the west/southwest in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. This event is not seen in STEREO A COR2 imagery likely due to a data gap from 2026-10-05T14:3",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48996/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-06T06:23:00-CME-001",
+  "time": "2026-10-06T06:23Z",
+  "speed": 570.0,
+  "halfAngle": 40.0,
+  "type": "C",
+  "note": "Full halo CME in SOHO LASCO C2/C3 and GOES CCOR-1, first seen to the NE in STEREO A COR2 (shock fully to the E, wide). The source is AR 14549, associated with an M1.4 flare (N10E12",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48988/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-06T09:53:00-CME-001",
+  "time": "2026-10-06T09:53Z",
+  "speed": 424.0,
+  "halfAngle": 24.0,
+  "type": "S",
+  "note": "CME observed to the NE in STEREO A COR2, also faintly observed to the N in SOHO LASCO C2/C3 and GOES CCOR-1. The source is AR 14549, associated with an M1.8 class flare (N08E07) pe",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49000/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-06T13:08:00-CME-001",
+  "time": "2026-10-06T13:08Z",
+  "speed": 438.0,
+  "halfAngle": 11.0,
+  "type": "S",
+  "note": "Faint CME first seen to the NNE by STEREO A COR2 beginning at 2026-10-06T13:08Z, as well as by SOHO LASCO C2/C3 and GOES CCOR-1 in later frames. The source of this CME is faint fie",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49005/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-07T13:53:00-CME-001",
+  "time": "2026-10-07T13:53Z",
+  "speed": 310.0,
+  "halfAngle": 36.0,
+  "type": "S",
+  "note": "CME first seen to the NE in STEREO A COR2 starting at 2026-10-07T13:53Z. So far it is only visible in COR2A. The source of this CME is a C7.9 class flare from AR 14549 (N10W04) pea",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49011/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-08T16:12:00-CME-001",
+  "time": "2026-10-08T16:12Z",
+  "speed": 449.0,
+  "halfAngle": 24.0,
+  "type": "S",
+  "note": "CME faintly seen to the east in SOHO LASCO C2/C3 and GOES CCOR-1. The CME may potentially be visible to the west in STEREO A COR2. The potential source for this CME may be beyond t",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49031/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-08T16:24:00-CME-001",
+  "time": "2026-10-08T16:24Z",
+  "speed": 579.0,
+  "halfAngle": 28.0,
+  "type": "C",
+  "note": "CME visible to the west in SOHO LASCO C2/C3 and GOES CCOR-1 as well as possibly faintly to the east in STEREO A COR2. This CME overlaps in the field of view with the CME first seen",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49026/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-08T16:53:00-CME-001",
+  "time": "2026-10-08T16:53Z",
+  "speed": 723.0,
+  "halfAngle": 35.0,
+  "type": "C",
+  "note": "CME visible to the NE in STEREO A COR2 and the NW in GOES CCOR-1. There was a real-time data gap in SOHO LASCO imagery at the start of the CME, but this backfilled with additional ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49019/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-08T18:38:00-CME-001",
+  "time": "2026-10-08T18:38Z",
+  "speed": 868.0,
+  "halfAngle": 18.0,
+  "type": "C",
+  "note": "Faint CME observed to the E only in STEREO A COR2 Science Data, as a real-time gap in STEREO A COR2 beacon data spanning 2026-10-08T18:53Z to 2026-10-09T17:53Z obscured real-time o",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49106/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-08T20:12:00-CME-001",
+  "time": "2026-10-08T20:12Z",
+  "speed": 453.0,
+  "halfAngle": 38.0,
+  "type": "S",
+  "note": "CME visible to the NW in SOHO LASCO C2/C3 and GOES CCOR-1, directly following CME: 2026-10-08T16:53Z in the field of view. The CME is not visible in STEREO A COR2, and a data gap s",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49034/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-09T00:45:00-CME-001",
+  "time": "2026-10-09T00:45Z",
+  "speed": 293.0,
+  "halfAngle": 27.0,
+  "type": "S",
+  "note": "CME faintly seen to the east in GOES CCOR-1 imagery. There is a data gap in SOHO LASCO C2/C3 imagery starting at 2026-10-09T00:48Z and a data gap starting in STEREO A COR2 at 2026-",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49043/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-09T07:15:00-CME-001",
+  "time": "2026-10-09T07:15Z",
+  "speed": 391.0,
+  "halfAngle": 21.0,
+  "type": "S",
+  "note": "CME seen to the NW in GOES CCOR-1 imagery. There is a data gap in SOHO LASCO C2/C3 and STEREO A COR2 at the time of this CME. The potential source is unclear, but is likely an erup",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49040/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-09T08:00:00-CME-001",
+  "time": "2026-10-09T08:00Z",
+  "speed": 270.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "CME visible to the NNW in GOES CCOR-1 imagery. There is no SOHO LASCO C2/C3 or STEREO A COR2 data available during this time, with a data gap in SOHO imagery starting at 2026-10-09",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49046/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-09T14:36:00-CME-001",
+  "time": "2026-10-09T14:36Z",
+  "speed": 315.0,
+  "halfAngle": 41.0,
+  "type": "S",
+  "note": "Faint CME with a loop front seen to the NW in the early SOHO LASCO C2 imagery, also seen faintly in C3 and GOES CCOR-1. It is fully covered by long data gap in STEREO A COR2 corona",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49049/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-10T08:36:00-CME-001",
+  "time": "2026-10-10T08:36Z",
+  "speed": 368.0,
+  "halfAngle": 40.0,
+  "type": "S",
+  "note": "CME observed to the NW in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source is former AR 14547 (~N15W105) as directly observed by STEREO A around the west limb from SDO.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49062/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-10T12:23:00-CME-001",
+  "time": "2026-10-10T12:23Z",
+  "speed": 763.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "Very minor, faint, and narrow CME seen to the NE in STEREO A COR2 coronagraph in early timestamps. This is possibly the same faint narrow CME that is also seen at the time NE in SO",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49076/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-10T16:15:00-CME-001",
+  "time": "2026-10-10T16:15Z",
+  "speed": 844.0,
+  "halfAngle": 43.0,
+  "type": "C",
+  "note": "CME observed to the NW in SOHO LASCO C2/C3 and GOES CCOR-1, with a full halo shock. Not yet observed in STEREO A COR2 white light imagery in real-time. The source is AR 14549, asso",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49064/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-10T22:00:00-CME-001",
+  "time": "2026-10-10T22:00Z",
+  "speed": 351.0,
+  "halfAngle": 11.0,
+  "type": "S",
+  "note": "Minor faint, narrow CME/outflow seen to the west in SOHO LASCO C2/C3 and GOES CCOR-1 and covered by the data gap in STEREO A. No clear source has been found for this CME.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49079/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-11T09:12:00-CME-001",
+  "time": "2026-10-11T09:12Z",
+  "speed": 374.0,
+  "halfAngle": 17.0,
+  "type": "S",
+  "note": "Outflow first seen to the NW in SOHO LASCO C2 starting around 2026-10-11T09:12Z. This feature is much easier to see later in its propagation into SOHO LASCO C3, GOES CCOR-1, and ST",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49082/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-11T23:12:00-CME-001",
+  "time": "2026-10-11T23:12Z",
+  "speed": 618.0,
+  "halfAngle": 36.0,
+  "type": "C",
+  "note": "This CME is visible to the east in GOES CCOR-1 and SOHO LASCO C2/C3 imagery. This event is seen in STEREO A COR2, directed towards the east, after it has exceeded the field of view",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49087/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-11T23:15:00-CME-001",
+  "time": "2026-10-11T23:15Z",
+  "speed": 457.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "This CME is visible to the southwest in GOES CCOR-1 and SOHO LASCO C2/C3 imagery. This event is not seen in STEREO A COR2 in real-time due to a data gap starting at 2026-10-11T17:3",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49084/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-12T05:09:00-CME-001",
+  "time": "2026-10-12T05:09Z",
+  "speed": 741.0,
+  "halfAngle": 27.0,
+  "type": "C",
+  "note": "This CME is visible to the east in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2 imagery. The source is a filament eruption spanning S12E15 to S20E30 which begins to lift off ar",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49089/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-12T10:09:00-CME-001",
+  "time": "2026-10-12T10:09Z",
+  "speed": 351.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "This CME is visible to the west in SOHO LASCO C2 and STEREO A COR2 imagery. The source is likely far-sided as there are no source signatures visible on the Earth or STEREO A-facing",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49095/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-12T12:23:00-CME-001",
+  "time": "2026-10-12T12:23Z",
+  "speed": 335.0,
+  "halfAngle": 20.0,
+  "type": "S",
+  "note": "This CME is visible to the west in STEREO A COR2, SOHO LASCO C2/C3, and GOES CCOR-1 imagery. The source is likely related to a filament eruption visible beyond the western limb in ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49099/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-12T19:36:00-CME-001",
+  "time": "2026-10-12T19:36Z",
+  "speed": 365.0,
+  "halfAngle": 12.0,
+  "type": "S",
+  "note": "Narrow CME first seen to the SW by SOHO LASCO C2 beginning at 2026-10-12T19:36Z, as well as by GOES CCOR-1 in later frames. This CME is not visible in STEREO A COR2 due to a data g",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49101/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-14T13:36:00-CME-001",
+  "time": "2026-10-14T13:36Z",
+  "speed": 236.0,
+  "halfAngle": 29.0,
+  "type": "S",
+  "note": "Bright CME first seen to the NE by SOHO LASCO C2 beginning at 2026-10-14T13:36Z, as well as by SOHO LASCO C3, STEREO A COR2 and GOES CCOR-1 in later frames. The source of this even",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49114/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-14T22:09:00-CME-001",
+  "time": "2026-10-14T22:09Z",
+  "speed": 339.0,
+  "halfAngle": 15.0,
+  "type": "S",
+  "note": "CME seen to the West in STEREO A COR2 beginning at 2026-10-14T22:09Z following the end of a data gap. This CME is not seen in SOHO LASCO C2/C3 or GOES CCOR-1 as it is likely obscur",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49117/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-14T23:12:00-CME-001",
+  "time": "2026-10-14T23:12Z",
+  "speed": 360.0,
+  "halfAngle": 28.0,
+  "type": "S",
+  "note": "CME first seen to the NE by SOHO LASCO C2 beginning at 2026-10-14T23:12Z. The source of this event is a large filament eruption seen originating from beyond the NE limb in GOES SUV",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49120/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-15T20:24:00-CME-001",
+  "time": "2026-10-15T20:24Z",
+  "speed": 428.0,
+  "halfAngle": 36.0,
+  "type": "S",
+  "note": "CME seen to the ESE in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. The CME is not clearly visible in STEREO A COR2 imagery. The potential source may be some minor field line movement",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49125/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T06:09:00-CME-001",
+  "time": "2026-10-16T06:09Z",
+  "speed": 324.0,
+  "halfAngle": 45.0,
+  "type": "S",
+  "note": "Faint, wide CME visible to the SW in STEREO A COR2 only. The CME is not clearly seen in SOHO LASCO C2/C3 or GOES CCOR-1 imagery. The potential source is not clearly visible. There ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49132/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T07:12:00-CME-001",
+  "time": "2026-10-16T07:12Z",
+  "speed": 490.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Narrow CME visible to the SW in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. The CME is not visible in STEREO A COR2 imagery. No source is found for this CME in EUV imagery.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49127/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T08:12:00-CME-001",
+  "time": "2026-10-16T08:12Z",
+  "speed": 334.0,
+  "halfAngle": 14.0,
+  "type": "S",
+  "note": "CME faintly visible to the NNW in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. The CME is not clearly visible in STEREO A COR2. The source for this CME is not found in available EUV i",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49135/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T11:48:00-CME-001",
+  "time": "2026-10-16T11:48Z",
+  "speed": 475.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "CME visible to the east in SOHO LASCO C2/C3 and STEREO A COR2 imagery. The source is likely beyond the east limb, as moving/opening field lines are seen in SDO AIA 171 in ISWA as e",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49139/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T12:38:00-CME-001",
+  "time": "2026-10-16T12:38Z",
+  "speed": 247.0,
+  "halfAngle": 29.0,
+  "type": "S",
+  "note": "CME visible faintly to the NE in STEREO A COR2. The CME is not seen in SOHO LASCO C2/C3 or GOES CCOR-1 imagery. The potential source is an eruption starting around 2026-10-16T11:00",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49137/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T15:12:00-CME-001",
+  "time": "2026-10-16T15:12Z",
+  "speed": 270.0,
+  "halfAngle": 30.0,
+  "type": "S",
+  "note": "Bright CME seen to the NW in SOHO LASCO C2/C3 and to the NW in STEREO A COR2. Its source is likely a messy eruption seen in the NW quadrant in STEREO A EUV 195/304 and centered ver",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49143/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T17:00:00-CME-001",
+  "time": "2026-10-16T17:00Z",
+  "speed": 479.0,
+  "halfAngle": 16.0,
+  "type": "S",
+  "note": "Faint and narrow CME seen to the E in early SOHO LASCO C2 imagery and not seen in C3, GOES CCOR-1 and STEREO A COR2 imagery, likely because of its faintness. The start time is like",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49146/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-16T20:24:00-CME-001",
+  "time": "2026-10-16T20:24Z",
+  "speed": 552.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "Narrow very minor CME/outflow visible to the SW in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. The CME is not visible in STEREO A COR2 imagery. The start of the CME/outflow is likely",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49148/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-17T02:48:00-CME-001",
+  "time": "2026-10-17T02:48Z",
+  "speed": 1048.0,
+  "halfAngle": 38.0,
+  "type": "O",
+  "note": "CME first seen to the ESE in SOHO LASCO C2 starting at 2026-10-17T02:48Z. It is also seen to the E in SOHO LASCO C3. The CME is also seen later in its propagation to the E GOES CCO",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49150/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-17T17:00:00-CME-001",
+  "time": "2026-10-17T17:00Z",
+  "speed": 453.0,
+  "halfAngle": 24.0,
+  "type": "S",
+  "note": "Narrow CME/outflow to the E seen in SOHO LASCO C2/C3 and GOES CCOR-1. The CME is not seen in STEREO A COR2 imagery, which is available. No clear source was found in EUV imagery, so",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49155/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-17T18:12:00-CME-001",
+  "time": "2026-10-17T18:12Z",
+  "speed": 427.0,
+  "halfAngle": 21.0,
+  "type": "S",
+  "note": "Narrow CME/outflow to the E seen in SOHO LASCO C2. The CME is not seen in STEREO A COR2 imagery. This CME/outflow is following the 2026-10-17T17:00Z CME. No clear source was found ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49157/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-18T21:30:00-CME-001",
+  "time": "2026-10-18T21:30Z",
+  "speed": 375.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Faint CME first seen to the NW by GOES CCOR-1 beginning at 2026-10-18T21:30Z. This CME is not visible in SOHO LASCO C2/C3 or STEREO A COR2 in real time due to data gaps beginning a",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49160/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-18T23:15:00-CME-001",
+  "time": "2026-10-18T23:15Z",
+  "speed": 590.0,
+  "halfAngle": 20.0,
+  "type": "C",
+  "note": "CME first seen to the West by GOES CCOR-1 beginning at 2026-10-18T23:15Z. This CME is not visible in SOHO LASCO C2/C3 or STEREO A COR2 in real time due to data gaps beginning at 20",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49162/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-19T14:48:00-CME-001",
+  "time": "2026-10-19T14:48Z",
+  "speed": 387.0,
+  "halfAngle": 27.0,
+  "type": "S",
+  "note": "CME first seen to the NNW in SOHO LASCO C2 starting at 2026-10-19T14:48Z. This CME is also seen to the NNW in SOHO LASCO C3 and GOES CCOR-1 and to the NW in STEREO A COR2. The sour",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49167/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-19T19:15:00-CME-001",
+  "time": "2026-10-19T19:15Z",
+  "speed": 474.0,
+  "halfAngle": 14.0,
+  "type": "S",
+  "note": "Faint CME observed to the NW in GOES CCOR-1. It may be visible to the NW in STEREO A COR2, but only one available frame of imagery does not clearly show the CME. No real-time visib",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49170/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-20T01:26:00-CME-001",
+  "time": "2026-10-20T01:26Z",
+  "speed": 368.0,
+  "halfAngle": 28.0,
+  "type": "S",
+  "note": "CME first seen to the NNW in SOHO LASCO C2 starting at 2026-10-20T01:26Z. It is also seen to the NNW in SOHO LASCO C3 and GOES CCOR-1 and to the NW in STEREO A COR2. The source of ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49173/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-20T07:24:00-CME-001",
+  "time": "2026-10-20T07:24Z",
+  "speed": 748.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "Narrow CME first seen to the NNW in SOHO LASCO C2 starting around 2026-10-20T07:24Z. It is also seen to the NNW in SOHO LASCO C3 and to the NW in STEREO A COR2 but is too diffuse t",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49178/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-20T09:09:00-CME-001",
+  "time": "2026-10-20T09:09Z",
+  "speed": 568.0,
+  "halfAngle": 38.0,
+  "type": "C",
+  "note": "CME first seem to the NW in STEREO A COR2 starting at 2026-10-20T09:09Z. It is also seen to the NNW in SOHO LASCO C2 and GOES CCOR-1 but is covered by a real-time data gap in SOHO ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49175/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-20T14:23:00-CME-001",
+  "time": "2026-10-20T14:23Z",
+  "speed": 920.0,
+  "halfAngle": 13.0,
+  "type": "C",
+  "note": "Narrow CME first seen to the NW in STEREO A COR2 starting around 2026-10-20T14:23Z. It is also seen to the NNW in SOHO LASCO C2/C3 and GOES CCOR-1. There are no source candidates o",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49183/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-21T08:53:00-CME-001",
+  "time": "2026-10-21T08:53Z",
+  "speed": 310.0,
+  "halfAngle": 35.0,
+  "type": "S",
+  "note": "CME first seen to the East by STEREO A COR2 beginning at 2026-10-21T08:53Z, as well as by SOHO LASCO C2/C3 and GOES CCOR-1 in later frames. The source of this event is a small erup",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49185/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-21T13:38:00-CME-001",
+  "time": "2026-10-21T13:38Z",
+  "speed": 547.0,
+  "halfAngle": 26.0,
+  "type": "C",
+  "note": "CME first seen to the NW by STEREO A COR2 beginning at 2026-10-21T13:38Z, as well as to the North in SOHO LASCO C2/C3 and GOES CCOR-1 in later frames. The source of this CME is lik",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49191/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-21T20:36:00-CME-001",
+  "time": "2026-10-21T20:36Z",
+  "speed": 973.0,
+  "halfAngle": 46.0,
+  "type": "C",
+  "note": "CME observed to the NNE in SOHO LASCO C2/C3 and GOES CCOR-1, and to the NW in STEREO A COR2. The source is likely far-sided and may not be observed, with the only potential observa",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49197/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-22T20:12:00-CME-001",
+  "time": "2026-10-22T20:12Z",
+  "speed": 561.0,
+  "halfAngle": 13.0,
+  "type": "C",
+  "note": "Thin CME observed to the NNE in SOHO LASCO C2/C3 and GOES CCOR-1, not observed in STEREO A COR2 with a data gap starting at 2026-10-22T17:23Z. The source is likely far-sided, only ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49208/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-22T22:12:00-CME-001",
+  "time": "2026-10-22T22:12Z",
+  "speed": 381.0,
+  "halfAngle": 32.0,
+  "type": "S",
+  "note": "Faint CME observed to the NE in SOHO LASCO C2/C3 and GOES CCOR-1, not observed in STEREO A COR2 due to a real time data gap spanning 2026-10-22T17:53Z to 2026-10-23T01:23Z, where i",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49210/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-23T04:18:00-CME-001",
+  "time": "2026-10-23T04:18Z",
+  "speed": 597.0,
+  "halfAngle": 26.0,
+  "type": "C",
+  "note": "This CME is visible to the northwest in SOHO LASCO C2/C3 and GOES CCOR-1, and to the north in STEREO A COR2 imagery. The source is a C1.3 flare and eruption from Active Region 1455",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49212/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-23T10:24:00-CME-001",
+  "time": "2026-10-23T10:24Z",
+  "speed": 337.0,
+  "halfAngle": 17.0,
+  "type": "S",
+  "note": "This CME is visible to the northeast in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. Despite data availability during this time, this event is likely far-sided from the perspective of",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49218/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-23T16:36:00-CME-001",
+  "time": "2026-10-23T16:36Z",
+  "speed": 255.0,
+  "halfAngle": 15.0,
+  "type": "S",
+  "note": "A super faint CME visible to the NE in SOHO LASCO C2/C3 and GOES CCOR-1 and not seen in STEREO A COR2. No source seen in EUV imagery, so this outflow is possibly far-sided.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49220/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-24T15:12:00-CME-001",
+  "time": "2026-10-24T15:12Z",
+  "speed": 652.0,
+  "halfAngle": 14.0,
+  "type": "C",
+  "note": "Narrow CME first seen to the NE in SOHO LASCO C2 starting around 2026-10-24T15:12Z. It is also seen to the NE in SOHO LASCO C3 and GOES CCOR-1 and to the N in STEREO A COR2. The so",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49223/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-24T18:00:00-CME-001",
+  "time": "2026-10-24T18:00Z",
+  "speed": 251.0,
+  "halfAngle": 12.0,
+  "type": "S",
+  "note": "A very minor CME to the E only seen in GOES CCOR-1 and not seen in STEREO A COR2 coronagraph; the CME is covered by the unfilled scheduled data gap in SOHO LASCO coronagraph. No so",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49231/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-24T18:08:00-CME-001",
+  "time": "2026-10-24T18:08Z",
+  "speed": 566.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "CME observed to the SW in STEREO A COR and GOES CCOR-1, not observed in SOHO LASCO C2/C3 due to a data gap from approximately 2026-10-24T16:48Z - 2026-10-24T20:36Z. No source is ob",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49239/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-24T20:36:00-CME-001",
+  "time": "2026-10-24T20:36Z",
+  "speed": 838.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "A narrow jet-like CME seen to the WSW in all three coronagraphs. No source has been found for this jet-like feature in the EUV imagery.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49226/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-24T21:48:00-CME-001",
+  "time": "2026-10-24T21:48Z",
+  "speed": 333.0,
+  "halfAngle": 19.0,
+  "type": "S",
+  "note": "Relatively narrow CME to the NNW seen in SOHO LASCO C2 and in GOES CCOR-1. This CME is not seen in SOHO LASCO C3 because of poor image quality. It is covered by the data gap in STE",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49229/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-24T22:24:00-CME-001",
+  "time": "2026-10-24T22:24Z",
+  "speed": 621.0,
+  "halfAngle": 17.0,
+  "type": "C",
+  "note": "Faint CME observed to the SW in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source is far-sided, observed in GOES SUVI 284 as field line movement beyond the W limb around",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49241/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-25T03:12:00-CME-001",
+  "time": "2026-10-25T03:12Z",
+  "speed": 336.0,
+  "halfAngle": 41.0,
+  "type": "S",
+  "note": "CME observed to the NE in SOHO LASCO C2/C3 and GOES CCOR-1, and faintly to the N in STEREO A COR2. The source is wide field line movement over the E limb starting around 2026-10-25",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49233/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-25T05:00:00-CME-001",
+  "time": "2026-10-25T05:00Z",
+  "speed": 246.0,
+  "halfAngle": 30.0,
+  "type": "S",
+  "note": "CME observed to the NE in SOHO LASCO C2/C3 and GOES CCOR-1, starting very slow. It is either not yet seen in STEREO A COR2 due to a data gap beginning at 2026-10-25T10:09Z or too f",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49237/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-25T09:48:00-CME-001",
+  "time": "2026-10-25T09:48Z",
+  "speed": 360.0,
+  "halfAngle": 24.0,
+  "type": "S",
+  "note": "Faint CME observed to the N in SOHO LASCO C2/C3 and GOES CCOR-1. It is likely not observed in STEREO A COR2, but the NW quadrant of COR2 imagery is overlapped with prior CME activi",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49244/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-25T19:24:00-CME-001",
+  "time": "2026-10-25T19:24Z",
+  "speed": 275.0,
+  "halfAngle": 27.0,
+  "type": "S",
+  "note": "CME first seen to the SW by SOHO LASCO C2 beginning at 2026-10-25T19:24Z. The source of this event is a small filament eruption seen in SDO AIA 304 located at approx. S10W60, begin",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49246/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-26T00:12:00-CME-001",
+  "time": "2026-10-26T00:12Z",
+  "speed": 402.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Faint CME observed to the NNE in SOHO LASCO C2/C3 and GOES CCOR-1, not observed in STEREO A COR2 due to a data gap. The source is likely far-sided over the east limb, potentially o",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49268/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-26T01:26:00-CME-001",
+  "time": "2026-10-26T01:26Z",
+  "speed": 285.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "This CME is visible to the west in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. This CME is not visible in STEREO A COR2 in real time due to a data gap. The source may be related to a",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49270/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-26T02:12:00-CME-001",
+  "time": "2026-10-26T02:12Z",
+  "speed": 327.0,
+  "halfAngle": 20.0,
+  "type": "S",
+  "note": "This CME is visible to the west in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. There is a data gap in STEREO A COR2 imagery at the time of this CME. The source may be related to a sm",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49272/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-26T09:00:00-CME-001",
+  "time": "2026-10-26T09:00Z",
+  "speed": 873.0,
+  "halfAngle": 11.0,
+  "type": "C",
+  "note": "CME observed to the SW in SOHO LASCO C2/C3 and GOES CCOR-1 and to the SE in STEREO A COR2. This CME precedes and is partially overlapped by the larger CME: 2026-10-26T09:48Z, very ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49254/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-10-26T09:48:00-CME-001",
+  "time": "2026-10-26T09:48Z",
+  "speed": 681.0,
+  "halfAngle": 24.0,
+  "type": "C",
+  "note": "CME observed to the SW in SOHO LASCO C2/C3 and GOES CCOR-1 and to the SE in STEREO A COR2. This CME follows the more faint CME: 2026-10-26T09:00Z, very likely from the same source.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49249/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-26T18:48:00-CME-001",
+  "time": "2026-10-26T18:48Z",
+  "speed": 616.0,
+  "halfAngle": 27.0,
+  "type": "C",
+  "note": "This CME is visible to the southwest in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. This event is not visible in STEREO A COR2 imagery despite data availability, likely because it is",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49276/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-10-26T20:48:00-CME-001",
+  "time": "2026-10-26T20:48Z",
+  "speed": 479.0,
+  "halfAngle": 35.0,
+  "type": "S",
+  "note": "This CME is visible to the northeast in SOHO LASCO C2 and GOES CCOR-1 imagery.  This event was also seen in SOHO LASCO C3 after a downlink data gap backfilled and was seen in STERE",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49282/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-27T06:48:00-CME-001",
+  "time": "2026-10-27T06:48Z",
+  "speed": 260.0,
+  "halfAngle": 15.0,
+  "type": "S",
+  "note": "Narrow CME visible to the NNE in SOHO LASCO C2/C3 and GOES CCOR-1 and the NE in STEREO A COR2. The potential source may be a faint filament eruption best seen starting around 2026-",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49286/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-27T12:53:00-CME-001",
+  "time": "2026-10-27T12:53Z",
+  "speed": 302.0,
+  "halfAngle": 17.0,
+  "type": "S",
+  "note": "Faint CME visible to the NE in STEREO A COR2. The CME is not clearly visible in SOHO LASCO C2/C3 or GOES CCOR-1 imagery. The potential source location is not found in available EUV",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49293/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-28T00:00:00-CME-001",
+  "time": "2026-10-28T00:00Z",
+  "speed": 399.0,
+  "halfAngle": 15.0,
+  "type": "S",
+  "note": "Faint CME observed to the NE in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source may be field line movement on/near the high latitude N limb around 2026-10-27T22:31Z in",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49301/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-28T11:12:00-CME-001",
+  "time": "2026-10-28T11:12Z",
+  "speed": 329.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Faint CME observed to the SW in SOHO LASCO C2/C3 and GOES CCOR-1, also very faintly observed to the SW in STEREO A COR2, becoming more defined as it travels further into each coron",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49304/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-29T10:36:00-CME-001",
+  "time": "2026-10-29T10:36Z",
+  "speed": 287.0,
+  "halfAngle": 30.0,
+  "type": "S",
+  "note": "This CME is visible to the west in SOHO LASCO C2/C3 and GOES CCOR-1 and to the east in STEREO A COR2 imagery. The source is a filament eruption with liftoff starting around 2026-10",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49324/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-30T12:36:00-CME-001",
+  "time": "2026-10-30T12:36Z",
+  "speed": 218.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Very minor and faint CME seen to the W in SOHO LASCO C2/C3 and in GOES CCOR-1 coronagraphs. This CME is not seen in STEREO A COR2. Its source is a very minor eruption from the form",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49341/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-10-31T05:00:00-CME-001",
+  "time": "2026-10-31T05:00Z",
+  "speed": 345.0,
+  "halfAngle": 24.0,
+  "type": "S",
+  "note": "CME first seen to the West by SOHO LASCO C2 beginning at 2026-10-31T05:00Z, as well as by SOHO LASCO C3 and GOES CCOR-1 in later frames. This CME is not clearly seen in STEREO A CO",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49343/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-01T00:00:00-CME-001",
+  "time": "2026-11-01T00:00Z",
+  "speed": 894.0,
+  "halfAngle": 14.0,
+  "type": "C",
+  "note": "Diffuse CME first seen to the SE by SOHO LASCO C2 beginning at 2026-11-01T00:00Z, as well as by SOHO LASCO C3, STEREO A COR2 and GOES CCOR-1 in later frames. The source of this eve",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49353/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-11-01T19:00:00-CME-001",
+  "time": "2026-11-01T19:00Z",
+  "speed": 357.0,
+  "halfAngle": 27.0,
+  "type": "S",
+  "note": "CME first seen to the West in SOHO LASCO C2 beginning at 2026-11-01T19:00Z. The CME is also visible to the west in SOHO LASCO C3 and GOES CCOR-1. The CME may be faintly visible to ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49358/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-01T19:48:00-CME-001",
+  "time": "2026-11-01T19:48Z",
+  "speed": 309.0,
+  "halfAngle": 30.0,
+  "type": "S",
+  "note": "Slow developing CME first seen to the NE by SOHO LASCO C2, also observed in SOHO LASCO C3 and GOES CCOR-1, not observed in STEREO A COR due to a data gap in real-time starting at 2",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49361/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-03T09:36:00-CME-001",
+  "time": "2026-11-03T09:36Z",
+  "speed": 347.0,
+  "halfAngle": 41.0,
+  "type": "S",
+  "note": "Wide, slow CME observed to the E in SOHO LASCO C2/C3 and GOES CCOR-1, not in STEREO A COR2 due to a data gap beginning at 2026-11-03T18:36Z. This CME is very slow to erupt, speedin",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49370/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-04T02:48:00-CME-001",
+  "time": "2026-11-04T02:48Z",
+  "speed": 497.0,
+  "halfAngle": 14.0,
+  "type": "S",
+  "note": "Faint CME first seen to the NW by SOHO LASCO C2 beginning at 2026-11-04T02:48Z. This CME fades before exiting the field-of-view in SOHO LASCO C2, and is therefore not visible in GO",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49382/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-05T04:24:00-CME-001",
+  "time": "2026-11-05T04:24Z",
+  "speed": 330.0,
+  "halfAngle": 19.0,
+  "type": "S",
+  "note": "CME faintly visible to the NE in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2 imagery. The potential source is unclear, but may be a small eruption seen near the northeast limb",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49386/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-05T11:48:00-CME-001",
+  "time": "2026-11-05T11:48Z",
+  "speed": 404.0,
+  "halfAngle": 16.0,
+  "type": "S",
+  "note": "CME faintly visible to the east in SOHO LASCO C2/C3. The CME is not clearly visible in GOES CCOR-1 or STEREO A COR2 imagery. There is no clear source for this CME seen in available",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49389/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-05T20:00:00-CME-001",
+  "time": "2026-11-05T20:00Z",
+  "speed": 915.0,
+  "halfAngle": 13.0,
+  "type": "C",
+  "note": "CME first seen in white light imagery to the E in GOES CCOR-1 starting at 2026-11-05T20:00Z. In real time, this CME is covered by data gaps in SOHO LASCO and STEREO A COR2. The sou",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49394/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-11-05T21:24:00-CME-001",
+  "time": "2026-11-05T21:24Z",
+  "speed": 406.0,
+  "halfAngle": 16.0,
+  "type": "S",
+  "note": "CME seen to the east in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. The CME is also faintly visible to the east in STEREO A COR2 after a data gap from 2026-11-05T14:35Z to 2026-11-06",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49398/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-06T01:26:00-CME-001",
+  "time": "2026-11-06T01:26Z",
+  "speed": 264.0,
+  "halfAngle": 14.0,
+  "type": "S",
+  "note": "Narrow CME visible to the NE in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2 imagery. The source may possibly be a minor eruption starting around 2026-11-06T00:22Z in as best s",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49403/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-06T10:53:00-CME-001",
+  "time": "2026-11-06T10:53Z",
+  "speed": 368.0,
+  "halfAngle": 18.0,
+  "type": "S",
+  "note": "Narrow CME visible to the west in STEREO A COR2. The CME is not clearly visible in GOES CCOR-1 imagery. SOHO LASCO C2/C3 imagery is not available due to a downlink data gap. The po",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49405/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-06T13:15:00-CME-001",
+  "time": "2026-11-06T13:15Z",
+  "speed": 530.0,
+  "halfAngle": 20.0,
+  "type": "C",
+  "note": "CME visible to the NE in GOES CCOR-1 imagery. The CME may also be faintly visible to the NNE in STEREO A COR2 imagery. The start of the CME may be faintly visible to the NE in SOHO",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49416/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-11-06T16:15:00-CME-001",
+  "time": "2026-11-06T16:15Z",
+  "speed": 476.0,
+  "halfAngle": 43.0,
+  "type": "S",
+  "note": "Wide CME visible to the NW in GOES CCOR-1 and SOHO LASCO C2/C3 imagery. The CME is not visible in STEREO A COR2 imagery in real-time due to a data gap starting at 2026-11-06T13:38Z",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49426/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-06T20:24:00-CME-001",
+  "time": "2026-11-06T20:24Z",
+  "speed": 319.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "A very minor CME see to the NW in LASCO C2/C3 and GOES CCOR-1. This CME is not seen STEREO A COR2 as there is a data gap. It is possible that this CME is an outflow following the 2",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49431/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-07T06:24:00-CME-001",
+  "time": "2026-11-07T06:24Z",
+  "speed": 245.0,
+  "halfAngle": 10.0,
+  "type": "S",
+  "note": "Faint CME observed to the NE in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source is likely field line movement on/near the high latitude NE limb, observed starting arou",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49445/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-07T09:36:00-CME-001",
+  "time": "2026-11-07T09:36Z",
+  "speed": 507.0,
+  "halfAngle": 26.0,
+  "type": "C",
+  "note": "First in a pair of far-sided CMEs from a filament eruption, followed by slower CME 2026-11-07T10:24Z.  This leading edge is more faint and observed to the NW in SOHO LASCO C2/C3, G",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49434/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-11-07T10:24:00-CME-001",
+  "time": "2026-11-07T10:24Z",
+  "speed": 330.0,
+  "halfAngle": 39.0,
+  "type": "S",
+  "note": "Second in a pair of far-sided CMEs from a filament eruption, following faster CME 2026-11-07T09:36Z.  This leading edge is brighter and observed to the NNE in SOHO LASCO C2/C3 and ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49437/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-07T18:30:00-CME-001",
+  "time": "2026-11-07T18:30Z",
+  "speed": 423.0,
+  "halfAngle": 13.0,
+  "type": "S",
+  "note": "CME visible to the NW in GOES CCOR-1 imagery. The CME may also be faintly visible in SOHO LASCO C2 imagery prior to a data gap starting at 2026-11-07T21:12Z. The CME is not clearly",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49451/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-08T00:48:00-CME-001",
+  "time": "2026-11-08T00:48Z",
+  "speed": 591.0,
+  "halfAngle": 22.0,
+  "type": "C",
+  "note": "Faint CME observed to the NW in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. No source is observed in EUV imagery and is likely far-sided.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49454/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-11-08T08:48:00-CME-001",
+  "time": "2026-11-08T08:48Z",
+  "speed": 367.0,
+  "halfAngle": 27.0,
+  "type": "S",
+  "note": "Faint CME observed to the NW in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. The source may be further far-sided or observed as field line movement on the W limb in GOES SUVI ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49459/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-09T09:12:00-CME-001",
+  "time": "2026-11-09T09:12Z",
+  "speed": 338.0,
+  "halfAngle": 11.0,
+  "type": "S",
+  "note": "Faint CME observed to the NE in SOHO LASCO C2, and faintly in SOHO LASCO C3 and GOES CCOR-1, not observed in STEREO A COR2. The source may be faint field line movement on or slight",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49466/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-09T10:53:00-CME-001",
+  "time": "2026-11-09T10:53Z",
+  "speed": 299.0,
+  "halfAngle": 35.0,
+  "type": "S",
+  "note": "Faint CME observed to the W only in STEREO A COR2 before a data gap begins at 2026-11-09T11:38Z, or in SOHO LASCO C2/C3 and GOES CCOR-1 at all. No source is observed for this CME i",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49470/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-09T18:15:00-CME-001",
+  "time": "2026-11-09T18:15Z",
+  "speed": 726.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "Faint, narrow CME observed to the W only in GOES CCOR-1, due to a real-time data gap in SOHO LASCO C2/C3 and STEREO A COR2. The source is likely an eruption from AR 14571 starting ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49468/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-11-10T02:00:00-CME-001",
+  "time": "2026-11-10T02:00Z",
+  "speed": 803.0,
+  "halfAngle": 10.0,
+  "type": "C",
+  "note": "Thin, faint CME observed to the NE in SOHO LASCO C3 and GOES CCOR-1, very faint in LASCO C2 and not observed in available STEREO A COR2 imagery. No distinct source is observed for ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49484/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-11-10T02:12:00-CME-001",
+  "time": "2026-11-10T02:12Z",
+  "speed": 346.0,
+  "halfAngle": 34.0,
+  "type": "S",
+  "note": "Wide, diffuse CME observed to the SE in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2. No distinct source observation or timing is observed beyond broad, slow, near-background m",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49475/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-10T05:30:00-CME-001",
+  "time": "2026-11-10T05:30Z",
+  "speed": 974.0,
+  "halfAngle": 11.0,
+  "type": "C",
+  "note": "Thin, faint CME observed to the W in GOES CCOR-1 (partially obscured by earthshine) and STEREO A COR2, also in SOHO LASCO C2/C3 after a data gap spanning approx. 2026-11-10T03:00Z ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49479/-1",
+  "severity": 3
+ },
+ {
+  "id": "2026-11-11T23:24:00-CME-001",
+  "time": "2026-11-11T23:24Z",
+  "speed": 367.0,
+  "halfAngle": 29.0,
+  "type": "S",
+  "note": "CME first seen to the NW by SOHO LASCO C2 beginning at 2026-11-11T23:24Z, as well as by SOHO LASCO C3 and GOES CCOR-1 in later frames. This CME is not visible in STEREO A COR2 due ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49505/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-12T01:53:00-CME-001",
+  "time": "2026-11-12T01:53Z",
+  "speed": 327.0,
+  "halfAngle": 15.0,
+  "type": "S",
+  "note": "CME first seen to the W part way into the FOV of STEREO A COR2 following a real-time data gap that ended at 2026-11-12T01:53Z. The source may be related to some \"flickering\" seen b",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49508/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-12T21:12:00-CME-001",
+  "time": "2026-11-12T21:12Z",
+  "speed": 247.0,
+  "halfAngle": 32.0,
+  "type": "S",
+  "note": "Faint CME seen to NNW in early SOHO LASCO C2 coronagraph imagery and very faintly in early timestamps of GOES CCOR-1 but completely covered by an evening data gap in STEREO A COR2 ",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49523/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-13T01:26:00-CME-001",
+  "time": "2026-11-13T01:26Z",
+  "speed": 308.0,
+  "halfAngle": 38.0,
+  "type": "S",
+  "note": "CME visible to the SW in SOHO LASCO C2/C3 and GOES CCOR-1 imagery and to the SSE in STEREO A COR2 imagery. The potential source is not clear, but some faint dimming and moving fiel",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49525/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-13T03:24:00-CME-001",
+  "time": "2026-11-13T03:24Z",
+  "speed": 525.0,
+  "halfAngle": 17.0,
+  "type": "C",
+  "note": "This CME is faintly visible to the NE in STEREO A COR2 and SOHO LASCO C2/C3. The CME is not seen in GOES CCOR-1 due to Earthshine starting 2026-11-13T03:45Z. The potential source m",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49529/-1",
+  "severity": 2
+ },
+ {
+  "id": "2026-11-13T09:24:00-CME-001",
+  "time": "2026-11-13T09:24Z",
+  "speed": 302.0,
+  "halfAngle": 24.0,
+  "type": "S",
+  "note": "CME faintly visible to the southwest in SOHO LASCO C2/C3, GOES CCOR-1, and STEREO A COR2 imagery. The source is not clear, but may be some faint field line movement seen to the wes",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49537/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-13T21:24:00-CME-001",
+  "time": "2026-11-13T21:24Z",
+  "speed": 474.0,
+  "halfAngle": 12.0,
+  "type": "S",
+  "note": "A very small CME seen to the SSW in SOHO LASCO C2 and to the SE in STEREO A COR2 coronagraphs, and in early timestamps of C3. The front is not clear in GOES CCOR-1. No source has b",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49547/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-14T01:48:00-CME-001",
+  "time": "2026-11-14T01:48Z",
+  "speed": 399.0,
+  "halfAngle": 14.0,
+  "type": "S",
+  "note": "This CME is visible to the south/southwest in SOHO LASCO C2/C3 and to the southeast in STEREO A COR2 imagery. There are no clear sources observed on the Earth-facing disk around th",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49549/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-14T04:00:00-CME-001",
+  "time": "2026-11-14T04:00Z",
+  "speed": 345.0,
+  "halfAngle": 15.0,
+  "type": "S",
+  "note": "This CME is visible to the south/southwest in SOHO LASCO C2/C3 and to the southeast in STEREO A COR2 imagery. The source may be related to a small filament eruption centered near S",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49551/-1",
+  "severity": 1
+ },
+ {
+  "id": "2026-11-14T14:00:00-CME-001",
+  "time": "2026-11-14T14:00Z",
+  "speed": 397.0,
+  "halfAngle": 21.0,
+  "type": "S",
+  "note": "This CME is visible to the east in SOHO LASCO C2/C3 and GOES CCOR-1 imagery. This event is not seen in STEREO A COR2 imagery due to a data gap starting at 2026-11-14T13:23Z. The so",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49554/-1",
+  "severity": 1
+ }
+]
