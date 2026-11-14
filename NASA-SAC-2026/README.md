@@ -44,6 +44,36 @@ Portraits are embedded as base64, so the single file still works offline.
   as live. (A browser game cannot hold an API key safely, and a rate-limited
   live call would break during judging.)
 
+## Mission setup
+Before launch, pick:
+- **Length** — Quick (12 sols, ~3-5 min demo) / Standard (24) / Expedition (36).
+  Progress per action scales with length, so a short run is still a real mission.
+- **Difficulty** — Cadet / Astronaut / Commander. Changes starting margins,
+  a per-sol crew oxygen draw, and how hard radiation lands.
+
+Verified winnable at every combination (smart play, 10 runs each):
+
+|            | Cadet | Astronaut | Commander |
+|------------|-------|-----------|-----------|
+| Quick      | 100%  | 100%      | 70%       |
+| Standard   | 100%  | 100%      | 30%       |
+| Expedition | 100%  | 80%       | 60%       |
+
+## Events
+Two kinds, and the game never confuses them:
+
+**Real space weather** (badged `REAL EVENT · ARCHIVED`) — drawn from the 132
+DONKI records. Each uses three real fields:
+- **speed** (218-1048 km/s) sets radiation intensity
+- **halfAngle** (10-46 deg) sets geometry: 64 glancing, 36 partial, 32 direct hits
+- **NASA class** (S slow / C common / O occasional) is shown as NASA records it
+
+**Outpost situations** (badged `OUTPOST SITUATION · NOT NASA DATA`) — five per
+mission: lunar night, dust storms, comms blackout, a rich regolith seam, water
+ice found. These are in-game scenarios, deliberately *not* dressed as NASA
+records. Each carries a "Did you know?" line and, like every action, each one
+costs something.
+
 ## Three resources, one rule
 Power · Life Support · Shielding. Every action gives one and takes another.
 Even "shelter and wait" costs oxygen — there is no free option, because there

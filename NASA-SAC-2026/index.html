@@ -86,6 +86,20 @@
   .roster img{width:26px;height:26px;border:2px solid var(--line);display:block;opacity:.45}
   .roster img.on{opacity:1;border-color:var(--shd)}
   #nameWrap{display:none;margin-top:10px}
+  .opt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+  @media(max-width:560px){.opt{grid-template-columns:1fr}}
+  .opt button{background:var(--panel2);border:var(--px) solid var(--line);color:var(--ink);
+    font:inherit;font-size:14px;padding:11px 8px;cursor:pointer;text-align:center}
+  .opt button small{display:block;color:var(--dim);font-size:11px;margin-top:4px;line-height:1.4}
+  .opt button:hover{border-color:#4a5f93}
+  .opt button.sel{background:#2f4a7a;border-color:var(--shd)}
+  .ev.ops{background:#102030;border-color:#2d5570}
+  .ev.ops h3{color:#7fd4ff}
+  .geo{display:inline-block;font-size:11px;padding:3px 7px;border:2px solid var(--line);
+    background:#0a1020;color:var(--dim);margin:0 5px 5px 0}
+  .geo.direct{border-color:var(--bad);color:#ff9b9b}
+  .geo.partial{border-color:var(--pwr);color:var(--pwr)}
+  .geo.glance{border-color:var(--life);color:var(--life)}
   #nameIn{width:100%;background:#05070f;border:var(--px) solid var(--line);color:var(--ink);
     font:inherit;font-size:15px;padding:10px}
 </style>
@@ -114,7 +128,20 @@
     <h2>HOW MANY ASTRONAUTS?</h2>
     <p class="dim small">Everyone votes each turn. The crew acts together.</p>
     <div class="row" id="pcount"></div>
-    <button class="btn go" id="pgo" onclick="go('s-crew')" disabled>CONTINUE &#9654;</button>
+    <button class="btn go" id="pgo" onclick="go('s-opts')" disabled>CONTINUE &#9654;</button>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+<section id="s-opts" class="screen">
+  <div class="card">
+    <h2>MISSION SETUP</h2>
+    <p class="dim small">How long, and how hard. You can change this next time.</p>
+    <h3 style="font-size:14px;margin-top:14px">MISSION LENGTH</h3>
+    <div class="opt" id="optLen"></div>
+    <h3 style="font-size:14px">DIFFICULTY</h3>
+    <div class="opt" id="optDiff"></div>
+    <button class="btn go" onclick="renderCrew()">CONTINUE &#9654;</button>
   </div>
 </section>
 
@@ -189,7 +216,7 @@ const SPRITES = {};         // drop-in: SPRITES.hab = <Image>; else procedural
 /* Loaded from data/event-deck.json, built from NASA DONKI /CME API.
    ARCHIVED, not live - labelled as such in-game per challenge rules. */
 let EVENTS = [];
-const EVENTS_FALLBACK = [{"id":"2026-10-01T02:36:00-CME-001","speed":476,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48911/-1"},{"id":"2026-10-01T03:12:00-CME-001","speed":432,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48913/-1"},{"id":"2026-10-02T00:53:00-CME-001","speed":255,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48924/-1"},{"id":"2026-10-02T06:48:00-CME-001","speed":356,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48928/-1"},{"id":"2026-10-02T08:24:00-CME-001","speed":270,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48931/-1"},{"id":"2026-10-02T17:36:00-CME-001","speed":317,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48943/-1"},{"id":"2026-10-02T19:48:00-CME-001","speed":595,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48941/-1"},{"id":"2026-10-02T23:36:00-CME-001","speed":654,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48946/-1"},{"id":"2026-10-03T21:24:00-CME-001","speed":273,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48949/-1"},{"id":"2026-10-04T07:24:00-CME-001","speed":336,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48958/-1"},{"id":"2026-10-04T07:36:00-CME-001","speed":313,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48960/-1"},{"id":"2026-10-04T17:00:00-CME-001","speed":289,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48964/-1"},{"id":"2026-10-05T01:26:00-CME-001","speed":340,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48982/-1"},{"id":"2026-10-05T07:48:00-CME-001","speed":701,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48969/-1"},{"id":"2026-10-05T11:24:00-CME-001","speed":629,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48974/-1"},{"id":"2026-10-05T21:12:00-CME-001","speed":266,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48989/-1"},{"id":"2026-10-06T00:00:00-CME-001","speed":325,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48996/-1"},{"id":"2026-10-06T06:23:00-CME-001","speed":570,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48988/-1"},{"id":"2026-10-06T09:53:00-CME-001","speed":424,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49000/-1"},{"id":"2026-10-06T13:08:00-CME-001","speed":438,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49005/-1"},{"id":"2026-10-07T13:53:00-CME-001","speed":310,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49011/-1"},{"id":"2026-10-08T16:12:00-CME-001","speed":449,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49031/-1"},{"id":"2026-10-08T16:24:00-CME-001","speed":579,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49026/-1"},{"id":"2026-10-08T16:53:00-CME-001","speed":723,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49019/-1"},{"id":"2026-10-08T18:38:00-CME-001","speed":868,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49106/-1"},{"id":"2026-10-08T20:12:00-CME-001","speed":453,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49034/-1"},{"id":"2026-10-09T00:45:00-CME-001","speed":293,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49043/-1"},{"id":"2026-10-09T07:15:00-CME-001","speed":391,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49040/-1"},{"id":"2026-10-09T08:00:00-CME-001","speed":270,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49046/-1"},{"id":"2026-10-09T14:36:00-CME-001","speed":315,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49049/-1"},{"id":"2026-10-10T08:36:00-CME-001","speed":368,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49062/-1"},{"id":"2026-10-10T12:23:00-CME-001","speed":763,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49076/-1"},{"id":"2026-10-10T16:15:00-CME-001","speed":844,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49064/-1"},{"id":"2026-10-10T22:00:00-CME-001","speed":351,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49079/-1"},{"id":"2026-10-11T09:12:00-CME-001","speed":374,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49082/-1"},{"id":"2026-10-11T23:12:00-CME-001","speed":618,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49087/-1"},{"id":"2026-10-11T23:15:00-CME-001","speed":457,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49084/-1"},{"id":"2026-10-12T05:09:00-CME-001","speed":741,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49089/-1"},{"id":"2026-10-12T10:09:00-CME-001","speed":351,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49095/-1"},{"id":"2026-10-12T12:23:00-CME-001","speed":335,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49099/-1"},{"id":"2026-10-12T19:36:00-CME-001","speed":365,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49101/-1"},{"id":"2026-10-14T13:36:00-CME-001","speed":236,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49114/-1"},{"id":"2026-10-14T22:09:00-CME-001","speed":339,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49117/-1"},{"id":"2026-10-14T23:12:00-CME-001","speed":360,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49120/-1"},{"id":"2026-10-15T20:24:00-CME-001","speed":428,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49125/-1"},{"id":"2026-10-16T06:09:00-CME-001","speed":324,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49132/-1"},{"id":"2026-10-16T07:12:00-CME-001","speed":490,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49127/-1"},{"id":"2026-10-16T08:12:00-CME-001","speed":334,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49135/-1"},{"id":"2026-10-16T11:48:00-CME-001","speed":475,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49139/-1"},{"id":"2026-10-16T12:38:00-CME-001","speed":247,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49137/-1"},{"id":"2026-10-16T15:12:00-CME-001","speed":270,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49143/-1"},{"id":"2026-10-16T17:00:00-CME-001","speed":479,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49146/-1"},{"id":"2026-10-16T20:24:00-CME-001","speed":552,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49148/-1"},{"id":"2026-10-17T02:48:00-CME-001","speed":1048,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49150/-1"},{"id":"2026-10-17T17:00:00-CME-001","speed":453,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49155/-1"},{"id":"2026-10-17T18:12:00-CME-001","speed":427,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49157/-1"},{"id":"2026-10-18T21:30:00-CME-001","speed":375,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49160/-1"},{"id":"2026-10-18T23:15:00-CME-001","speed":590,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49162/-1"},{"id":"2026-10-19T14:48:00-CME-001","speed":387,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49167/-1"},{"id":"2026-10-19T19:15:00-CME-001","speed":474,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49170/-1"},{"id":"2026-10-20T01:26:00-CME-001","speed":368,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49173/-1"},{"id":"2026-10-20T07:24:00-CME-001","speed":748,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49178/-1"},{"id":"2026-10-20T09:09:00-CME-001","speed":568,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49175/-1"},{"id":"2026-10-20T14:23:00-CME-001","speed":920,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49183/-1"},{"id":"2026-10-21T08:53:00-CME-001","speed":310,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49185/-1"},{"id":"2026-10-21T13:38:00-CME-001","speed":547,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49191/-1"},{"id":"2026-10-21T20:36:00-CME-001","speed":973,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49197/-1"},{"id":"2026-10-22T20:12:00-CME-001","speed":561,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49208/-1"},{"id":"2026-10-22T22:12:00-CME-001","speed":381,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49210/-1"},{"id":"2026-10-23T04:18:00-CME-001","speed":597,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49212/-1"},{"id":"2026-10-23T10:24:00-CME-001","speed":337,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49218/-1"},{"id":"2026-10-23T16:36:00-CME-001","speed":255,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49220/-1"},{"id":"2026-10-24T15:12:00-CME-001","speed":652,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49223/-1"},{"id":"2026-10-24T18:00:00-CME-001","speed":251,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49231/-1"},{"id":"2026-10-24T18:08:00-CME-001","speed":566,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49239/-1"},{"id":"2026-10-24T20:36:00-CME-001","speed":838,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49226/-1"},{"id":"2026-10-24T21:48:00-CME-001","speed":333,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49229/-1"},{"id":"2026-10-24T22:24:00-CME-001","speed":621,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49241/-1"},{"id":"2026-10-25T03:12:00-CME-001","speed":336,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49233/-1"},{"id":"2026-10-25T05:00:00-CME-001","speed":246,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49237/-1"},{"id":"2026-10-25T09:48:00-CME-001","speed":360,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49244/-1"},{"id":"2026-10-25T19:24:00-CME-001","speed":275,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49246/-1"},{"id":"2026-10-26T00:12:00-CME-001","speed":402,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49268/-1"},{"id":"2026-10-26T01:26:00-CME-001","speed":285,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49270/-1"},{"id":"2026-10-26T02:12:00-CME-001","speed":327,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49272/-1"},{"id":"2026-10-26T09:00:00-CME-001","speed":873,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49254/-1"},{"id":"2026-10-26T09:48:00-CME-001","speed":681,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49249/-1"},{"id":"2026-10-26T18:48:00-CME-001","speed":616,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49276/-1"},{"id":"2026-10-26T20:48:00-CME-001","speed":479,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49282/-1"},{"id":"2026-10-27T06:48:00-CME-001","speed":260,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49286/-1"},{"id":"2026-10-27T12:53:00-CME-001","speed":302,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49293/-1"},{"id":"2026-10-28T00:00:00-CME-001","speed":399,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49301/-1"},{"id":"2026-10-28T11:12:00-CME-001","speed":329,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49304/-1"},{"id":"2026-10-29T10:36:00-CME-001","speed":287,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49324/-1"},{"id":"2026-10-30T12:36:00-CME-001","speed":218,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49341/-1"},{"id":"2026-10-31T05:00:00-CME-001","speed":345,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49343/-1"},{"id":"2026-11-01T00:00:00-CME-001","speed":894,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49353/-1"},{"id":"2026-11-01T19:00:00-CME-001","speed":357,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49358/-1"},{"id":"2026-11-01T19:48:00-CME-001","speed":309,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49361/-1"},{"id":"2026-11-03T09:36:00-CME-001","speed":347,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49370/-1"},{"id":"2026-11-04T02:48:00-CME-001","speed":497,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49382/-1"},{"id":"2026-11-05T04:24:00-CME-001","speed":330,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49386/-1"},{"id":"2026-11-05T11:48:00-CME-001","speed":404,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49389/-1"},{"id":"2026-11-05T20:00:00-CME-001","speed":915,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49394/-1"},{"id":"2026-11-05T21:24:00-CME-001","speed":406,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49398/-1"},{"id":"2026-11-06T01:26:00-CME-001","speed":264,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49403/-1"},{"id":"2026-11-06T10:53:00-CME-001","speed":368,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49405/-1"},{"id":"2026-11-06T13:15:00-CME-001","speed":530,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49416/-1"},{"id":"2026-11-06T16:15:00-CME-001","speed":476,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49426/-1"},{"id":"2026-11-06T20:24:00-CME-001","speed":319,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49431/-1"},{"id":"2026-11-07T06:24:00-CME-001","speed":245,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49445/-1"},{"id":"2026-11-07T09:36:00-CME-001","speed":507,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49434/-1"},{"id":"2026-11-07T10:24:00-CME-001","speed":330,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49437/-1"},{"id":"2026-11-07T18:30:00-CME-001","speed":423,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49451/-1"},{"id":"2026-11-08T00:48:00-CME-001","speed":591,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49454/-1"},{"id":"2026-11-08T08:48:00-CME-001","speed":367,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49459/-1"},{"id":"2026-11-09T09:12:00-CME-001","speed":338,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49466/-1"},{"id":"2026-11-09T10:53:00-CME-001","speed":299,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49470/-1"},{"id":"2026-11-09T18:15:00-CME-001","speed":726,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49468/-1"},{"id":"2026-11-10T02:00:00-CME-001","speed":803,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49484/-1"},{"id":"2026-11-10T02:12:00-CME-001","speed":346,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49475/-1"},{"id":"2026-11-10T05:30:00-CME-001","speed":974,"severity":3,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49479/-1"},{"id":"2026-11-11T23:24:00-CME-001","speed":367,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49505/-1"},{"id":"2026-11-12T01:53:00-CME-001","speed":327,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49508/-1"},{"id":"2026-11-12T21:12:00-CME-001","speed":247,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49523/-1"},{"id":"2026-11-13T01:26:00-CME-001","speed":308,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49525/-1"},{"id":"2026-11-13T03:24:00-CME-001","speed":525,"severity":2,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49529/-1"},{"id":"2026-11-13T09:24:00-CME-001","speed":302,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49537/-1"},{"id":"2026-11-13T21:24:00-CME-001","speed":474,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49547/-1"},{"id":"2026-11-14T01:48:00-CME-001","speed":399,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49549/-1"},{"id":"2026-11-14T04:00:00-CME-001","speed":345,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49551/-1"},{"id":"2026-11-14T14:00:00-CME-001","speed":397,"severity":1,"link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49554/-1"}];
+const EVENTS_FALLBACK = [{"id":"2026-10-01T02:36:00-CME-001","speed":476,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48911/-1"},{"id":"2026-10-01T03:12:00-CME-001","speed":432,"severity":1,"halfAngle":13.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48913/-1"},{"id":"2026-10-02T00:53:00-CME-001","speed":255,"severity":1,"halfAngle":28.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48924/-1"},{"id":"2026-10-02T06:48:00-CME-001","speed":356,"severity":1,"halfAngle":17.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48928/-1"},{"id":"2026-10-02T08:24:00-CME-001","speed":270,"severity":1,"halfAngle":33.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48931/-1"},{"id":"2026-10-02T17:36:00-CME-001","speed":317,"severity":1,"halfAngle":25.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48943/-1"},{"id":"2026-10-02T19:48:00-CME-001","speed":595,"severity":2,"halfAngle":20.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48941/-1"},{"id":"2026-10-02T23:36:00-CME-001","speed":654,"severity":2,"halfAngle":11.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48946/-1"},{"id":"2026-10-03T21:24:00-CME-001","speed":273,"severity":1,"halfAngle":25.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48949/-1"},{"id":"2026-10-04T07:24:00-CME-001","speed":336,"severity":1,"halfAngle":20.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48958/-1"},{"id":"2026-10-04T07:36:00-CME-001","speed":313,"severity":1,"halfAngle":13.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48960/-1"},{"id":"2026-10-04T17:00:00-CME-001","speed":289,"severity":1,"halfAngle":45.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48964/-1"},{"id":"2026-10-05T01:26:00-CME-001","speed":340,"severity":1,"halfAngle":18.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48982/-1"},{"id":"2026-10-05T07:48:00-CME-001","speed":701,"severity":2,"halfAngle":40.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48969/-1"},{"id":"2026-10-05T11:24:00-CME-001","speed":629,"severity":2,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48974/-1"},{"id":"2026-10-05T21:12:00-CME-001","speed":266,"severity":1,"halfAngle":35.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48989/-1"},{"id":"2026-10-06T00:00:00-CME-001","speed":325,"severity":1,"halfAngle":17.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48996/-1"},{"id":"2026-10-06T06:23:00-CME-001","speed":570,"severity":2,"halfAngle":40.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/48988/-1"},{"id":"2026-10-06T09:53:00-CME-001","speed":424,"severity":1,"halfAngle":24.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49000/-1"},{"id":"2026-10-06T13:08:00-CME-001","speed":438,"severity":1,"halfAngle":11.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49005/-1"},{"id":"2026-10-07T13:53:00-CME-001","speed":310,"severity":1,"halfAngle":36.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49011/-1"},{"id":"2026-10-08T16:12:00-CME-001","speed":449,"severity":1,"halfAngle":24.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49031/-1"},{"id":"2026-10-08T16:24:00-CME-001","speed":579,"severity":2,"halfAngle":28.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49026/-1"},{"id":"2026-10-08T16:53:00-CME-001","speed":723,"severity":2,"halfAngle":35.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49019/-1"},{"id":"2026-10-08T18:38:00-CME-001","speed":868,"severity":3,"halfAngle":18.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49106/-1"},{"id":"2026-10-08T20:12:00-CME-001","speed":453,"severity":1,"halfAngle":38.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49034/-1"},{"id":"2026-10-09T00:45:00-CME-001","speed":293,"severity":1,"halfAngle":27.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49043/-1"},{"id":"2026-10-09T07:15:00-CME-001","speed":391,"severity":1,"halfAngle":21.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49040/-1"},{"id":"2026-10-09T08:00:00-CME-001","speed":270,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49046/-1"},{"id":"2026-10-09T14:36:00-CME-001","speed":315,"severity":1,"halfAngle":41.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49049/-1"},{"id":"2026-10-10T08:36:00-CME-001","speed":368,"severity":1,"halfAngle":40.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49062/-1"},{"id":"2026-10-10T12:23:00-CME-001","speed":763,"severity":2,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49076/-1"},{"id":"2026-10-10T16:15:00-CME-001","speed":844,"severity":3,"halfAngle":43.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49064/-1"},{"id":"2026-10-10T22:00:00-CME-001","speed":351,"severity":1,"halfAngle":11.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49079/-1"},{"id":"2026-10-11T09:12:00-CME-001","speed":374,"severity":1,"halfAngle":17.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49082/-1"},{"id":"2026-10-11T23:12:00-CME-001","speed":618,"severity":2,"halfAngle":36.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49087/-1"},{"id":"2026-10-11T23:15:00-CME-001","speed":457,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49084/-1"},{"id":"2026-10-12T05:09:00-CME-001","speed":741,"severity":2,"halfAngle":27.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49089/-1"},{"id":"2026-10-12T10:09:00-CME-001","speed":351,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49095/-1"},{"id":"2026-10-12T12:23:00-CME-001","speed":335,"severity":1,"halfAngle":20.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49099/-1"},{"id":"2026-10-12T19:36:00-CME-001","speed":365,"severity":1,"halfAngle":12.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49101/-1"},{"id":"2026-10-14T13:36:00-CME-001","speed":236,"severity":1,"halfAngle":29.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49114/-1"},{"id":"2026-10-14T22:09:00-CME-001","speed":339,"severity":1,"halfAngle":15.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49117/-1"},{"id":"2026-10-14T23:12:00-CME-001","speed":360,"severity":1,"halfAngle":28.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49120/-1"},{"id":"2026-10-15T20:24:00-CME-001","speed":428,"severity":1,"halfAngle":36.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49125/-1"},{"id":"2026-10-16T06:09:00-CME-001","speed":324,"severity":1,"halfAngle":45.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49132/-1"},{"id":"2026-10-16T07:12:00-CME-001","speed":490,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49127/-1"},{"id":"2026-10-16T08:12:00-CME-001","speed":334,"severity":1,"halfAngle":14.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49135/-1"},{"id":"2026-10-16T11:48:00-CME-001","speed":475,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49139/-1"},{"id":"2026-10-16T12:38:00-CME-001","speed":247,"severity":1,"halfAngle":29.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49137/-1"},{"id":"2026-10-16T15:12:00-CME-001","speed":270,"severity":1,"halfAngle":30.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49143/-1"},{"id":"2026-10-16T17:00:00-CME-001","speed":479,"severity":1,"halfAngle":16.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49146/-1"},{"id":"2026-10-16T20:24:00-CME-001","speed":552,"severity":2,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49148/-1"},{"id":"2026-10-17T02:48:00-CME-001","speed":1048,"severity":3,"halfAngle":38.0,"type":"O","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49150/-1"},{"id":"2026-10-17T17:00:00-CME-001","speed":453,"severity":1,"halfAngle":24.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49155/-1"},{"id":"2026-10-17T18:12:00-CME-001","speed":427,"severity":1,"halfAngle":21.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49157/-1"},{"id":"2026-10-18T21:30:00-CME-001","speed":375,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49160/-1"},{"id":"2026-10-18T23:15:00-CME-001","speed":590,"severity":2,"halfAngle":20.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49162/-1"},{"id":"2026-10-19T14:48:00-CME-001","speed":387,"severity":1,"halfAngle":27.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49167/-1"},{"id":"2026-10-19T19:15:00-CME-001","speed":474,"severity":1,"halfAngle":14.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49170/-1"},{"id":"2026-10-20T01:26:00-CME-001","speed":368,"severity":1,"halfAngle":28.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49173/-1"},{"id":"2026-10-20T07:24:00-CME-001","speed":748,"severity":2,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49178/-1"},{"id":"2026-10-20T09:09:00-CME-001","speed":568,"severity":2,"halfAngle":38.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49175/-1"},{"id":"2026-10-20T14:23:00-CME-001","speed":920,"severity":3,"halfAngle":13.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49183/-1"},{"id":"2026-10-21T08:53:00-CME-001","speed":310,"severity":1,"halfAngle":35.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49185/-1"},{"id":"2026-10-21T13:38:00-CME-001","speed":547,"severity":2,"halfAngle":26.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49191/-1"},{"id":"2026-10-21T20:36:00-CME-001","speed":973,"severity":3,"halfAngle":46.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49197/-1"},{"id":"2026-10-22T20:12:00-CME-001","speed":561,"severity":2,"halfAngle":13.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49208/-1"},{"id":"2026-10-22T22:12:00-CME-001","speed":381,"severity":1,"halfAngle":32.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49210/-1"},{"id":"2026-10-23T04:18:00-CME-001","speed":597,"severity":2,"halfAngle":26.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49212/-1"},{"id":"2026-10-23T10:24:00-CME-001","speed":337,"severity":1,"halfAngle":17.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49218/-1"},{"id":"2026-10-23T16:36:00-CME-001","speed":255,"severity":1,"halfAngle":15.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49220/-1"},{"id":"2026-10-24T15:12:00-CME-001","speed":652,"severity":2,"halfAngle":14.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49223/-1"},{"id":"2026-10-24T18:00:00-CME-001","speed":251,"severity":1,"halfAngle":12.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49231/-1"},{"id":"2026-10-24T18:08:00-CME-001","speed":566,"severity":2,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49239/-1"},{"id":"2026-10-24T20:36:00-CME-001","speed":838,"severity":3,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49226/-1"},{"id":"2026-10-24T21:48:00-CME-001","speed":333,"severity":1,"halfAngle":19.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49229/-1"},{"id":"2026-10-24T22:24:00-CME-001","speed":621,"severity":2,"halfAngle":17.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49241/-1"},{"id":"2026-10-25T03:12:00-CME-001","speed":336,"severity":1,"halfAngle":41.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49233/-1"},{"id":"2026-10-25T05:00:00-CME-001","speed":246,"severity":1,"halfAngle":30.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49237/-1"},{"id":"2026-10-25T09:48:00-CME-001","speed":360,"severity":1,"halfAngle":24.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49244/-1"},{"id":"2026-10-25T19:24:00-CME-001","speed":275,"severity":1,"halfAngle":27.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49246/-1"},{"id":"2026-10-26T00:12:00-CME-001","speed":402,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49268/-1"},{"id":"2026-10-26T01:26:00-CME-001","speed":285,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49270/-1"},{"id":"2026-10-26T02:12:00-CME-001","speed":327,"severity":1,"halfAngle":20.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49272/-1"},{"id":"2026-10-26T09:00:00-CME-001","speed":873,"severity":3,"halfAngle":11.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49254/-1"},{"id":"2026-10-26T09:48:00-CME-001","speed":681,"severity":2,"halfAngle":24.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49249/-1"},{"id":"2026-10-26T18:48:00-CME-001","speed":616,"severity":2,"halfAngle":27.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49276/-1"},{"id":"2026-10-26T20:48:00-CME-001","speed":479,"severity":1,"halfAngle":35.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49282/-1"},{"id":"2026-10-27T06:48:00-CME-001","speed":260,"severity":1,"halfAngle":15.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49286/-1"},{"id":"2026-10-27T12:53:00-CME-001","speed":302,"severity":1,"halfAngle":17.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49293/-1"},{"id":"2026-10-28T00:00:00-CME-001","speed":399,"severity":1,"halfAngle":15.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49301/-1"},{"id":"2026-10-28T11:12:00-CME-001","speed":329,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49304/-1"},{"id":"2026-10-29T10:36:00-CME-001","speed":287,"severity":1,"halfAngle":30.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49324/-1"},{"id":"2026-10-30T12:36:00-CME-001","speed":218,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49341/-1"},{"id":"2026-10-31T05:00:00-CME-001","speed":345,"severity":1,"halfAngle":24.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49343/-1"},{"id":"2026-11-01T00:00:00-CME-001","speed":894,"severity":3,"halfAngle":14.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49353/-1"},{"id":"2026-11-01T19:00:00-CME-001","speed":357,"severity":1,"halfAngle":27.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49358/-1"},{"id":"2026-11-01T19:48:00-CME-001","speed":309,"severity":1,"halfAngle":30.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49361/-1"},{"id":"2026-11-03T09:36:00-CME-001","speed":347,"severity":1,"halfAngle":41.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49370/-1"},{"id":"2026-11-04T02:48:00-CME-001","speed":497,"severity":1,"halfAngle":14.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49382/-1"},{"id":"2026-11-05T04:24:00-CME-001","speed":330,"severity":1,"halfAngle":19.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49386/-1"},{"id":"2026-11-05T11:48:00-CME-001","speed":404,"severity":1,"halfAngle":16.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49389/-1"},{"id":"2026-11-05T20:00:00-CME-001","speed":915,"severity":3,"halfAngle":13.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49394/-1"},{"id":"2026-11-05T21:24:00-CME-001","speed":406,"severity":1,"halfAngle":16.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49398/-1"},{"id":"2026-11-06T01:26:00-CME-001","speed":264,"severity":1,"halfAngle":14.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49403/-1"},{"id":"2026-11-06T10:53:00-CME-001","speed":368,"severity":1,"halfAngle":18.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49405/-1"},{"id":"2026-11-06T13:15:00-CME-001","speed":530,"severity":2,"halfAngle":20.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49416/-1"},{"id":"2026-11-06T16:15:00-CME-001","speed":476,"severity":1,"halfAngle":43.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49426/-1"},{"id":"2026-11-06T20:24:00-CME-001","speed":319,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49431/-1"},{"id":"2026-11-07T06:24:00-CME-001","speed":245,"severity":1,"halfAngle":10.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49445/-1"},{"id":"2026-11-07T09:36:00-CME-001","speed":507,"severity":2,"halfAngle":26.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49434/-1"},{"id":"2026-11-07T10:24:00-CME-001","speed":330,"severity":1,"halfAngle":39.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49437/-1"},{"id":"2026-11-07T18:30:00-CME-001","speed":423,"severity":1,"halfAngle":13.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49451/-1"},{"id":"2026-11-08T00:48:00-CME-001","speed":591,"severity":2,"halfAngle":22.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49454/-1"},{"id":"2026-11-08T08:48:00-CME-001","speed":367,"severity":1,"halfAngle":27.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49459/-1"},{"id":"2026-11-09T09:12:00-CME-001","speed":338,"severity":1,"halfAngle":11.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49466/-1"},{"id":"2026-11-09T10:53:00-CME-001","speed":299,"severity":1,"halfAngle":35.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49470/-1"},{"id":"2026-11-09T18:15:00-CME-001","speed":726,"severity":2,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49468/-1"},{"id":"2026-11-10T02:00:00-CME-001","speed":803,"severity":3,"halfAngle":10.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49484/-1"},{"id":"2026-11-10T02:12:00-CME-001","speed":346,"severity":1,"halfAngle":34.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49475/-1"},{"id":"2026-11-10T05:30:00-CME-001","speed":974,"severity":3,"halfAngle":11.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49479/-1"},{"id":"2026-11-11T23:24:00-CME-001","speed":367,"severity":1,"halfAngle":29.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49505/-1"},{"id":"2026-11-12T01:53:00-CME-001","speed":327,"severity":1,"halfAngle":15.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49508/-1"},{"id":"2026-11-12T21:12:00-CME-001","speed":247,"severity":1,"halfAngle":32.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49523/-1"},{"id":"2026-11-13T01:26:00-CME-001","speed":308,"severity":1,"halfAngle":38.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49525/-1"},{"id":"2026-11-13T03:24:00-CME-001","speed":525,"severity":2,"halfAngle":17.0,"type":"C","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49529/-1"},{"id":"2026-11-13T09:24:00-CME-001","speed":302,"severity":1,"halfAngle":24.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49537/-1"},{"id":"2026-11-13T21:24:00-CME-001","speed":474,"severity":1,"halfAngle":12.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49547/-1"},{"id":"2026-11-14T01:48:00-CME-001","speed":399,"severity":1,"halfAngle":14.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49549/-1"},{"id":"2026-11-14T04:00:00-CME-001","speed":345,"severity":1,"halfAngle":15.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49551/-1"},{"id":"2026-11-14T14:00:00-CME-001","speed":397,"severity":1,"halfAngle":21.0,"type":"S","link":"https://ccmc.gsfc.nasa.gov/DONKI/view/CME/49554/-1"}];
 
 const MISSIONS = {
  moon:{
@@ -260,8 +287,72 @@ const ACTIONS = {
  ]
 };
 
+/* ---------- CONFIG ---------- */
+const LENGTHS = {
+ quick:{k:'quick', n:'QUICK', sols:12, d:'3-5 min. Good for a demo.'},
+ std:  {k:'std',   n:'STANDARD', sols:24, d:'The full mission.'},
+ long: {k:'long',  n:'EXPEDITION', sols:36, d:'Long haul. More storms.'}
+};
+const DIFFS = {
+ cadet:{k:'cadet', n:'CADET', d:'Forgiving. Learn the trade-offs.',
+        pwr:82, life:86, shd:62, rad:0.45, drain:0},
+ astro:{k:'astro', n:'ASTRONAUT', d:'The real balance.',
+        pwr:70, life:74, shd:48, rad:1.05, drain:1},
+ cmdr: {k:'cmdr',  n:'COMMANDER', d:'Thin margins. Storms bite.',
+        pwr:58, life:62, shd:36, rad:1.55, drain:1}
+};
+
+/* ---------- OPERATIONAL EVENTS ----------
+   These are in-game outpost situations, NOT NASA records. They are deliberately
+   NOT badged as real data - only the DONKI space-weather events carry that badge. */
+const OPS = {
+ moon:[
+  {n:'Dust in the harvester intake',
+   d:'Lunar regolith is sharp and clingy. It grinds moving parts and the harvester has to run slower.',
+   e:{pwr:-7}, teach:'Moon dust is jagged because there is no weather to wear it smooth.'},
+  {n:'Long lunar night begins',
+   d:'The Sun has set at your site. Solar panels make nothing until it returns.',
+   e:{pwr:-12}, teach:'A night at the lunar south pole can last days. Power has to be stored first.'},
+  {n:'Radiator running hot',
+   d:'Heat has nowhere to go in vacuum. The cooling loop is working overtime.',
+   e:{pwr:-5,life:-3}, teach:'In space the hard part is often getting rid of heat, not making it.'},
+  {n:'Good seam of regolith found',
+   d:'This patch is richer in trapped helium-3 than the survey predicted.',
+   e:{prog:+10,pwr:-6}, teach:'Helium-3 is not spread evenly. Prospecting is why Interlune flies a camera first.'},
+  {n:'Supply lander arrives',
+   d:'A cargo lander sets down with spare parts and fresh oxygen candles.',
+   e:{life:+16,pwr:-6}, teach:'Nothing reaches the Moon that was not launched from Earth months earlier.'}
+ ],
+ mars:[
+  {n:'Dust storm on the horizon',
+   d:'The sky is turning butterscotch. Airborne dust is cutting the light reaching your panels.',
+   e:{pwr:-11}, teach:'Martian dust storms can cover the planet and last for weeks.'},
+  {n:'Dust settles on the panels',
+   d:'A fine layer has built up overnight. Output is down until someone clears it.',
+   e:{pwr:-6}, teach:'Dust on solar panels ended several real Mars missions.'},
+  {n:'Comms blackout window',
+   d:'Earth is below the horizon. No new instructions for a while - decide alone.',
+   e:{life:-4}, teach:'A signal takes 4 to 24 minutes each way. Mars crews cannot ask and wait.'},
+  {n:'Clear traverse ground',
+   d:'Flat bedrock ahead instead of loose sand. The rover makes good time.',
+   e:{prog:+10,life:-4}, teach:'Loose sand once trapped the rover Spirit for good.'},
+  {n:'Water ice located nearby',
+   d:'Ground-penetrating radar finds ice within reach. That is oxygen and drinking water.',
+   e:{life:+16,pwr:-8}, teach:'Making supplies from what is already there is called ISRU.'}
+ ]
+};
+
+// a shorter mission must advance faster per action, or it cannot be finished
+function pk(){ return Math.pow(24 / (S.len ? S.len.sols : 24), 0.6); }
+function scaleE(e){
+  const o={...e};
+  if(o.prog>0) o.prog = Math.round(o.prog * pk());
+  return o;
+}
+
 /* ---------- STATE ---------- */
 let S = {players:1, crew:[], picking:1, pending:null, duty:null,
+         len:LENGTHS.std, diff:DIFFS.astro, anim:{}, ops:null, lastT:0,
          mission:null, sol:1, maxSol:24,
          pwr:70, life:75, shd:50, prog:0,
          deck:[], ev:null, votes:{}, pick:null, log:[]};
@@ -277,6 +368,22 @@ function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remo
   b.onclick=()=>{S.players=n;[...w.children].forEach(c=>c.classList.remove('sel'));
     b.classList.add('sel');document.getElementById('pgo').disabled=false;};
   w.appendChild(b);});})();
+
+/* ---------- SETTINGS ---------- */
+function renderOpts(){
+ const L=document.getElementById('optLen'), D=document.getElementById('optDiff');
+ L.innerHTML='';D.innerHTML='';
+ Object.values(LENGTHS).forEach(o=>{
+  const b=document.createElement('button');
+  b.className=(S.len.k===o.k?'sel':'');
+  b.innerHTML=`<b>${o.n}</b><small>${o.sols} sols<br>${o.d}</small>`;
+  b.onclick=()=>{S.len=o;renderOpts();};L.appendChild(b);});
+ Object.values(DIFFS).forEach(o=>{
+  const b=document.createElement('button');
+  b.className=(S.diff.k===o.k?'sel':'');
+  b.innerHTML=`<b>${o.n}</b><small>${o.d}</small>`;
+  b.onclick=()=>{S.diff=o;renderOpts();};D.appendChild(b);});
+}
 
 /* ---------- CREW SELECT ---------- */
 function renderCrew(){
@@ -370,7 +477,9 @@ function renderBrief(){
 
 /* ---------- RUN ---------- */
 function startRun(){
- S.sol=1;S.pwr=70;S.life=75;S.shd=50;S.prog=0;S.log=[];
+ S.sol=1;S.maxSol=S.len.sols;
+ S.pwr=S.diff.pwr;S.life=S.diff.life;S.shd=S.diff.shd;S.prog=0;S.log=[];
+ initAnim();
  S.deck=shuffle([...(EVENTS.length?EVENTS:EVENTS_FALLBACK)]);
  logit(`Mission begins at ${S.mission.site}. Crew: ${S.crew.map(c=>c.name).join(', ')}.`);
  go('s-game');nextTurn();
@@ -378,7 +487,13 @@ function startRun(){
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function nextTurn(){
- S.ev = S.deck[(S.sol-1) % S.deck.length];
+ // ~2 of every 3 sols bring real space weather; the rest are outpost situations
+ if(S.sol>1 && Math.random()<0.34){
+   const pool=OPS[S.mission.key];
+   S.ops=pool[Math.random()*pool.length|0]; S.ev=null;
+ } else {
+   S.ops=null; S.ev=S.deck[(S.sol-1) % S.deck.length];
+ }
  S.duty = S.crew.length ? S.crew[(S.sol-1) % S.crew.length] : null;
  S.pick=null;
  document.getElementById('solLab').textContent=`SOL ${S.sol} / ${S.maxSol}`;
@@ -407,16 +522,42 @@ function drawBars(){
  }).join('');
 }
 
+// how square-on the ejection hits, from NASA's halfAngle
+function geometry(e){
+ const a=e.halfAngle||20;
+ if(a>=30) return {k:'direct', mult:1.0,  lab:'DIRECT HIT',  txt:`A wide ${a}&deg; cloud - this one hits square on.`};
+ if(a>=20) return {k:'partial',mult:0.72, lab:'PARTIAL HIT', txt:`A ${a}&deg; cloud - you catch part of it.`};
+ return     {k:'glance', mult:0.42, lab:'GLANCING BLOW',txt:`Only ${a}&deg; wide - it mostly misses you.`};
+}
+// NASA's own CME class: S slow, C common, O occasional, R rare, ER extremely rare
+const CLASS = {S:'Slow (class S)', C:'Common (class C)', O:'Occasional (class O)',
+               R:'Rare (class R)', ER:'Extremely rare (class ER)'};
+
 function drawEvent(){
- const e=S.ev, sev=e.severity||1;
+ const box=document.getElementById('evbox');
+ if(S.ops){
+  const o=S.ops;
+  box.innerHTML=`
+  <div class="ev ops">
+    <h3>&#9881; ${o.n}</h3>
+    <p class="small">${o.d}</p>
+    <p class="small dim"><b>Did you know?</b> ${o.teach}</p>
+    <span class="tag">OUTPOST SITUATION &middot; NOT NASA DATA</span>
+    <div class="small" style="margin-top:6px">${costStr(scaleE(o.e))}</div>
+  </div>`;
+  return;
+ }
+ const e=S.ev, sev=e.severity||1, g=geometry(e);
  const names={1:'Minor solar activity',2:'Moderate CME detected',3:'STRONG CME INBOUND'};
- const dmg = sev*6;
- document.getElementById('evbox').innerHTML=`
+ box.innerHTML=`
  <div class="ev ${sev>=3?'s3':''}">
    <h3>&#9888; ${names[sev]||names[1]}</h3>
    <p class="small">A coronal mass ejection left the Sun at <b>${Math.round(e.speed)} km/s</b>.
    Faster means more radiation. Your shielding is what stands between it and the crew.</p>
+   <p class="small">${g.txt}</p>
+   <span class="geo ${g.k==='glance'?'glance':g.k}">${g.lab}</span>
    <span class="tag arch">REAL EVENT &middot; ARCHIVED</span>
+   ${e.type&&CLASS[e.type]?`<span class="tag">NASA class: ${CLASS[e.type]}</span>`:''}
    <span class="tag">${e.id}</span>
    <div class="small dim" style="margin-top:6px">Source: NASA DONKI${e.link?` &middot; <a href="${e.link}" target="_blank" rel="noopener">view record</a>`:''}</div>
  </div>`;
@@ -426,7 +567,7 @@ function drawActions(){
  const w=document.getElementById('actions');w.innerHTML='';
  ACTIONS[S.mission.key].forEach(a=>{
   const b=document.createElement('button');b.className='btn';
-  b.innerHTML=`<b>${a.n}</b><small>${a.d}<br>${costStr(a.e)}</small>`;
+  b.innerHTML=`<b>${a.n}</b><small>${a.d}<br>${costStr(scaleE(a.e))}</small>`;
   b.onclick=()=>{S.pick=a;[...w.children].forEach(c=>c.classList.remove('sel'));
     b.classList.add('sel');document.getElementById('actGo').disabled=false;
     document.getElementById('actTally').textContent=
@@ -441,21 +582,28 @@ function costStr(e){
 
 function resolveTurn(){
  const a=S.pick; if(!a) return;
- Object.entries(a.e).forEach(([k,v])=>{S[k]+=v;});
+ Object.entries(scaleE(a.e)).forEach(([k,v])=>{S[k]+=v;});
  logit(`Sol ${S.sol} \u00b7 ${S.duty?S.duty.name:'Crew'}: ${a.n.toLowerCase()}.`);
 
- // real consequence: CME severity vs shielding
- const sev=S.ev.severity||1;
- const raw=sev*6;
- const blocked=Math.round(raw*(S.shd/100));
- const hit=Math.max(0,raw-blocked);
- S.life-=hit; S.shd-=sev*2;
- if(hit>0) logit(`Radiation hit life support for ${hit}. Shielding absorbed ${blocked}.`);
- else logit(`Shielding held. No radiation damage.`);
+ if(S.ops){
+   Object.entries(scaleE(S.ops.e)).forEach(([k,v])=>{S[k]+=v;});
+   logit(`${S.ops.n}. ${costStr(scaleE(S.ops.e)).replace(/<[^>]*>/g,'')}`);
+ } else {
+   // real consequence: CME speed + NASA halfAngle geometry vs shielding
+   const sev=S.ev.severity||1, g=geometry(S.ev);
+   const raw=Math.round(sev*6*g.mult*S.diff.rad);
+   const blocked=Math.round(raw*(S.shd/100));
+   const hit=Math.max(0,raw-blocked);
+   S.life-=hit; S.shd-=sev*2;
+   if(hit>0) logit(`${g.lab.toLowerCase()}: radiation cost ${hit} life support, shielding absorbed ${blocked}.`);
+   else logit(`Shielding held against the ${g.lab.toLowerCase()}. No damage.`);
+ }
 
  ['pwr','life','shd'].forEach(k=>S[k]=Math.max(0,Math.min(100,S[k])));
  S.prog=Math.max(0,Math.min(100,S.prog));
 
+ S.life -= (S.diff.drain||0);
+ ['pwr','life','shd'].forEach(k=>S[k]=Math.max(0,Math.min(100,S[k])));
  if(S.prog>=100) return finish(true,'Mission accomplished.');
  if(S.life<=0)  return finish(false,'Life support failed. The crew had to abort.');
  if(S.pwr<=0)   return finish(false,'Power ran out. The outpost went dark.');
@@ -514,6 +662,30 @@ function drawHero(){
  px(c,230,66,2,20,'#8fa0c4');px(c,232,66,12,8,'#ff5c5c');
  px(c,200,78,18,8,'#9aa4b5');px(c,202,86,4,4,'#30363f');px(c,212,86,4,4,'#30363f');
 }
+function initAnim(){
+ S.anim={};S.lastT=performance.now();
+ S.crew.forEach((m,i)=>{S.anim[m.id]={x:8+i*24,tx:8+i*24,dir:1,wait:600+i*400};});
+}
+function stepAnim(dt){
+ const SPEED=14/1000;                       // px per ms
+ S.crew.forEach((m,i)=>{
+  const a=S.anim[m.id]; if(!a) return;
+  const onDuty = S.duty && m.id===S.duty.id;
+  if(onDuty){
+   a.tx = 96 + (S.prog/100)*194;            // walks out with the mission
+  } else {
+   a.wait-=dt;
+   if(a.wait<=0 && Math.abs(a.tx-a.x)<1){   // pick a new spot to amble to
+    a.tx = 6 + Math.random()*72; a.wait = 1200+Math.random()*2600;
+   }
+  }
+  const d=a.tx-a.x;
+  if(Math.abs(d)>0.6){
+   const step=Math.sign(d)*Math.min(Math.abs(d), SPEED*dt);
+   a.x+=step; a.dir=Math.sign(step)||a.dir; a.moving=true;
+  } else a.moving=false;
+ });
+}
 function drawScene(){
  const cv=document.getElementById('scene'),c=cv.getContext('2d'),m=S.mission,p=m.pal;
  px(c,0,0,320,140,'#05070f');stars(c,320,140,50,S.sol*31+3);
@@ -534,29 +706,32 @@ function drawScene(){
  const lit=S.pwr>40?'#ffc93c':S.pwr>15?'#8a6a20':'#3a3a3a';
  for(let i=0;i<4;i++)px(c,176+i*13,72,10,16,lit);
  px(c,176,88,49,3,'#2c3a5c');
- // --- animated crew sprites ---
- const fr = Math.floor(performance.now()/SPRITE_MS) % SPRITE_FRAMES;
- const GY = 104;                            // standing in the foreground regolith
- function sprite(suit, x, y, f){
+ // --- animated, walking crew ---
+ const now=performance.now();
+ const dt=Math.min(64, now-(S.lastT||now)); S.lastT=now;
+ stepAnim(dt);
+ const GY = 104;                            // foreground regolith
+ function sprite(suit, x, y, f, flip){
   const img = SUITIMG[suit];
   if(!img || !img.complete || !img.naturalWidth) return false;
-  c.drawImage(img, f*SPRITE_W, 0, SPRITE_W, SPRITE_H, x, y, SPRITE_W, SPRITE_H);
+  if(flip){
+   c.save(); c.translate(Math.round(x)+SPRITE_W, y); c.scale(-1,1);
+   c.drawImage(img, f*SPRITE_W,0,SPRITE_W,SPRITE_H, 0,0,SPRITE_W,SPRITE_H);
+   c.restore();
+  } else {
+   c.drawImage(img, f*SPRITE_W,0,SPRITE_W,SPRITE_H, Math.round(x),y,SPRITE_W,SPRITE_H);
+  }
   return true;
  }
- // off-duty crew wait at the left edge of the foreground, evenly spaced
- let slot=0;
  S.crew.forEach((m,i)=>{
-  if(S.duty && m.id===S.duty.id) return;
-  sprite(m.suit, 6+slot*24, GY, (fr+slot*3)%SPRITE_FRAMES);
-  slot++;
- });
- // on-duty astronaut walks the open ground as the mission advances
- const wx = 96 + Math.round((S.prog/100)*194);
- if(S.duty){
-  if(!sprite(S.duty.suit, wx, GY, fr)){
-    px(c,wx+7,GY+18,16,8,'#cfd8ee');px(c,wx+9,GY+26,4,4,'#30363f');
+  const a=S.anim[m.id]; if(!a) return;
+  // walkers cycle all 8 frames; standing crew breathe on a slow 2-frame idle
+  const f = a.moving ? Math.floor(now/SPRITE_MS+i*2)%SPRITE_FRAMES
+                     : Math.floor(now/420+i)%2;
+  if(!sprite(m.suit, a.x, GY, f, a.dir<0)){
+   px(c,Math.round(a.x)+7,GY+18,16,8,'#cfd8ee');
   }
- }
+ });
 }
 
 /* ---------- LOAD REAL EVENT DECK ---------- */
@@ -573,6 +748,6 @@ if(location.protocol!=='file:'){                 // optional refresh when served
 })();
 
 drawHero();
-document.getElementById('pgo').addEventListener('click',renderCrew);
+document.getElementById('pgo').addEventListener('click',renderOpts);
 </script>
 </body></html>
