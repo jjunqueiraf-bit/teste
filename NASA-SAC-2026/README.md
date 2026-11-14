@@ -60,18 +60,27 @@ shielding level. Fast storm + thin shield = the crew pays.
 
 Verified against the real page with Playwright: **8/12 wins** with sensible play.
 
-## Pixel art — dropping in Pixilart assets
-Art is procedural placeholder right now. To swap in real sprites:
-1. Export from Pixilart as **PNG with transparency**, tile size **32×32**.
-2. Register them in `index.html`:
-   ```js
-   const TILE = 32;
-   SPRITES.hab   = Object.assign(new Image(), {src:'art/hab.png'});
-   SPRITES.rover = Object.assign(new Image(), {src:'art/rover.png'});
-   SPRITES.solar = Object.assign(new Image(), {src:'art/solar.png'});
-   ```
-3. `drawScene()` uses `SPRITES.x` when present, else draws the placeholder.
-   Canvas is already `image-rendering: pixelated`, so no blurring.
+## Pixel art
+
+### Astronaut sprites (in use)
+Four animated suits from Pixilart, **30×30, 8 frames, 100 ms per frame**:
+cyan, green, gold, red — assigned to players 1–4 in join order.
+
+Source GIFs were RGB on a white background with no alpha. Since the suit is
+*also* white, a plain colour-key would have punched holes through the body.
+Instead `tools/` flood-fills transparency inward from the border, so only
+white reachable from outside the black outline is cleared. Strips live in
+`art/astro_<colour>.png` (240×30) and are embedded as base64 — about 5 KB total.
+
+The scene redraws on `requestAnimationFrame` while the game screen is visible:
+off-duty crew idle at the left of the regolith, the on-duty astronaut walks
+right as mission progress climbs.
+
+### Adding more sprites
+Keep **30×30** and integer scaling so pixels stay crisp. Export PNG with
+transparency where possible; if the background is opaque white, reuse the
+flood-fill in `tools/`. Register in `SUITIMG` or draw via `sprite()` in
+`drawScene()`. Canvas is already `image-rendering: pixelated`.
 
 ## Submission checklist
 - [x] Working browser prototype, no download, no account
