@@ -37,7 +37,7 @@ global one, and the Local Event's clock is the one that counts.
 | 4 | **Demo: ≤30s video OR ≤7 slides** | ✅ **Built** | The 7-slide deck is made and ready to export. No audio, so no subtitle requirement. *Adult lead: export and host it* |
 | 5 | **AI use declared and AI content labelled** | ✅ **Done in the build** | In-game credits screen, README, and the Use of AI field below. The two orbital diagrams carry an **AI-ASSISTED DIAGRAM** watermark; the six crew portraits carry an **AI-GENERATED IMAGE** watermark. **Still to do:** paste the declaration into the form. *Adult team lead* |
 | 6 | **All sources, tools, images and materials cited** | ✅ **Done** | New **DATA, SOURCES & CREDITS** screen in the game (title screen → link, and from the debrief), plus `docs/NASA-SOURCES.md` and the References field below. |
-| 7 | **All links public, no password** | ⚠️ **Missing** | Nothing is published yet. Cut the GitHub release, host the demo, then test every link signed out. *Adult team lead* |
+| 7 | **All links public, no password** | 🚫 **BLOCKED** | **The repository `jjunqueiraf-bit/teste` is PRIVATE.** A judge cannot open it, and a private link fails this requirement outright. It must be made public, or the game hosted elsewhere, before anything can be submitted. *Adult team lead — see Part 1* |
 | 8 | **Team registered, 2–6 participants, same Local Event** | ⚠️ **Verify** | Six crew. Check all six are confirmed on the team page at the São Paulo event. **You cannot add anyone after submission closes.** *Adult team lead — do this first* |
 | 9 | **Submitted by 15/11 23:59 São Paulo** | ⚠️ **Not yet** | See the code-freeze table above. *Adult team lead* |
 
@@ -80,17 +80,47 @@ Code, 10 NASA photographs, the team's pixel art, the landing animation, the
 rover and 132 real coronal mass ejections — all inside it. No internet, no
 install, no account. Double-click and it runs.
 
+### 🚫 First: the repository is private
+
+Checked just now: `jjunqueiraf-bit/teste` is **private**, has no GitHub Pages
+and no releases. Anonymous requests return 404. Nothing can be submitted until
+that changes, because every link on the form has to open for a stranger with no
+account.
+
+**Before you make it public, know what goes public with it.** The repository's
+**git history** still contains the earlier portraits — the ones with the NASA
+Space Apps patches, the Brazilian flags and the children's real first names —
+inside older commits of `index.html`. Making the repo public makes that history
+public too. Two options:
+
+- **Accept it.** A judge will not read your git history; the current build is
+  what they see.
+- **Rewrite the history first** so only the current version exists. Ask, and it
+  can be done in a few minutes, before you flip the switch.
+
 ### Steps
 
-1. **Push everything.** `git add -A && git commit -m "..." && git push`
-   (Under-13s must not create GitHub accounts — the adult pushes.)
-2. **Cut a release.** GitHub → Releases → Draft a new release → tag `v1.0` →
-   attach `index.html` → Publish. That is your permanent, unchanging **Link to
-   Final Project**.
-3. **Download the release file fresh**, put it on the laptop, and play one full
-   mission **with the Wi-Fi off**. If it works from a folder offline, it works
-   for a judge.
-4. Copy it to a second device or a USB stick.
+1. **Make the repository public.** GitHub → the repo → **Settings** → General →
+   **Danger Zone** → *Change repository visibility* → Public.
+   *(Only an account owner can do this.)*
+2. **Cut a release.** GitHub → **Releases** → *Draft a new release* → tag
+   `v1.0` → attach `NASA-SAC-2026/index.html` → Publish. That is your permanent
+   **Link to Final Project**. Notes ready to paste: `docs/release-notes-v1.0.md`.
+   *(This session is not permitted to create releases — GitHub returns 403 for
+   this session type — so it has to be you. It takes about a minute.)*
+3. **Better still, turn on GitHub Pages.** Settings → Pages → Source: *Deploy
+   from a branch* → `main` / `/ (root)`. The game then has a link that **plays
+   in the browser** instead of downloading, which is a far better first
+   impression for a judge:
+   `https://jjunqueiraf-bit.github.io/teste/NASA-SAC-2026/index.html`
+4. **Upload the demo deck.** `docs/Space-Mission-Design-Game-demo.pdf` goes to
+   Google Drive (*Anyone with the link*) or into the release. That is your
+   **Link to Project Demo**.
+5. **Download the release file fresh** and play one full mission **with the
+   Wi-Fi off**.
+6. **Test every link in a private window, signed out.** This is the step that
+   catches the private-repo problem — do not skip it.
+7. Copy the file to a second device or a USB stick.
 
 ### Build checks before freeze
 
