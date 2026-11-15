@@ -1,10 +1,19 @@
-# Junior Astronaut Mission Trainer
+# Space Mission Design Game
 
 **NASA Space Apps Challenge 2026 · São Paulo · 14–15 Nov 2026**
-Challenge: [Build a Junior Astronaut Mission Trainer](https://www.spaceappschallenge.org/2026/challenges/junior-astronaut-mission-trainer/)
+Challenge: [Space Mission Design Game](https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/)
 
-A browser game for ages 7–12. You run a real outpost and discover that
-**every choice costs something else** — including doing nothing.
+A browser game for **1 to 4 players**, ages 7–12. You design a complete space
+mission — objectives, launch window, power, instruments, communications, rocket
+and budget — then fly it and find out which of your decisions was the one that
+broke it. **Every choice costs something else**, including doing nothing.
+
+> **Use of AI.** The team chose the challenge, designed both missions, decided
+> every rule and balance figure, drew the pixel art and tested the game. The
+> code was written with an AI assistant working under the team's direction, and
+> the two orbital diagrams are AI-assisted and carry a visible watermark saying
+> so. The full declaration is on the game's own **DATA, SOURCES & CREDITS**
+> screen, reachable from the title screen.
 
 ## Play it
 Open `index.html`. That's it. No install, no build, no account, no server.
@@ -21,19 +30,21 @@ what is already done, what the focus is today, what we honestly don't know,
 and **who actually pays** for it.
 
 ## Astronaut crew
-Six selectable characters, one per team member: **Theo, Davi, Henrique, Caio,
-Nathan and Luca**. Luca's portrait carries the Brazil flag but no name tag.
+Six selectable crew, by callsign: **ORION, VEGA, RIGEL, LYRA, ATLAS and NOVA**.
+Each wears a different suit colour and has a different specialism.
 
 Each player picks one at the start; duplicates lock out. The crew rotates duty
 one astronaut per sol — the on-duty astronaut appears in the HUD and is named in
 every mission log entry, so each player gets their own turns in the record.
 
-Portraits are embedded as base64, so the single file still works offline.
+The portraits are the team's own pixel astronaut sprite, recoloured by script
+into six suits. They are **deliberately generic: no real person is depicted, no
+face is visible, and no badge or mission identifier appears on the suit.** The
+NASA Space Apps Terms and Conditions bar any image, video, audio or likeness of
+a person under 18 from a submitted project, and AI-generated content may not
+carry NASA branding — these portraits are built to satisfy both.
 
-> **Note for submission:** the handbook (p.11) says to keep minors' recognizable
-> names and faces out of submission materials. These are illustrations, not
-> photos, but they do pair real first names with likenesses. Decide whether this
-> build is the public submission or the local version the team plays.
+Portraits are embedded as base64, so the single file still works offline.
 
 ## Real NASA data
 - **132 real coronal mass ejections** from NASA's **DONKI** database,
@@ -63,14 +74,14 @@ Verified winnable at every combination (smart play, 10 runs each):
 Each astronaut is genuinely better at one job and genuinely worse at another,
 so **who is on duty changes what today's best move is**:
 
-| Astronaut | Role | Good at | Weak at |
+| Callsign | Role | Good at | Weak at |
 |---|---|---|---|
-| Theo | Engineer | Power systems (+40%) | Not a medic |
-| Davi | Geologist | Finding good ground (+38%) | Stays out too long |
-| Henrique | Flight surgeon | Keeping the crew alive (+45%) | Slows the mission |
-| Caio | Radiation officer | Shielding (+45%) | Heavy on power |
-| Nathan | Systems operator | Wastes nothing (costs -18%) | Never pushes |
-| Luca | Rover pilot | Covering ground (+30%) | Light on shielding |
+| ORION | Engineer | Power systems (+40%) | Not a medic |
+| VEGA | Geologist | Finding good ground (+38%) | Stays out too long |
+| RIGEL | Flight surgeon | Keeping the crew alive (+45%) | Slows the mission |
+| LYRA | Radiation officer | Shielding (+45%) | Heavy on power |
+| ATLAS | Systems operator | Wastes nothing (costs -18%) | Never pushes |
+| NOVA | Rover pilot | Covering ground (+30%) | Light on shielding |
 
 Action cards show the numbers *after* the on-duty astronaut's specialism, so
 players can see the difference rather than being told about it.
@@ -196,10 +207,14 @@ actually working stands out.
 Originals in `art/crew/`.
 
 > **Not used: `fundo1`.** It carries a visible *shutterstock.com* watermark, so
-> it is third-party licensed material and cannot ship. The handbook (p.11)
-> requires third-party rights to be checked and an original-content licence.
-> Also unused for now: the generic astronaut NPC (the six portraits already
-> cover the crew) and the UI boxes.
+> it is third-party licensed material and cannot ship. The submission form
+> requires you to confirm that every external resource is listed and that you
+> hold permission for any copyrighted material — so it stays out.
+>
+> **Also not shipped: the six personalised crew portraits.** They were
+> illustrated likenesses of the children carrying a Space Apps patch. They are
+> kept as a private family build and are not in this repository, because the
+> Terms and Conditions bar likenesses of under-18s from a submitted project.
 
 ## The journey
 Launching no longer drops you straight onto the surface. The ship crosses a
@@ -252,9 +267,9 @@ Each mission also carries one radio message about the real machine it is based o
 Every phase brings one message between the crew on the surface and the
 teammates who stayed on Earth, shuffled per run so replays differ.
 
-**The people are named and placed.** Whoever you did not pick for the crew is
-holding the desk back home, so the link reads
-`LUCA · EARTH → THEO` or `THEO · MARS → LUCA`, with both faces shown. Nobody
+**The crew are named and placed.** Whoever you did not pick for the flight crew
+is holding the desk back home, so the link reads
+`NOVA · EARTH → ORION` or `ORION · MARS → NOVA`, with both suits shown. Nobody
 appears in two places at once.
 
 **The delay is real and calculated, not decorative.** Each run picks an
@@ -262,8 +277,8 @@ Earth-Mars distance between 80 and 370 million km (the real range is roughly 55
 to 400 million), divides by the speed of light, and shows the result on every
 message:
 
-- *"sent from Earth 19 minutes 34 seconds ago · LUCA cannot see what you are doing now"*
-- *"this will reach Luca in 19 minutes 34 seconds · any answer takes that much more"*
+- *"sent from Earth 19 minutes 34 seconds ago · NOVA cannot see what you are doing now"*
+- *"this will reach NOVA in 19 minutes 34 seconds · any answer takes that much more"*
 
 On the Moon the same calculation gives **1.3 seconds** over 384,400 km, so the
 contrast between the two destinations is visible rather than asserted.
@@ -396,18 +411,22 @@ flood-fill in `tools/`. Register in `SUITIMG` or draw via `sprite()` in
 `drawScene()`. Canvas is already `image-rendering: pixelated`.
 
 ## Submission checklist
-- [x] Working browser prototype, no download, no account
-- [x] Real NASA data, attributed in-tool, archived clearly labelled
-- [x] 3 core resources, no free action
-- [x] Replayability — 132-event shuffled deck, two missions
-- [x] Mission context with real evidence and real funders
-- [ ] 1-page data explainer (content is in `docs/MISSIONS.md`)
-- [ ] Demo video
-- [ ] Real Pixilart sprites
+The full, owner-assigned version is in **`docs/SUBMIT.md`**. In short:
+- [x] Answers an official challenge — Space Mission Design Game
+- [x] Real NASA data (DONKI, Image and Video Library), cited in-game
+- [x] Everything in English
+- [x] No likeness of anyone under 18 anywhere in the build
+- [x] AI use declared in-game, in this README and in the submission text
+- [x] Credits screen listing every source, tool and image
+- [ ] Demo: 30-second video **or** 7 slides — draft in `docs/SUBMIT.md`
+- [ ] Links tested signed out
+- [ ] Submitted for judging before the São Paulo cutoff
 
 ## Files
 ```
 index.html              the whole game, standalone
+docs/SUBMIT.md          submission checklist + every form field, drafted
+docs/ASSESSMENT.md      where the project stands against the rules
 docs/challenge-brief.md the NASA challenge
 docs/MISSIONS.md        mission science + sources + honest caveats
 docs/PROJECT-CONTEXT.md event facts, constraints, decisions

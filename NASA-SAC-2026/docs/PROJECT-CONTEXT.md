@@ -4,7 +4,7 @@
 - **Event:** NASA Space Apps Challenge 2026 — **14–15 Nov 2026** (live now)
 - **Theme:** The Next Frontier
 - **Local event:** São Paulo
-- **Challenge:** Build a Junior Astronaut Mission Trainer
+- **Challenge:** Space Mission Design Game (1–4 players; design and simulate a complete mission end to end)
 - **Source:** https://www.spaceappschallenge.org/2026/challenges/junior-astronaut-mission-trainer/
 - **Full brief:** `docs/challenge-brief.md`
 

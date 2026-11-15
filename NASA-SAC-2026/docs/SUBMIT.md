@@ -1,157 +1,144 @@
-# Recording and posting the project
+# Submission: checklist, demo and every form field
 
-Everything in Part 2 and Part 3 of this file is taken from NASA Space Apps' own
-published guides. **Read the "Where these rules come from" note at the bottom
-before you rely on a number** — the live site was unreachable while this was
-written, so the year-specific dates must be confirmed by the team.
+**Challenge: Space Mission Design Game · São Paulo · deadline Sun 15 Nov 2026, 23:59 local**
 
-Three parts: **save the build**, **record the demo**, **post the submission**.
-
-> **The clock.** The portal closes at **23:59 on Sunday 15 November, São Paulo
-> local time** — that is tonight. Your São Paulo Local Lead may set an earlier
-> cutoff. Use whichever comes first and aim to be finished two hours before it.
-> You can re-submit as many times as you like until it closes; only the last
-> submission is judged. **So submit something early, then improve it.**
+Rules here come from the official Project Submission Guide as read by the team
+lead in a browser (this machine cannot reach spaceappschallenge.org), backed by
+the NASA Space Apps guide PDFs archived in this folder.
 
 ---
 
-# ⚠️ Three things that must be fixed before you post
+## ⏰ Code freeze
 
-A judge checks these first. If a project fails any one of them it is scored
-**1 (Poor) and not evaluated any further** — no appeal, no partial credit.
+Anything saved after the deadline is ineligible, and the clock is the Local
+Event's, not yours. Work back from 23:59 with real buffer:
 
-### 1. The six astronaut portraits must come out
+| Time | What happens | Owner |
+|---|---|---|
+| **20:00** | **Code freeze.** Last commit, last push, last release. Nothing touches `index.html` after this. | Adult team lead |
+| 20:15 | Download the release file fresh and play one full mission offline | Crew |
+| 20:30 | Open every link you are about to paste in a **private window**, signed out | Crew |
+| 21:00 | Paste all fields, tick both boxes, **click Submit for Judging** | Adult team lead |
+| 21:05 | Reload the page. It must say *submitted*, not *saved*. Screenshot it. | Adult team lead |
+| 21:05–23:59 | Buffer. You may keep re-submitting improvements; the last one is judged. | — |
 
-The character art for Theo, Davi, Henrique, Caio, Nathan and Luca breaks three
-separate rules at once:
-
-- It is a **likeness of a person under 18**. The Terms & Conditions say demos
-  and final projects may not include images, video, audio or other likeness of
-  anyone under 18. Six recognisable faces are in the build right now.
-- Each suit carries a **"NASA International Space Apps Challenge" patch**.
-  AI-generated content "may not use, contain, or modify any NASA branding or
-  design elements (such as the NASA logos, flags, or mission identifiers)."
-  That patch is a mission identifier, and it is visibly distorted.
-- They are **AI-generated images with no watermark**. AI-generated images and
-  videos "must be amended to include a visible watermark indicating they are
-  AI-generated."
-
-**The fix:** swap the six portraits for generic pixel astronauts in the four
-suit colours the team already drew (`art/crew/astro_anim_*.png`,
-`art/crew/control.png` — no faces, no name tags, no patches), and replace the
-first names with callsigns the players choose at the start. It is about fifteen
-minutes of work. Keep the personal version as a private family build — it just
-cannot be the one you submit or film.
-
-### 2. The demo is **30 seconds**, not 60–90
-
-An earlier version of this file said 60–90 seconds. That was wrong. The limit
-is **a video of 30 seconds or less, OR a deck of 7 slides or fewer** (title and
-ending slides count). Judges stop watching at 30 seconds. A 90-second video
-fails the minimum check.
-
-### 3. The README names the wrong challenge
-
-`README.md` still says *"Junior Astronaut Mission Trainer"* and links to that
-challenge page. You are submitting to **Space Mission Design Game**. "Responds
-to the challenge selected" is a minimum requirement, and the judges read your
-links. Change the title and the link before you paste the repo URL anywhere.
+Confirm the São Paulo cutoff with your Local Lead — it can be earlier than the
+global one, and the Local Event's clock is the one that counts.
 
 ---
 
-# PART 1 — Save the build
+## The mandatory checklist
 
-## The game is one file
+| # | Requirement | Status | What is left, and who does it |
+|---|---|---|---|
+| 1 | **Answers an official NASA challenge**, not Invent Your Own | ✅ **Done** | Game, README and title screen all name **Space Mission Design Game**. Confirm the team page has the same challenge selected. *Adult team lead* |
+| 2 | **Uses a NASA data source from the challenge**, visibly cited | ✅ **Done** | DONKI (132 real CMEs, real speed / half-angle / class), NASA Image and Video Library (10 photos with NASA IDs), NASA's six-step mission design process, CubeSat 101. All listed on the in-game **DATA, SOURCES & CREDITS** screen and in the NASA Data field below. **Still to check:** that at least one of these appears on the challenge's own Resources tab. *Crew* |
+| 3 | **Presented primarily in English** | ✅ **Done** | Game, README and all docs are English. Keep the form fields English too. |
+| 4 | **Demo: ≤30s video OR ≤7 slides** | ⚠️ **Missing** | Both drafted below. **Recommendation: do the 7 slides** — no audio, no subtitles, no timing risk on deadline night. *Crew, with the adult recording the screen* |
+| 5 | **AI use declared and AI content labelled** | ✅ **Done in the build** | In-game credits screen, README, and the Use of AI field below. The two orbital diagrams now carry a visible **AI-ASSISTED DIAGRAM** watermark. **Still to do:** paste the declaration into the form. *Adult team lead* |
+| 6 | **All sources, tools, images and materials cited** | ✅ **Done** | New **DATA, SOURCES & CREDITS** screen in the game (title screen → link, and from the debrief), plus `docs/NASA-SOURCES.md` and the References field below. |
+| 7 | **All links public, no password** | ⚠️ **Missing** | Nothing is published yet. Cut the GitHub release, host the demo, then test every link signed out. *Adult team lead* |
+| 8 | **Team registered, 2–6 participants, same Local Event** | ⚠️ **Verify** | Six crew. Check all six are confirmed on the team page at the São Paulo event. **You cannot add anyone after submission closes.** *Adult team lead — do this first* |
+| 9 | **Submitted by 15/11 23:59 São Paulo** | ⚠️ **Not yet** | See the code-freeze table above. *Adult team lead* |
 
-Everything — code, the NASA photographs, your Construct and Pixilart artwork,
-the 132 real coronal mass ejections — is inside:
+### Risks, in the order they would sink the entry
+
+1. **~~Likenesses of under-18s~~ — fixed.** The six portraits of the children
+   have been removed from the build. The crew are now generic pixel astronauts
+   with callsigns (ORION, VEGA, RIGEL, LYRA, ATLAS, NOVA), no faces, no name
+   tags, no Space Apps patch. The personalised version has been handed over
+   separately as a **private family build and is not in this repository.**
+   - ⚠️ **Still open:** the old portraits remain in this repository's **git
+     history**, inside earlier commits of `index.html`. A judge will not dig
+     there, but it is public. Say the word and the history can be rewritten.
+2. **~~Space Apps patch inside AI-generated art~~ — fixed** with the same
+   change. No AI-generated image in the build now carries NASA branding.
+3. **~~Unwatermarked AI images~~ — fixed.** Both orbital diagrams carry a
+   visible watermark. Everything else visual is either a NASA photograph
+   (public domain, credited) or the team's own hand-drawn pixel art.
+4. **The children cannot narrate the demo.** A voice is audio likeness of a
+   minor. Use burned-in English captions with no voice, or an adult narrating.
+5. **The demo does not exist yet.** This is the one thing that is pure missing
+   work, and judges often watch it first.
+6. **Nothing is published.** Every link in the form has to resolve for a
+   stranger with no account.
+
+---
+
+## PART 1 — Save and publish the build
+
+### The game is one file
 
 ```
-NASA-SAC-2026/index.html
+NASA-SAC-2026/index.html     (~549 KB)
 ```
 
-No internet, no install, no account. Double-click it and it runs.
+Code, 10 NASA photographs, the team's pixel art, the landing animation, the
+rover and 132 real coronal mass ejections — all inside it. No internet, no
+install, no account. Double-click and it runs.
 
-## A. Save a copy you can hand over
+### Steps
 
-1. Download `index.html` from GitHub (open the file, press **Download raw file**).
-2. Rename it with the date: `mission-design-game_20261115_1800.html`.
-3. Put it in a folder called `demo` on the laptop.
-4. **Open it and play one full mission with the Wi-Fi switched off.** If it
-   works from that folder offline, it will work for a judge.
-5. Copy it to a second device or a USB stick.
+1. **Push everything.** `git add -A && git commit -m "..." && git push`
+   (Under-13s must not create GitHub accounts — the adult pushes.)
+2. **Cut a release.** GitHub → Releases → Draft a new release → tag `v1.0` →
+   attach `index.html` → Publish. That is your permanent, unchanging **Link to
+   Final Project**.
+3. **Download the release file fresh**, put it on the laptop, and play one full
+   mission **with the Wi-Fi off**. If it works from a folder offline, it works
+   for a judge.
+4. Copy it to a second device or a USB stick.
 
-## B. Push the history to GitHub
+### Build checks before freeze
 
-```
-cd NASA-SAC-2026
-git add -A
-git commit -m "say what you changed"
-git push
-```
-
-**Under-13s must not create GitHub accounts** — that is GitHub's rule, not
-ours. An adult pushes on the team's behalf.
-
-## C. Cut a release judges can download
-
-GitHub → **Releases → Draft a new release → tag `v1.0` → attach `index.html`
-→ Publish**. One permanent link to a file that cannot change afterwards.
-
-## D. Last checks on the build
-
-- [ ] Opens and completes a mission **offline**
-- [ ] Opens on a **second device**
-- [ ] A deliberately bad design (small rocket, big dish, launch next month)
-      says **CANNOT LAUNCH** and gives reasons
+- [ ] Opens and completes a mission offline
+- [ ] Opens on a second device
+- [ ] A bad design (small rocket, big dish, launch next month) says **CANNOT
+      LAUNCH** and gives reasons
 - [ ] Collecting and never sending ends with the science stranded
 - [ ] **PLAY AGAIN** starts clean
-- [ ] No faces, names or Space Apps patches anywhere on screen
+- [ ] Title screen → **DATA, SOURCES & CREDITS** opens and lists everything
+- [ ] No faces, no real names, no Space Apps patches anywhere on screen
 
 ---
 
-# PART 2 — Record the demo
+## PART 2 — The demo
 
-## The rules, exactly
+### Rules
 
 | | |
 |---|---|
-| Format | **Video ≤ 30 seconds** OR **slide deck ≤ 7 slides** (pick one) |
-| Where it lives | **Not on the Space Apps site.** The portal does not accept video or document uploads. Host it on YouTube, Google Drive, GitHub, Dropbox or OneDrive and paste a link. |
-| Access | **Publicly accessible.** No sign-in, no permission request, no registration. Test it in a private browsing window. |
-| Language | Slides **must be in English**. A video may be spoken in any language **but must carry English subtitles**. |
-| People | No images, video, audio or likeness of anyone **under 18**. |
-| AI content | Declared; AI images/video need a visible watermark; AI code/data acknowledged in the descriptive text. No NASA branding inside AI-generated content. |
-| Content | No profanity or inappropriate language. |
+| Format | **Video ≤30 seconds** OR **≤7 slides** including title and intro slides. Pick one. |
+| Hosting | **Not on the Space Apps site** — it takes JPG/PNG/GIF up to 10 MB but no video or documents. Host on YouTube, Drive or GitHub and paste one link. |
+| Access | Public. No sign-in, no permission request. Test in a private window. |
+| Language | Slides **must be English**. A video may be spoken in Portuguese **but must carry English subtitles**. |
+| People | **No image, video, audio or likeness of anyone under 18.** |
+| Limit | Over 30 seconds or over 7 slides = **not eligible for Global Judging.** |
 
-**One link only** in the Demo field — you are choosing one format, not both.
+### ✅ Recommended: the 7 slides
 
-## How to handle the narration
+Safer tonight — no audio, no subtitles, no timing risk. Seven slides, English,
+big visuals, few words.
 
-The children cannot be heard or seen in the demo; a voice is a likeness. Two
-clean ways round it, in order of preference:
+| # | Slide | Content |
+|---|---|---|
+| 1 | **Title** | *Space Mission Design Game* · team name · all member names · challenge: Space Mission Design Game · NASA Space Apps 2026, São Paulo |
+| 2 | **The problem** | "Children are taught that space is amazing. They are not taught that it is a budget." One line on who it is for: 1–4 players, ages 7–12. |
+| 3 | **What you do** | Screenshot of a design step. The five decisions: launch window, power, two instruments, radio, rocket. |
+| 4 | **The moment it teaches** | Screenshot of **BUILD & VERIFY refusing to launch**, with the reasons listed. Caption: "Too heavy for this rocket. That is a real design review." *This is your strongest slide — do not cut it.* |
+| 5 | **NASA data made this possible** | Screenshot of a real CME event in play, plus the credits screen. Name DONKI (132 real events: real speed, half-angle, NASA class), the Image and Video Library (10 photos with NASA IDs), and NASA's six-step mission design process. |
+| 6 | **The user experience** | Screenshot of the crew voting and of the Earth message arriving 19 minutes late. Caption: "Science only counts once it reaches Earth." |
+| 7 | **What it becomes** | One offline HTML file → any classroom with no network. Next: more destinations, a teacher's sheet, Portuguese subtitles. |
 
-1. **No voice at all.** Screen recording of the game with **English text
-   captions burned on**. The game's own screens are already in English, it
-   sidesteps the subtitle rule completely, and it is the fastest to produce.
-2. **An adult narrates in English.** Also fine. If the adult narrates in
-   Portuguese, English subtitles are then mandatory.
+### Alternative: the 30-second video
 
-Either way the children's work is still front and centre — it is their art,
-their rules and their design decisions on screen. Credit them by first name in
-the *written* Hackathon Journey field, which is not a demo and not a likeness.
+NASA's own model is 0:00 who you are and the challenge · 0:05 name it and the
+problem · 0:10 how it works and the NASA data · 0:20 the future · 0:30 stop.
 
-## A 30-second script that fits
+**76 words — about 30 seconds read at a normal pace. Time it. If you run over,
+cut the last line.**
 
-NASA's own pitch model ("30 Seconds of Glory") splits the time like this:
-0:00 who you are and which challenge · 0:05 name the solution and the problem ·
-0:10 how it works, show it, say which space-agency data made it possible ·
-0:20 what it could become · 0:30 stop.
-
-Here is that model filled in. It is **76 words**, which is about 30 seconds read
-at a normal pace. Time yourself; if you run over, cut the last line first.
-
-> **0:00** Team *[your team name]*, São Paulo. This is the Space Mission Design Game.
+> **0:00** Team *[name]*, São Paulo. This is the Space Mission Design Game.
 >
 > **0:04** Children aged seven to twelve design a real mission — and find out why it fails.
 >
@@ -163,200 +150,299 @@ at a normal pace. Time yourself; if you run over, cut the last line first.
 >
 > **0:28** One file. No internet. Any classroom.
 
-### What to show under each line
-
 | Time | On screen |
 |---|---|
 | 0:00 | Title screen, then the mission vote |
 | 0:04 | A crew picking Mars |
-| 0:09 | The launch-window step, with the orbit diagram visible |
-| 0:16 | **BUILD & VERIFY refusing to launch**, reasons listed — this is the single best shot you have |
+| 0:09 | The launch-window step with the orbit diagram |
+| 0:16 | **BUILD & VERIFY refusing to launch**, reasons listed |
 | 0:22 | A solar storm hitting, then the Earth message arriving late |
 | 0:28 | The ending screen |
 
-Record the **screen only**, not the room. Do a 10-second test clip and play it
-back before you record the real one — check the text is readable at the size
-YouTube will show it.
-
-## If you choose slides instead
-
-Seven slides, English, strong visuals, few words:
-
-1. Team name, challenge (**Space Mission Design Game**), member callsigns
-2. The problem and who it is for
-3. How the game works — the five design decisions
-4. A screenshot of BUILD & VERIFY refusing to launch
-5. The NASA data, named: DONKI, the Image and Video Library, the mission-design
-   process
-6. What a player walks away understanding
-7. What it becomes with more time
-
-Slides are the safer choice if you are short on time tonight — no audio, no
-subtitles, no timing risk.
+Record the **screen only**, not the room. Test a 10-second clip first and check
+the text is readable at the size YouTube will show it.
 
 ---
 
-# PART 3 — Post the submission
+## PART 3 — Every form field, drafted
 
-You submit on **your team page** at spaceappschallenge.org, under the
-**Project** tab → **Edit Project**. Fill in the fields the site actually shows
-you; the list below is what to have written and ready to paste.
+Paste these, then edit in the team's own voice. Everything below is in English,
+as required.
 
-## The form fields
+### Project Name
 
-**Project Title**
-> Space Mission Design Game — design the mission, then find out why it fails
+```
+Space Mission Design Game
+```
 
-**High-Level Project Summary** *(what you built, how it answers the challenge, why it matters)*
-> A mission-design game for 1 to 4 players, aged 7 to 12. Players choose a
-> destination, then design the whole mission: when to launch, where the power
-> comes from, which two instruments to carry, how the evidence gets home, and
-> which rocket can lift it. A design that breaks its mass, power, cost or
-> launch-window limits cannot launch — and the game explains which limit it
-> broke. In flight the crew vote each phase, and science only counts once it has
-> been transmitted to Earth: collect everything, send nothing, and the mission
-> fails. It runs from a single file with no internet, so it works in a classroom
-> with no network.
+### High-Level Project Summary
 
-**Link to Final Project** — the GitHub release from Part 1C, or the repo.
-Must open with no login.
+```
+The Space Mission Design Game is a browser game for 1 to 4 players, aged 7 to
+12, that teaches real aerospace trade-offs by making players design a complete
+mission and then fly it.
 
-**Link to Project "Demo"** — one link, the video or the deck. Must open with no
-login. **Test it signed out.**
+Players vote on a destination, then make five decisions that a real mission team
+has to make: when to launch, where the power comes from, which two instruments
+to carry, how the evidence gets back to Earth, and which rocket can lift it. A
+design that breaks its mass, power, cost or launch-window limits CANNOT LAUNCH,
+and the game names the limit it broke. In flight, the crew vote every phase
+while real NASA space-weather data attacks the outpost, and science only counts
+once it has been transmitted home: collect everything, send nothing, and the
+mission fails.
 
-**Detailed Project Description** *(what it does, how it works, tools used)*
-Draw from `README.md` and `docs/MISSIONS.md`. Say plainly: single HTML file,
-Canvas 2D, no framework, no server; pixel art drawn by the team in Pixilart and
-Construct; NASA photographs embedded with their NASA IDs.
+It answers the challenge by refusing to let a player win without understanding
+the trade-off. There is no free action, no infinite budget, and no way to skip
+the physics. It runs from a single HTML file with no internet, no install and no
+account, so it works in a classroom with no network.
+```
 
-**Space Agency Data** *(the field that decides Global Award eligibility)*
-Paste from `docs/NASA-SOURCES.md`. Name each one and say what it changed:
-> - **DONKI (api.nasa.gov/DONKI/CME)** — 132 real coronal mass ejections from
->   1 Oct–14 Nov 2026. Each in-game storm uses that event's real speed
->   (218–1048 km/s), real half-angle (10–46°) and NASA's own S/C/O class.
-> - **NASA Image and Video Library (images-api.nasa.gov)** — seven credited
->   photographs shown with title, date and NASA ID, including PIA26368 (the
->   "leopard spots" rock) and as17-145-22157 (Apollo 17 scooping regolith).
-> - **"Design and Develop Science Missions", NASA Access to Space for All,
->   26 Mar 2025** — the six-step design process is the progress bar across the
->   top of the game; the four mission segments are how BUILD & VERIFY reports
->   back.
-> - **CubeSat 101, NASA CubeSat Launch Initiative** — anchors the mass and cost
->   scales so the numbers are the right order of magnitude.
+### Link to Project Demo
 
-**Hackathon Journey** *(what you learned, what went wrong, who to thank)*
-This is where the children's names belong — it is written text, not a likeness.
-Say what surprised them: that you cannot fly to Mars on any day you like, that
-the heavier battery is the one that survives a dust storm, that data sitting on
-the surface is worth nothing.
+```
+[one link — the 7 slides or the 30-second video, hosted publicly, tested signed out]
+```
 
-**References** *(everything you used — code, text, images, even open ones)*
-Every NASA source above, plus Pixilart and Construct, plus the AI declaration.
-If you cannot show you have permission to use something, take it out.
+### Link to Final Project
 
-## The AI declaration
+```
+[the GitHub release URL for index.html]
+```
 
-Required, and judged. Put it in the Detailed Project Description **and** in
-References so nobody misses it:
+### Detailed Project Description
 
-> The team designed the game, chose both missions, drew the pixel art and the
-> animations, and decided every rule. The game's code was written with an AI
-> assistant working under the team's direction, and this is declared here as
-> required. All NASA data and sources used are listed in the References field.
+```
+WHAT IT DOES
+The player runs a mission end to end, in the order a real mission team works:
+define the mission, decide how to get there, decide how to collect the evidence,
+decide how to deliver it to Earth, and come home.
 
-If any image in the final build is AI-generated, it needs a **visible
-watermark** saying so — which is one more reason the six portraits should go.
+1. DEFINE THE MISSION. Two real missions, voted on by the crew. Moon: harvest
+helium-3, following the real $6.9M NASA contract awarded to Interlune in May
+2026. Mars: recover the Sapphire Canyon core that Perseverance drilled in July
+2024 and that NASA announced in Nature in September 2025 as a potential
+biosignature — a sample still sitting on Mars because Mars Sample Return lost
+its funding in January 2026. Six illustrated panels, each built on a real NASA
+photograph, explain why we would go, what was actually found, what is still
+disputed, and who pays for it.
 
-## The two boxes you must tick
+2. DESIGN IT. Five steps, following NASA's own six-step mission design process.
+Launch window (the 26-month Mars synodic period versus a Moon launch available
+most weeks), power source (an MMRTG's steady 110 W against solar panels that
+make more on a good day and nothing in a dust storm), two instruments from four,
+communications, and the launch vehicle. Each option shows its mass, power, cost
+and capability side by side, so the trade-off is visible rather than described.
 
-The form will not submit without them. You are confirming, in substance:
+3. BUILD AND VERIFY. The design is checked against mass, power, budget and
+launch window. If it fails, it does not launch, and the game lists every limit
+it broke and by how much. This is the moment the game exists for.
 
-1. You have read and agree to the Project Submission Guide and the Participant
-   Terms and Conditions.
-2. The project is your team's **original work**, every external resource —
-   code, text, images, even open-source ones — is listed in **References**, and
-   you have used no copyrighted material you do not have permission for.
+4. FLY IT. The crew vote on one action each phase. Power, life support and
+shielding all decay whether you act or not. Solar storms arrive from 132 real
+coronal mass ejections. Science collected is tracked separately from science
+transmitted, and only transmitted science counts.
 
-Tick those honestly. The Shutterstock background from the Construct pack is
-exactly the kind of thing box 2 is about: it is licensed to someone else and
-must not be in the build.
+5. COME HOME. Eight different endings, each naming what to change next time.
 
-## Team rules
+HOW IT WORKS
+One self-contained HTML file. Canvas 2D for the surface scenes, no framework, no
+server, no build step, no account, no network. Every image, animation and data
+record is embedded as base64, so the file runs from file:// offline. Tested at
+360x640 through 1280x800 with no page scrolling during play.
 
-- Everyone must be **registered and identified on the team's Project Page**.
-- **Maximum six** team members, minimum one. You have six — that is the cap.
-- You **cannot add members after submission closes**. Do this first, not last.
+BENEFITS AND GOALS
+Most space education tells children that space is amazing. This teaches them
+that it is a budget. A child who finishes one mission can explain why you cannot
+launch to Mars on any day you like, why the heavier battery is sometimes the
+right one, and why data sitting on a planet's surface is worth nothing. It is
+designed to be handed to a teacher as a single file and used in a room with no
+internet.
 
-## Final checklist before you press Submit
+TOOLS AND LANGUAGES
+HTML, CSS and vanilla JavaScript with the Canvas 2D API. Pixel art drawn by the
+team in Pixilart and Construct. Playwright for automated testing across five
+full playthroughs. Python and Node scripts for asset processing and for
+simulating game balance before tuning it.
+```
 
-- [ ] The six face portraits and the Space Apps patches are **out of the build
-      and out of the demo**
-- [ ] The README names **Space Mission Design Game**
-- [ ] Demo is **≤ 30 seconds** or **≤ 7 slides**
-- [ ] Demo link and project link both open **in a private window, signed out**
-- [ ] Everything on the page and in the linked materials is **in English**
-      (video in Portuguese → English subtitles)
-- [ ] All six members registered and listed on the Project Page
-- [ ] AI use declared in writing
-- [ ] References lists every source, including Pixilart and Construct
-- [ ] No profanity anywhere, including in the code comments judges might read
-- [ ] Press **Submit** — then **reload the page and confirm it says submitted,
-      not saved**. A draft is not an entry.
+### Use of AI
+
+```
+AI was used, and here is exactly how.
+
+The team chose the challenge, designed both missions, decided every game rule
+and every balance figure, drew all the pixel art and animation, playtested the
+game and made every creative decision.
+
+AI-ASSISTED CODE: the game's code was written with an AI assistant working under
+the team's direction. This is acknowledged here, in the project's README, and on
+the game's own DATA, SOURCES & CREDITS screen, reachable from the title screen.
+
+AI-ASSISTED IMAGES: two orbital diagrams (why a Mars launch must wait for its
+transfer window, and why the Moon is reachable almost any week) were generated
+as code with AI assistance. Both carry a visible "AI-ASSISTED DIAGRAM" watermark
+in the corner of the image, and both are captioned in-game as drawn for this
+game so they can never be mistaken for NASA photographs.
+
+NOT AI-GENERATED: all pixel art, the rover, the astronaut animation, the landing
+sequence and the user interface art were hand-drawn by the team in Pixilart and
+Construct. The crew portraits are the team's own astronaut sprite recoloured by
+script into six suits.
+
+No AI-generated content in this project uses, contains or modifies any NASA
+branding or design element — no NASA logo, flag or mission identifier appears in
+any AI-generated image.
+
+No image, video, audio or likeness of any person under 18 appears anywhere in
+the submitted game or in the demo.
+```
+
+### NASA Data
+
+```
+DONKI — Space Weather Database Of Notifications, Knowledge, Information
+https://api.nasa.gov/DONKI/CME
+132 real coronal mass ejections recorded between 1 October and 14 November 2026.
+This is not decoration: every solar storm in the game uses that event's real
+speed (218-1048 km/s) to set radiation intensity, its real half-angle (10-46
+degrees) to decide whether the hit is glancing, partial or direct, and NASA's
+own S/C/O class, shown to the player as NASA records it. The deck of 132 is
+shuffled per run, so no two missions face the same weather. Archived rather than
+live, and labelled as archived in-game, because a browser game cannot hold an
+API key safely and a rate-limited call would fail during judging.
+
+NASA Image and Video Library
+https://images-api.nasa.gov
+Ten photographs, each displayed in-game with its title, date and NASA ID:
+as17-145-22157 (Harrison Schmitt scooping lunar samples, Apollo 17),
+art002e021278 (Earthset from Orion), KSC-20231121-PH-ULA01_0002 (Astrobotic
+lander encapsulation), PIA26368 (the 'leopard spots' rock), PIA26344
+(Perseverance selfie with Cheyava Falls), PIA24485 (the delta in Jezero Crater),
+PIA26640 (PIXL finding vivianite and greigite), PIA23306 (Mars 2020's MMRTG),
+PIA23214 (the Deep Space Network at Goldstone), KSC-20200730-PH-FMX01_0042 (Mars
+2020 lifting off on an Atlas V). Each photograph is attached to the decision it
+explains, not used as wallpaper.
+
+"Design and Develop Science Missions" — Julie Levri, Flight Systems Engineer,
+NASA Access to Space for All, Systems Engineering Webinar Series, 26 March 2025
+https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf
+The six steps across the top of every design screen are NASA's six steps:
+Identify Need & Goals, Define Concept, Define Requirements, Design, Build &
+Verify, Implement. BUILD & VERIFY summarises the player's mission back to them
+in NASA's four mission segments: launch, space, ground and user.
+
+CubeSat 101 — NASA CubeSat Launch Initiative
+https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf
+Sets the mass and cost scales so the numbers a player sees are the right order
+of magnitude.
+```
+
+### Space Agency Partner Data and Other References
+
+```
+ORBITAL MECHANICS AND PHYSICS USED IN THE GAME
+- Earth orbits the Sun in 365 days, Mars in 687, so a low-energy alignment
+  recurs about every 26 months. A Hohmann transfer takes about 259 days and
+  needs about 3.6 km/s. Walter Hohmann, 1925.
+- An MMRTG produces roughly 110 W and keeps producing it at night and through
+  dust storms. Mars receives about 43% of the sunlight Earth does, before dust.
+- Light travels at 299,792 km/s. Every message delay in the game is the real
+  Earth-to-destination distance divided by that figure: about 1.3 seconds to the
+  Moon, up to about 20 minutes to Mars.
+- Kulcinski, Wittenberg and Schmitt, 1986 — the first paper linking lunar
+  helium-3 to fusion power. Harrison Schmitt is the Apollo 17 astronaut in the
+  photograph the player sees two steps earlier.
+
+REAL EVENTS CITED IN THE GAME
+- Opportunity, silenced 10 June 2018 by a planet-wide dust storm (attached to
+  the solar-versus-nuclear power decision).
+- Mars Climate Orbiter, 1999 — newtons versus pound-force (attached to the
+  design verification step).
+- NASA award to Interlune, May 2026, $6.9M, payload "Prospect Moon".
+- Perseverance / Cheyava Falls / Sapphire Canyon, NASA and Nature, September
+  2025, described in-game as a potential biosignature, not as proof.
+- Mars Sample Return defunded, 23 January 2026.
+
+TOOLS AND SOFTWARE
+- Pixilart — all pixel art and animation, drawn by the team.
+- Construct — the cockpit view, ship, buttons and astronaut sprite, made by
+  the team.
+- HTML, CSS, vanilla JavaScript, Canvas 2D API. No frameworks, no libraries, no
+  third-party code is included in the final file.
+- Playwright (automated testing), Python with Pillow and NumPy (image
+  processing), Node.js (balance simulation). Development tools only; none ships
+  in the submitted file.
+
+IMAGES AND MEDIA
+- All photographs are NASA, public domain, each listed above with its NASA ID.
+- All pixel art, animation, the rover, the lander animation and the interface
+  art are the team's own original work.
+- The two orbital diagrams are AI-assisted and visibly watermarked.
+- No stock photography, no third-party licensed art, no music, no sound.
+- A Shutterstock-watermarked background that came with a template was
+  identified and deliberately excluded from the build.
+
+HONESTY NOTE
+In-game outpost events (lunar night, dust storms, comms blackout, a rich
+regolith seam, water ice) are written scenarios, not NASA records, and the game
+never badges them as data. Only the DONKI space-weather events carry the
+"REAL EVENT - ARCHIVED" badge.
+```
+
+### The two checkboxes
+
+The form will not submit without both. You are confirming that you have read and
+agree to the Project Submission Guide and the Participant Terms and Conditions,
+and that the project is your team's **original work** with every external
+resource listed in References and no copyrighted material you lack permission
+for. The References field above is written to make both true. Then click
+**Submit for Judging** — saving a draft is not entering.
+
+---
+
+## PART 4 — Final checks before you click
+
+- [ ] All six members confirmed on the team page, same Local Event
+- [ ] Challenge on the team page reads **Space Mission Design Game**
+- [ ] Every form field filled, all in English
+- [ ] Demo is ≤30 seconds or ≤7 slides
+- [ ] Demo link and project link open **in a private window, signed out**
+- [ ] AI declaration pasted into Use of AI
+- [ ] References lists every tool and source
+- [ ] No faces, real names or Space Apps patches in the build or the demo
+- [ ] No profanity anywhere, including code comments
+- [ ] Click **Submit for Judging**, reload, confirm it says submitted
 - [ ] Screenshot the confirmation
-- [ ] Confirm the **São Paulo cutoff** with your Local Lead as well as the
-      global one
-
-## After you submit
-
-Local judges pick **1–3 projects per location** to advance as *Global
-Nominees*. Those go to NASA and partner-agency judges, who pick *Global
-Finalists*, who go to an executive committee for **10 Global Awards**: Best Use
-of Science, Best Use of Data, Best Use of Technology, Galactic Impact, Best
-Mission Concept, Most Inspirational, Best Storytelling, Global Connection,
-Art & Technology, and Local Impact.
-
-Judges score **holistically 1–5** on five criteria: **Impact, Creativity,
-Validity, Relevance, Presentation**. Relevance explicitly rewards NASA data
-being *integral* to the project rather than decorative — which is why the
-Space Agency Data field is worth writing carefully.
-
-**Best Mission Concept** ("the most plausible concept and design") and **Best
-Storytelling** are the two this project is built to win. Say so, in those words,
-in the Detailed Project Description.
 
 ## If something breaks at the last minute
 
-Fall back to the saved file from Part 1A. It is self-contained and offline, so
-a dead Wi-Fi link at the venue cannot touch it.
+Fall back to the offline file from Part 1. It is self-contained, so dead Wi-Fi
+at the venue cannot touch it.
 
 ---
 
-## Where these rules come from
+## How this project will be judged
 
-`www.spaceappschallenge.org` could not be reached from the machine this was
-written on — DNS and TLS both fail there, through every route tried. Nothing
-below was invented or recalled from memory; each rule comes from a document
-actually retrieved and read:
+Judges score holistically 1–5 on **Impact, Creativity, Validity, Relevance and
+Presentation**, after a pass/fail check of the minimum requirements above.
+Relevance explicitly rewards NASA data being *integral* rather than decorative —
+which is why the NASA Data field is worth the length it has.
 
-| Source | What it gave |
-|---|---|
-| **Space Apps 2025 Judging Guidelines** (NASA Space Apps S3) | The minimum-requirements checklist: English, responds to the challenge, **≤ 7 slides or ≤ 30 seconds**, links password-unrestricted, NASA data used, AI declared with the branding and watermark rules. The 1–5 criteria and the ten awards. |
-| **Space Apps 2022 Project Submission Guide** (NASA Space Apps S3) | The exact project-form fields, the two agreement checkboxes, the six-member cap, the file-hosting rules, the "30 Seconds of Glory" pitch model. |
-| **Space Apps 2021 Project "Demo" Guide** (NASA Space Apps S3) | Demo format rules and the seven-slide content outline. |
-| **github.com/nasa/spaceapps** | Confirms registration and Terms & Conditions apply; the repo itself is only a README and Discussions — no submission rules live there. |
-| **The GO Team message to participants** | Names the current guides: Project Submission, Judging and Awards, Participant FAQs, Space Apps Connect. |
+Local judges advance 1–3 projects per location as Global Nominees; those go to
+NASA and partner-agency judges for Global Finalist, then to an executive
+committee for ten Global Awards. **Best Mission Concept** ("the most plausible
+concept and design") and **Best Storytelling** are the two this project is built
+for.
 
-**What the team must still confirm on the live site**, because it is
-year-specific and the 2026 pages could not be opened:
+## Reference documents in this folder
 
-1. The exact 2026 São Paulo submission deadline.
-2. Whether the 2026 form fields match the list above.
-3. The challenge's own **Resources tab** — check at least one NASA source you
-   used is listed there.
-4. The current Participant Terms and Conditions, especially the under-18 clause.
-5. Whether the Brazilian Space Agency (AEB) is a 2026 Space Agency Partner, in
-   which case Brazilian open data would also count toward eligibility.
+Archived from NASA Space Apps' own servers, because the live site is unreachable
+from the build machine:
 
-Open `https://www.spaceappschallenge.org/resources/project-submission-guide/`
-and the 2026 challenge page on a phone and check these five. It takes five
-minutes and it is the difference between a valid entry and a wasted weekend.
+- `Final_Space_Apps_2025_Judging_Guidelines_for_web.pdf` — the minimum-requirements
+  checklist and the 1–5 criteria
+- `Space_Apps_2022_Project_Submission_Guide.pdf` — form fields and the pitch model
+- `Space_Apps_2021_Project_Demo_Guide.pdf` — demo formats
+- `Space_Apps_2022_Judging_and_Awards_Guide.pdf` — the award ladder
+
+Year-specific details were supplied by the team lead from the live 2026 guide.

@@ -1,4 +1,4 @@
-# NASA SAC 2026 — Junior Astronaut Mission Trainer
+# NASA SAC 2026 — Space Mission Design Game
 
 Read `docs/PROJECT-CONTEXT.md` first, then `docs/challenge-brief.md`.
 

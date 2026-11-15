@@ -1,8 +1,55 @@
 # Final assessment
 
 Sunday 15 November 2026. Challenge: **Space Mission Design Game**, São Paulo.
-Submissions close 23:59 local — **confirm the São Paulo cutoff, which may be earlier
-than the global portal.**
+Submissions close 23:59 São Paulo time — **Local Event clock, and anything saved
+after it is ineligible.** Code freeze 20:00, submit 21:00. See `SUBMIT.md`.
+
+---
+
+## 0. Eligibility — the pass/fail gate
+
+A judge checks these before scoring anything. Fail one and the project is scored
+**1 (Poor) and not evaluated further.**
+
+| # | Requirement | Status | Owner |
+|---|---|---|---|
+| 1 | Answers an official challenge, not Invent Your Own | ✅ **Done** — Space Mission Design Game, in the title screen, README and docs | Adult lead confirms the team page matches |
+| 2 | NASA data used, and visible | ✅ **Done** — DONKI, Image and Video Library, NASA's six-step process, CubeSat 101, all on the in-game credits screen | Crew: confirm one appears on the challenge Resources tab |
+| 3 | Primarily in English | ✅ **Done** | — |
+| 4 | Demo ≤30s video or ≤7 slides | ⚠️ **Missing** — both drafted in `SUBMIT.md`; slides recommended | Crew + adult |
+| 5 | AI use declared, AI content labelled | ✅ **Done in the build** — credits screen, README, watermarked diagrams | Adult pastes the declaration into the form |
+| 6 | Every source, tool and image cited | ✅ **Done** — new credits screen + References draft | — |
+| 7 | All links public, no password | ⚠️ **Missing** — nothing published yet | Adult lead |
+| 8 | Team registered, 2–6, same Local Event | ⚠️ **Verify first** — cannot add members after close | Adult lead |
+| 9 | Submitted by the deadline | ⚠️ **Not yet** | Adult lead |
+
+### Risks closed in this pass
+
+- **Likenesses of under-18s.** The six illustrated portraits of the children
+  are out of the build. Crew are now generic pixel astronauts by callsign —
+  ORION, VEGA, RIGEL, LYRA, ATLAS, NOVA — recoloured from the team's own
+  astronaut sprite. No face, no name tag, no patch. The personalised version was
+  handed over as a private family build and is **not in this repository**.
+- **NASA branding inside AI-generated art.** The patch went with the portraits.
+  Nothing AI-generated in the build now carries a NASA logo, flag or identifier.
+- **Unwatermarked AI images.** Both orbital diagrams now carry a visible
+  **AI-ASSISTED DIAGRAM** watermark.
+- **Wrong challenge name.** Title screen, document title, README and the page
+  banner all now say Space Mission Design Game.
+- **Demo length.** Earlier guidance in this repo said 60–90 seconds. The limit
+  is 30 seconds or 7 slides, and judges stop at the limit.
+
+### Risks still open
+
+1. **The old portraits are in this repository's git history**, inside earlier
+   commits of `index.html`. Not visible to a judge, but public. History can be
+   rewritten on request.
+2. **The children cannot narrate the demo** — a voice is audio likeness of a
+   minor. Use burned-in English captions, or an adult narrating.
+3. **The demo does not exist yet.** It is the one piece of pure missing work,
+   and it is often the first thing a judge opens.
+4. **Nothing is published.** Every link must resolve for a stranger with no
+   account.
 
 ---
 
@@ -82,17 +129,23 @@ Everything checkable is checked, and disagreements are stated rather than hidden
 
 ## 5. What is still missing — none of it is code
 
-1. **Write up a child testing it.** Lucca played and was fine; that needs to
-   become a sentence a judge can read: who played, what confused them, what they
-   could explain afterwards. This is the Impact lens, scored first.
-2. **Demo video**, 60–90 seconds, narrated by the children.
-3. **One-page data explainer** — the content is already in `NASA-SOURCES.md`.
-4. **AI disclosure** in the submission. This code was written by an AI assistant
-   working to the team's direction; the handbook (p.11) requires that to be
-   stated.
-5. **Confirm one listed NASA source on the challenge's Resources tab.** Three
+1. **The demo.** ≤30 second video or ≤7 slides. Both drafted in `SUBMIT.md`;
+   the slides are the safer choice tonight. Not narrated by the children.
+2. **Publish the links.** GitHub release for the game, public host for the
+   demo, both tested signed out in a private window.
+3. **Write up a child testing it.** One player tried it and was fine; that needs
+   to become a sentence a judge can read — who played, what confused them, what
+   they could explain afterwards. It belongs in the Detailed Description, and it
+   is the Impact lens, which is scored first.
+4. **Confirm the team page**: challenge set to Space Mission Design Game, all
+   six members confirmed at the São Paulo event.
+5. **Confirm one listed NASA source on the challenge's Resources tab.** The
    sources used here came from the list the team supplied, but this container
    cannot reach spaceappschallenge.org to verify it.
+
+Everything else — the AI declaration, the credits, the citations, the English,
+the removal of the children's likenesses — is now in the build and drafted in
+`SUBMIT.md` ready to paste.
 
 ## 6. On holding attention
 
@@ -108,10 +161,14 @@ cutting two story panels would help more.
 
 ## 7. Verdict
 
-The build answers the brief completely and passes every functional test. The
-science is real, sourced, and honest about what is disputed.
+The build answers the brief completely, passes every functional test, and now
+clears every eligibility gate that can be cleared in code. The science is real,
+sourced, and honest about what is disputed. Five full playthroughs across crew
+sizes, worlds, lengths and difficulties all finish, with four different endings
+and zero JavaScript errors.
 
-**The remaining work is evidence, not engineering.** An hour spent writing down
-what Lucca and two others did — what confused them, what they could explain
-afterwards — is worth more to the score than anything further that could be
-built today.
+**The remaining work is evidence and publishing, not engineering.** Three things
+decide whether this scores: the demo exists and is inside the limit, every link
+opens for a stranger, and someone clicks Submit for Judging before the São Paulo
+cutoff. An hour on the seven slides and a written note about a child playing it
+is worth more than anything else that could be built today.

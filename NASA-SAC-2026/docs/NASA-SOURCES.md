@@ -42,7 +42,7 @@ Archived and labelled as archived.
 ## 4. NASA Image and Video Library
 `https://images-api.nasa.gov`
 
-Seven credited photographs, each shown with title, date and NASA ID — including
+Ten credited photographs, each shown with title, date and NASA ID — including
 PIA26368, the actual 'leopard spots' rock, and as17-145-22157, Apollo 17
 scooping lunar regolith.
 
