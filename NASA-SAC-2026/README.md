@@ -102,6 +102,21 @@ ice found. These are in-game scenarios, deliberately *not* dressed as NASA
 records. Each carries a "Did you know?" line and, like every action, each one
 costs something.
 
+## Screen layout
+The game screen is built to fit **one screen with no page scrolling**, so a
+player never loses sight of the outpost or of what their last decision did.
+
+Permanently pinned: the scene, the on-duty astronaut and sol counter, the four
+gauges, and a **result readout** showing what the crew just did and what the
+storm cost. Only the action list scrolls, and only on small phones; CONFIRM is
+pinned within thumb reach.
+
+On screens 900px and wider it becomes two columns - scene and status on the
+left, event and choices on the right - with nothing scrolling at all.
+
+Verified at 360x640, 390x844, 820x1180, 1280x800 and 1280x620: zero page
+scroll, scene and result always visible, CONFIRM always on screen.
+
 ## Three resources, one rule
 Power · Life Support · Shielding. Every action gives one and takes another.
 Even "shelter and wait" costs oxygen — there is no free option, because there

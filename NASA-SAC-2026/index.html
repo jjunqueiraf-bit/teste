@@ -80,8 +80,76 @@
   .av.taken{opacity:.3;pointer-events:none;filter:grayscale(1)}
   .av .num{position:absolute;top:0;left:0;background:var(--shd);color:#04101f;
     font-size:11px;padding:2px 6px;font-weight:bold}
+  /* ---- game screen: one screen, never scrolls the page ---- */
+  #s-game.on{display:flex;flex-direction:column;height:calc(100dvh - 32px);gap:7px}
+  .gside{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:7px}
+  .gfoot{flex:0 0 auto}
+  .gfoot .btn{margin:0}
+  .gfoot .votes{margin:0 0 4px}
+  .gstick{flex:0 0 auto;display:flex;flex-direction:column;gap:7px;min-height:0}
+  .gflow{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:7px;
+    scrollbar-width:thin}
+  #scene{max-height:23dvh;object-fit:contain;background:#05070f}
   #fxtag{display:none;border:var(--px) solid var(--line);background:#0a1020;
-    padding:7px 10px;font-size:12px;letter-spacing:1px;margin-top:-4px}
+    padding:6px 9px;font-size:11px;letter-spacing:1px}
+
+  .statusbar{display:flex;align-items:center;gap:9px;background:var(--panel);
+    border:var(--px) solid var(--line);padding:6px 9px;font-size:12px}
+  .statusbar img{width:34px;height:34px;border:2px solid var(--line);display:block;flex:0 0 auto}
+  .statusbar .sb-who{min-width:0;line-height:1.35}
+  .statusbar .sb-who b{font-size:13px}
+  .statusbar .sb-who span{display:block;color:var(--dim);font-size:10.5px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .statusbar .sb-sol{margin-left:auto;text-align:right;flex:0 0 auto}
+  .statusbar .sb-sol b{font-size:14px}
+  .statusbar .sb-sol span{display:block;color:var(--dim);font-size:10px}
+
+  .gauges{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .g{background:var(--panel);border:var(--px) solid var(--line);padding:5px 7px}
+  .g .gl{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);
+    letter-spacing:.5px;margin-bottom:4px}
+  .g .gl b{color:var(--ink);font-size:12px}
+  .g .gt{height:7px;background:#0a1020;border:1px solid #000}
+  .g .gf{height:100%;transition:width .3s steps(10)}
+
+  .result{background:#06101c;border:var(--px) solid #24405c;padding:7px 10px;
+    font-size:12px;line-height:1.55;min-height:34px}
+  .result .rl{display:block}
+  .result .up{color:var(--life)} .result .dn{color:var(--bad)} .result .nu{color:var(--dim)}
+  .result.empty{color:var(--dim)}
+
+  .act{background:var(--panel2);border:var(--px) solid var(--line);color:var(--ink);
+    font:inherit;width:100%;text-align:left;padding:8px 10px;cursor:pointer;display:block}
+  .act:hover{border-color:#4a5f93}
+  .act.sel{background:#2f4a7a;border-color:var(--shd)}
+  .act .an{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .act .an b{font-size:13px;letter-spacing:.5px}
+  .act .ac{font-size:11px;white-space:nowrap;flex:0 0 auto}
+  .act .ad{display:block;color:var(--dim);font-size:11px;margin-top:3px;line-height:1.4}
+  .actlist{display:flex;flex-direction:column;gap:5px}
+
+  .evc{border:var(--px) solid #4a2f6b;background:#1a1230;padding:8px 10px}
+  .evc.s3{background:#2b1220;border-color:#7a2a42}
+  .evc.ops{background:#102030;border-color:#2d5570}
+  .evc h3{font-size:13px;margin:0 0 4px;color:#ffb3d9}
+  .evc.ops h3{color:#7fd4ff}
+  .evc p{font-size:11.5px;margin:0 0 4px;line-height:1.5}
+  .evc details{margin-top:4px}
+  .evc summary{font-size:11px;color:var(--shd);cursor:pointer;list-style:none}
+  .evc summary::-webkit-details-marker{display:none}
+  .evc summary::before{content:'\25b8 '}
+  .evc details[open] summary::before{content:'\25be '}
+  .evc .dt{font-size:11px;color:var(--dim);margin-top:5px;line-height:1.6}
+
+  @media(min-width:900px){
+    #app{max-width:1180px}
+    #s-game.on{flex-direction:row;align-items:stretch;gap:12px}
+    .gstick{flex:1 1 52%}
+    .gside{flex:1 1 48%;justify-content:flex-start}
+    .gflow{flex:0 1 auto}
+    #scene{max-height:34dvh}
+  }
+  @media(max-height:680px){ #scene{max-height:19dvh} }
   .duty{display:flex;align-items:center;gap:10px;background:var(--panel);
     border:var(--px) solid var(--line);padding:8px 10px;margin-bottom:12px}
   .duty img{width:46px;height:46px;border:2px solid var(--line);display:block}
@@ -175,22 +243,23 @@
 
 <!-- GAME -->
 <section id="s-game" class="screen">
-  <canvas id="scene" width="320" height="140"></canvas>
-  <div id="fxtag"></div>
-  <div class="card" style="margin-top:12px;padding:10px">
-    <div style="display:flex;justify-content:space-between;font-size:13px">
-      <span id="solLab">SOL 1</span><span id="missLab" class="dim"></span>
+  <div class="gstick">
+    <canvas id="scene" width="320" height="140"></canvas>
+    <div id="fxtag"></div>
+    <div class="statusbar" id="statusbar"></div>
+    <div class="gauges" id="gauges"></div>
+    <div class="result empty" id="result">Pick a job for today.</div>
+  </div>
+  <div class="gside">
+    <div class="gflow">
+      <div id="evbox"></div>
+      <div class="actlist" id="actions"></div>
+    </div>
+    <div class="gfoot">
+      <div class="votes" id="actTally"></div>
+      <button class="btn go" id="actGo" onclick="resolveTurn()" disabled>CONFIRM &#9654;</button>
     </div>
   </div>
-  <div class="duty" id="duty"></div>
-  <div class="bars" id="bars"></div>
-  <div id="evbox"></div>
-  <div class="card">
-    <div id="actions"></div>
-    <div class="votes" id="actTally"></div>
-    <button class="btn go" id="actGo" onclick="resolveTurn()" disabled>CONFIRM &#9654;</button>
-  </div>
-  <div class="log" id="log"></div>
 </section>
 
 <!-- END -->
@@ -517,7 +586,7 @@ function renderBrief(){
 function startRun(){
  S.sol=1;S.maxSol=S.len.sols;
  S.pwr=S.diff.pwr;S.life=S.diff.life;S.shd=S.diff.shd;S.prog=0;S.log=[];
- initAnim();
+ initAnim(); S.turnLines=[]; showResult();
  S.deck=shuffle([...(EVENTS.length?EVENTS:EVENTS_FALLBACK)]);
  logit(`Mission begins at ${S.mission.site}. Crew: ${S.crew.map(c=>c.name).join(', ')}.`);
  go('s-game');nextTurn();
@@ -544,8 +613,6 @@ function nextTurn(){
    const g=geometry(S.ev);
    if((S.ev.severity||1)>=3 || g.k==='direct') S.fx='storm';
  }
- document.getElementById('solLab').textContent=`SOL ${S.sol} / ${S.maxSol}`;
- document.getElementById('missLab').textContent=S.mission.name;
  drawDuty();drawBars();drawEvent();drawActions();drawScene();drawFxTag();
  document.getElementById('actGo').disabled=true;
 }
@@ -561,23 +628,25 @@ function drawFxTag(){
  else el.style.display='none';
 }
 function drawDuty(){
- const d=document.getElementById('duty');
+ const d=document.getElementById('statusbar');
+ if(!d) return;
  const t=S.duty&&TRAITS[S.duty.id];
- if(!S.duty){d.style.display='none';return;}
- d.style.display='flex';
- d.innerHTML=`<img src="${S.duty.face}" alt="${S.duty.name}">
-   <div class="who"><b style="color:${SUITS[S.duty.suit].rgb}">${S.duty.name}</b> is on duty
-     <small>${t?`${t.icon} <b style="color:var(--ink)">${t.role}</b> \u00b7 good at ${t.good.toLowerCase()} \u00b7 weak at ${t.bad.toLowerCase()}`:''}</small></div>
-   <div class="roster">${S.crew.map(c=>
-     `<img src="${c.face}" class="${c.id===S.duty.id?'on':''}" title="${c.name}">`).join('')}</div>`;
+ const face=S.duty?`<img src="${S.duty.face}" alt="${S.duty.name}">`:'';
+ d.innerHTML=`${face}
+  <div class="sb-who">
+    <b style="color:${S.duty?SUITS[S.duty.suit].rgb:'var(--ink)'}">${S.duty?S.duty.name:'Crew'}</b>
+    <span>${t?`${t.icon} ${t.role} \u00b7 +${t.good.toLowerCase()} \u00b7 \u2212${t.bad.toLowerCase()}`:''}</span>
+  </div>
+  <div class="sb-sol"><b>SOL ${S.sol}/${S.maxSol}</b>
+    <span>${S.mission.key==='moon'?'MOON \u00b7 HE-3':'MARS \u00b7 SAMPLE'}</span></div>`;
 }
 function drawBars(){
- const B=[['POWER','pwr','f-pwr',S.pwr],['LIFE SUPPORT','life','f-life',S.life],
-          ['SHIELDING','shd','f-shd',S.shd],[S.mission.unit.toUpperCase(),'prog','f-prog',S.prog]];
- document.getElementById('bars').innerHTML=B.map(([n,k,c,v])=>{
-  const low=v<=25&&k!=='prog';
-  return `<div class="bar"><div class="lab"><span>${n}</span><b>${Math.max(0,Math.round(v))}%</b></div>
-  <div class="track"><div class="fill ${c} ${low?'danger':''}" style="width:${Math.max(0,Math.min(100,v))}%"></div></div></div>`;
+ const G=[['PWR','f-pwr',S.pwr],['LIFE','f-life',S.life],
+          ['SHLD','f-shd',S.shd],[S.mission.unit.toUpperCase().slice(0,5),'f-prog',S.prog]];
+ document.getElementById('gauges').innerHTML=G.map(([n,c,v])=>{
+  const low=v<=25&&c!=='f-prog';
+  return `<div class="g"><div class="gl"><span>${n}</span><b>${Math.max(0,Math.round(v))}</b></div>
+  <div class="gt"><div class="gf ${c} ${low?'danger':''}" style="width:${Math.max(0,Math.min(100,v))}%"></div></div></div>`;
  }).join('');
 }
 
@@ -597,36 +666,40 @@ function drawEvent(){
  if(S.ops){
   const o=S.ops;
   box.innerHTML=`
-  <div class="ev ops">
+  <div class="evc ops">
     <h3>&#9881; ${o.n}</h3>
-    <p class="small">${o.d}</p>
-    <p class="small dim"><b>Did you know?</b> ${o.teach}</p>
-    <span class="tag">OUTPOST SITUATION &middot; NOT NASA DATA</span>
-    <div class="small" style="margin-top:6px">${costStr(scaleE(o.e))}</div>
+    <p>${o.d}</p>
+    <div class="small">${costStr(scaleE(o.e))}</div>
+    <details><summary>Why this happens</summary>
+      <div class="dt">${o.teach}<br><span class="tag">OUTPOST SITUATION &middot; NOT NASA DATA</span></div>
+    </details>
   </div>`;
   return;
  }
  const e=S.ev, sev=e.severity||1, g=geometry(e);
  const names={1:'Minor solar activity',2:'Moderate CME detected',3:'STRONG CME INBOUND'};
  box.innerHTML=`
- <div class="ev ${sev>=3?'s3':''}">
+ <div class="evc ${sev>=3?'s3':''}">
    <h3>&#9888; ${names[sev]||names[1]}</h3>
-   <p class="small">A coronal mass ejection left the Sun at <b>${Math.round(e.speed)} km/s</b>.
-   Faster means more radiation. Your shielding is what stands between it and the crew.</p>
-   <p class="small">${g.txt}</p>
-   <span class="geo ${g.k==='glance'?'glance':g.k}">${g.lab}</span>
-   <span class="tag arch">REAL EVENT &middot; ARCHIVED</span>
-   ${e.type&&CLASS[e.type]?`<span class="tag">NASA class: ${CLASS[e.type]}</span>`:''}
-   <span class="tag">${e.id}</span>
-   <div class="small dim" style="margin-top:6px">Source: NASA DONKI${e.link?` &middot; <a href="${e.link}" target="_blank" rel="noopener">view record</a>`:''}</div>
+   <p><b>${Math.round(e.speed)} km/s</b> &middot;
+      <span class="geo ${g.k==='glance'?'glance':g.k}" style="margin:0">${g.lab}</span></p>
+   <details><summary>What this means</summary>
+     <div class="dt">${g.txt} Faster means more radiation; your shielding is what stands
+     between it and the crew.<br>
+     <span class="tag arch">REAL EVENT &middot; ARCHIVED</span>
+     ${e.type&&CLASS[e.type]?`<span class="tag">NASA class: ${CLASS[e.type]}</span>`:''}
+     <span class="tag">${e.id}</span><br>
+     Source: NASA DONKI${e.link?` &middot; <a href="${e.link}" target="_blank" rel="noopener">view record</a>`:''}</div>
+   </details>
  </div>`;
 }
 
 function drawActions(){
  const w=document.getElementById('actions');w.innerHTML='';
  ACTIONS[S.mission.key].forEach(a=>{
-  const b=document.createElement('button');b.className='btn';
-  b.innerHTML=`<b>${a.n}</b><small>${a.d}<br>${costStr(scaleE(traitE(a.e)))}</small>`;
+  const b=document.createElement('button');b.className='act';
+  b.innerHTML=`<span class="an"><b>${a.n}</b><span class="ac">${costStr(scaleE(traitE(a.e)),true)}</span></span>
+    <span class="ad">${a.d}</span>`;
   b.onclick=()=>{S.pick=a;S.site=SITE[a.id]!==undefined?SITE[a.id]:null;
     [...w.children].forEach(c=>c.classList.remove('sel'));
     b.classList.add('sel');document.getElementById('actGo').disabled=false;
@@ -634,20 +707,23 @@ function drawActions(){
       S.players>1?`Crew of ${S.players} agrees: ${a.n}`:'';};
   w.appendChild(b);});
 }
-function costStr(e){
- const L={prog:'progress',pwr:'power',life:'life support',shd:'shielding'};
+function costStr(e,short){
+ const L=short?{prog:'GOAL',pwr:'PWR',life:'LIFE',shd:'SHLD'}
+              :{prog:'progress',pwr:'power',life:'life support',shd:'shielding'};
  return Object.entries(e).map(([k,v])=>
-   `<span style="color:${v>0?'var(--life)':'var(--bad)'}">${v>0?'+':''}${v} ${L[k]}</span>`).join('  ');
+   `<span style="color:${v>0?'var(--life)':'var(--bad)'}">${v>0?'+':''}${v} ${L[k]}</span>`)
+   .join(short?' ':'  ');
 }
 
 function resolveTurn(){
  const a=S.pick; if(!a) return;
+ S.turnLines=[];
  Object.entries(scaleE(traitE(a.e))).forEach(([k,v])=>{S[k]+=v;});
- logit(`Sol ${S.sol} \u00b7 ${S.duty?S.duty.name:'Crew'}: ${a.n.toLowerCase()}.`);
+ logit(`<b>${S.duty?S.duty.name:'Crew'}</b> \u2192 ${a.n.toLowerCase()}. ${costStr(scaleE(traitE(a.e)),true)}`);
 
  if(S.ops){
    Object.entries(scaleE(S.ops.e)).forEach(([k,v])=>{S[k]+=v;});
-   logit(`${S.ops.n}. ${costStr(scaleE(S.ops.e)).replace(/<[^>]*>/g,'')}`);
+   logit(`&#9881; ${S.ops.n}. ${costStr(scaleE(S.ops.e),true)}`);
  } else {
    // real consequence: CME speed + NASA halfAngle geometry vs shielding
    const sev=S.ev.severity||1, g=geometry(S.ev);
@@ -655,8 +731,8 @@ function resolveTurn(){
    const blocked=Math.round(raw*(S.shd/100));
    const hit=Math.max(0,raw-blocked);
    S.life-=hit; S.shd-=sev*2;
-   if(hit>0) logit(`${g.lab.toLowerCase()}: radiation cost ${hit} life support, shielding absorbed ${blocked}.`);
-   else logit(`Shielding held against the ${g.lab.toLowerCase()}. No damage.`);
+   if(hit>0) logit(`&#9888; ${g.lab.toLowerCase()} \u2014 <span class="dn">\u2212${hit} LIFE</span> <span class="nu">(shielding absorbed ${blocked})</span>`);
+   else logit(`&#9888; ${g.lab.toLowerCase()} \u2014 <span class="up">shielding held, no damage</span>`);
  }
 
  ['pwr','life','shd'].forEach(k=>S[k]=Math.max(0,Math.min(100,S[k])));
@@ -668,11 +744,18 @@ function resolveTurn(){
  if(S.life<=0)  return finish(false,'Life support failed. The crew had to abort.');
  if(S.pwr<=0)   return finish(false,'Power ran out. The outpost went dark.');
  if(S.sol>=S.maxSol) return finish(false,'The mission window closed before the goal was reached.');
- S.sol++; nextTurn();
+ S.sol++; nextTurn(); showResult();
 }
 
-function logit(t){S.log.unshift(t);
- document.getElementById('log').innerHTML=S.log.map(x=>`<div>${x}</div>`).join('');}
+function logit(t){S.log.unshift(t); (S.turnLines=S.turnLines||[]).push(t);}
+// the pinned readout: what the crew just did, and what it cost
+function showResult(){
+ const el=document.getElementById('result'); if(!el) return;
+ const lines=S.turnLines||[];
+ if(!lines.length){el.className='result empty';el.textContent='Pick a job for today.';return;}
+ el.className='result';
+ el.innerHTML=lines.map(t=>`<span class="rl">${t}</span>`).join('');
+}
 
 /* ---------- END ---------- */
 function finish(win,msg){
