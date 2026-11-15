@@ -136,6 +136,25 @@ not twenty. Collection and send rates scale with length, so every setting is
 winnable (verified 6/6 at all three) and the time goes into learning rather
 than repetition.
 
+## Two worlds that look like two worlds
+The scenes are built separately, from the physical differences rather than a
+palette swap:
+
+**The Moon** has no atmosphere, so the sky stays black even in daylight, stars
+are hard points, and shadows are pitch black. **Earth hangs in the sky** with a
+visible night side. The Sun is small and fierce. Crater rims ring the horizon
+and boulders throw sharp shadows across grey regolith. The habitat is a dome
+with soil piled over it.
+
+**Mars** has a thin dusty atmosphere that scatters light, so the sky is
+**butterscotch, not black**, and daytime stars are washed out. The Sun is small
+and pale because Mars is half again as far from it. Mesas recede into haze on
+the horizon, rocks are strewn across rust-red ground, and the habitat is a
+lander on legs with regolith banked against it.
+
+Weather sits on top of that: lunar night darkens everything and kills the
+panels; a Martian dust storm thickens the haze.
+
 ## Radio traffic
 Every phase brings one message between the crew on the surface and Mission
 Control on Earth, shuffled per run so replays differ. Each carries a real

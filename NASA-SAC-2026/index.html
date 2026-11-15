@@ -1467,25 +1467,97 @@ function stepAnim(dt){
  });
 }
 function drawScene(){
- const cv=document.getElementById('scene'),c=cv.getContext('2d'),m=S.mission,p=m.pal;
- px(c,0,0,320,140,'#05070f');stars(c,320,140,50,S.sol*31+3);
- // horizon
- px(c,0,96,320,44,p[0]);px(c,0,96,320,2,p[2]);
- for(let i=0;i<9;i++){const x=(i*41+S.sol*7)%320;px(c,x,100+(i%3)*8,10,4,p[1]);}
- // sun glow scaled to CME severity
+ const cv=document.getElementById('scene'),c=cv.getContext('2d'),m=S.mission;
+ const moon = m.key==='moon';
  const sev=(S.ev&&S.ev.severity)||1;
- px(c,284,14,18,18,sev>=3?'#ff7a4a':'#ffc93c');
- if(sev>=2){px(c,280,10,26,26,sev>=3?'rgba(255,90,60,.30)':'rgba(255,201,60,.20)');}
- // habitat with shield thickness = shielding level
- const sh=Math.max(1,Math.round(S.shd/14));
- c.fillStyle=p[3];c.beginPath();c.arc(90,96,28,Math.PI,0);c.fill();
- c.fillStyle='#6b7a9c';c.beginPath();c.arc(90,96,28+sh,Math.PI,0);c.fill();
- c.fillStyle=p[3];c.beginPath();c.arc(90,96,28,Math.PI,0);c.fill();
- px(c,84,80,12,10,S.life>25?'#4fd1a5':'#ff5c5c');
- // solar array, lit by power
  const lit=S.pwr>40?'#ffc93c':S.pwr>15?'#8a6a20':'#3a3a3a';
- for(let i=0;i<4;i++)px(c,176+i*13,72,10,16,lit);
- px(c,176,88,49,3,'#2c3a5c');
+ const sh=Math.max(1,Math.round(S.shd/14));
+
+ if(moon){
+  /* ---------- THE MOON: no air, so the sky stays black even in daylight,
+     the stars are hard points, shadows are pitch black, and Earth hangs still. */
+  px(c,0,0,320,140,'#03050c');
+  stars(c,320,96,70,S.sol*31+3);
+
+  // Earth, the thing you are doing all this for
+  const ex=252, ey=30;
+  c.fillStyle='#2a6fd4'; c.beginPath(); c.arc(ex,ey,12,0,7); c.fill();
+  c.fillStyle='#3f8f5a';                               // continents
+  px(c,ex-7,ey-5,6,4,'#3f8f5a'); px(c,ex+1,ey-1,5,5,'#3f8f5a'); px(c,ex-4,ey+4,7,3,'#3f8f5a');
+  c.fillStyle='rgba(255,255,255,.55)';                 // cloud swirls
+  px(c,ex-9,ey+1,5,2,'rgba(255,255,255,.55)'); px(c,ex+3,ey-7,6,2,'rgba(255,255,255,.55)');
+  c.fillStyle='rgba(3,5,12,.85)'; c.beginPath();       // night side
+  c.arc(ex+7,ey,12,0,7); c.fill();
+
+  // a small, fierce Sun - no atmosphere to soften it
+  px(c,34,16,12,12,sev>=3?'#ffd2a0':'#ffffff');
+  if(sev>=2) px(c,30,12,20,20,sev>=3?'rgba(255,120,70,.28)':'rgba(255,255,255,.16)');
+
+  // crater rims along the horizon
+  c.fillStyle='#1b1f27';
+  for(let i=0;i<5;i++){
+   const cx=24+i*70, r=16+((i*13)%10);
+   c.beginPath(); c.arc(cx,98,r,Math.PI,0); c.fill();
+  }
+  px(c,0,96,320,44,'#30363f'); px(c,0,96,320,2,'#8e98a8');
+
+  // boulders, each with a hard black shadow
+  for(let i=0;i<10;i++){
+   const x=(i*37+11)%312, y=104+((i*11)%26), w=5+(i%4);
+   px(c,x,y,w,3,'#5d6675'); px(c,x+w,y+1,4,2,'#000000');
+  }
+
+  // dome habitat, regolith piled over it
+  c.fillStyle='#6b7a9c'; c.beginPath(); c.arc(90,96,28+sh,Math.PI,0); c.fill();
+  c.fillStyle='#9aa4b5'; c.beginPath(); c.arc(90,96,28,Math.PI,0); c.fill();
+  px(c,84,80,12,10,S.life>25?'#4fd1a5':'#ff5c5c');
+  px(c,62,94,56,2,'#4a5668');
+
+  // flat solar array on a mast
+  for(let i=0;i<4;i++) px(c,176+i*13,70,10,16,lit);
+  px(c,176,86,49,3,'#2c3a5c'); px(c,198,89,3,7,'#2c3a5c');
+
+ } else {
+  /* ---------- MARS: a thin dusty atmosphere scatters light, so the sky is
+     butterscotch, stars are washed out, the Sun is small and pale, and the
+     horizon fades into haze. */
+  const g=c.createLinearGradient(0,0,0,100);
+  g.addColorStop(0,'#6b4a35'); g.addColorStop(0.55,'#b3763f'); g.addColorStop(1,'#d9a062');
+  c.fillStyle=g; c.fillRect(0,0,320,100);
+
+  // pale, shrunken Sun - Mars is half again as far from it as we are
+  px(c,262,20,9,9,'#fff0cf');
+  px(c,259,17,15,15,'rgba(255,240,207,.22)');
+
+  // distant mesas, lighter with distance because of the dust
+  c.fillStyle='#8a5a3c';
+  [[18,60],[70,46],[132,54],[205,42],[268,52]].forEach(([x,wid],i)=>{
+   const top=78-((i*7)%16)-8;
+   c.fillRect(x,top,wid,96-top);
+   c.fillStyle='#9c6947'; c.fillRect(x,top,wid,2); c.fillStyle='#8a5a3c';
+  });
+  c.fillStyle='rgba(217,160,98,.35)'; c.fillRect(0,70,320,26);   // haze over the far ground
+
+  px(c,0,96,320,44,'#7a4329'); px(c,0,96,320,2,'#c98a59');
+
+  // strewn rocks and low dunes
+  for(let i=0;i<12;i++){
+   const x=(i*29+7)%314, y=103+((i*13)%28), w=4+(i%5);
+   px(c,x,y,w,3,'#9c5e3c');
+  }
+  for(let i=0;i<4;i++) px(c,10+i*84,120,60,3,'#8d5234');
+
+  // lander-style habitat on legs, soil banked against it
+  px(c,64,74,52,22,'#c6b6a6');
+  px(c,64,74,52,3,'#e3d6c8');
+  px(c,70,96,5,10,'#7d7268'); px(c,105,96,5,10,'#7d7268');
+  px(c,62,92,56,4+sh,'#8a5a3c');                       // regolith banked up
+  px(c,84,80,12,10,S.life>25?'#4fd1a5':'#ff5c5c');
+
+  // tilted panels, angled to catch a low Sun through dust
+  for(let i=0;i<4;i++) px(c,178+i*12,72+(i%2),10,15,lit);
+  px(c,178,87,46,3,'#5b4030');
+ }
  // --- weather and light for this sol ---
  if(S.fx==='night'){                       // lunar night: everything goes dark
   c.fillStyle='rgba(2,4,12,0.62)'; c.fillRect(0,0,320,140);
