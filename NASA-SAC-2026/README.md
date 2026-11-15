@@ -174,6 +174,21 @@ Three assets from the team's Construct project are used:
 - **start.png** — the START button on the title screen
 - **control.png** — the astronaut NPC, cropped head-and-shoulders, who is now
   the face of Mission Control in the radio panel
+- **astro_anim_*.png** — the hand-animated astronaut from the team's Pixilart
+  video, lifted out of the 1900x1900 export, keyed to transparency and
+  recoloured into the four suit colours
+
+### The animated astronaut
+The Pixilart video was a 10 second, 300 frame, 1900x1900 MP4 with the sprite
+occupying a small part of the frame. Rather than embed video, the sprite region
+was cropped, the frames de-duplicated down to the real **54 frame** loop, the
+white keyed out by flood fill from the border (so the white suit survives), and
+the gold visor recoloured into cyan, green, gold and red while keeping its
+shading. Four strips, about 26 KB in total, embedded like everything else.
+
+In play, the **astronaut on duty** is drawn with this larger, more detailed
+animation while off-duty crew keep the compact 30px suits — so the person
+actually working stands out.
 
 Originals in `art/crew/`.
 
