@@ -119,6 +119,9 @@
   .g .gl b i{font-style:normal;font-size:10px;margin-left:4px}
   .g .gl b i.up{color:var(--life)} .g .gl b i.dn{color:var(--bad)}
   .g.fatal{border-color:var(--bad);animation:blink .5s steps(2) infinite}
+  .g .held{position:absolute;top:0;height:100%;
+    background:repeating-linear-gradient(45deg,#8a5aa8,#8a5aa8 2px,#3a2550 2px,#3a2550 4px)}
+  .g .heldlab{display:block;font-size:9px;color:#c79fe0;margin-top:3px;letter-spacing:.3px}
 
   .result{background:#06101c;border:var(--px) solid #24405c;padding:7px 10px;
     font-size:12px;line-height:1.55;min-height:34px}
@@ -408,7 +411,7 @@ const MISSIONS = {
 };
 
 /* ---------- ACTIONS: every one costs something. No free option. ---------- */
-const SITE = {prog:null, shield:75, solar:186, life:84, hold:70};  // where the work happens
+const SITE = {collect:null, send:150, power:186, shield:75, life:84};  // where each job happens
 const ACTIONS = {
  moon:[
   {id:"harvest",n:"RUN THE HARVESTER",d:"Dig regolith and bake out helium-3. Heavy power draw, and the crew is outside.",
@@ -642,7 +645,7 @@ const OPS = {
    e:{pwr:-5,life:-3}, teach:'In space the hard part is often getting rid of heat, not making it.'},
   {n:'Good seam of regolith found',
    d:'This patch is richer in trapped helium-3 than the survey predicted.',
-   e:{prog:+10,pwr:-6}, teach:'Helium-3 is not spread evenly. Prospecting is why Interlune flies a camera first.'},
+   e:{coll:+12,pwr:-6}, teach:'Helium-3 is not spread evenly. Prospecting is why Interlune flies a camera first.'},
   {n:'Supply lander arrives',
    d:'A cargo lander sets down with spare parts and fresh oxygen candles.',
    e:{life:+16,pwr:-6}, teach:'Nothing reaches the Moon that was not launched from Earth months earlier.'}
@@ -659,7 +662,7 @@ const OPS = {
    e:{life:-4}, teach:'A signal takes 4 to 24 minutes each way. Mars crews cannot ask and wait.'},
   {n:'Clear traverse ground',
    d:'Flat bedrock ahead instead of loose sand. The rover makes good time.',
-   e:{prog:+10,life:-4}, teach:'Loose sand once trapped the rover Spirit for good.'},
+   e:{coll:+12,life:-4}, teach:'Loose sand once trapped the rover Spirit for good.'},
   {n:'Water ice located nearby',
    d:'Ground-penetrating radar finds ice within reach. That is oxygen and drinking water.',
    e:{life:+16,pwr:-8}, teach:'Making supplies from what is already there is called ISRU.'}
@@ -684,9 +687,76 @@ function scaleE(e){
   return o;
 }
 
+/* ---------- FLIGHT, BUILT FROM YOUR DESIGN ----------
+   prog = science DELIVERED to Earth (the only thing that counts)
+   coll = science COLLECTED and sitting in the spacecraft's memory */
+
+function powerGain(){
+ const p=S.design&&S.design.power;
+ if(!p) return 22;
+ if(p.id==='rtg')  return 24;                       // steady, modest, never fails
+ if(p.id==='batt') return 12;                        // nearly nothing
+ return (S.fx==='night'||S.fx==='dust') ? 14 : 32;   // solar: good day or bad day
+}
+function collectRate(){
+ const i=(S.design&&S.design.inst)||[];
+ let r=10;
+ if(i.some(x=>x.id==='drill')) r+=7;
+ if(i.some(x=>x.id==='spec'))  r+=6;
+ if(i.some(x=>x.id==='cam'))   r+=3;
+ if(i.some(x=>x.id==='met'))   r+=1;
+ return r;
+}
+function sendRate(){
+ const c=S.design&&S.design.comms;
+ if(!c) return 18;
+ return c.id==='relay' ? 34 : c.id==='hga' ? 25 : 10;
+}
+function sendPower(){
+ const c=S.design&&S.design.comms;
+ if(!c) return 12;
+ return c.id==='relay' ? 6 : c.id==='hga' ? 14 : 4;
+}
+// how much actually goes home this turn: you cannot send what you have not collected
+function sendable(){ return Math.min(Math.round(sendRate()*pk()), Math.floor(S.coll||0)); }
+
+function flightActions(){
+ const moon=S.mission.key==='moon';
+ const cr=Math.round(collectRate()*pk());
+ const sd=sendable();
+ return [
+  {id:'collect', n: moon?'HARVEST AND MEASURE':'DRILL AND SCAN',
+   d: moon?'Work the regolith and record what you find. It goes into memory, not to Earth.'
+         :'Core the rock and read its chemistry. It goes into memory, not to Earth.',
+   e:{coll:+cr, pwr:-8, life:-5},
+   why:'Collecting is the easy half. Nothing you gather counts until it reaches Earth.'},
+
+  {id:'send', n:'SEND THE DATA HOME',
+   d: sd>0 ? `Transmit ${sd} of the ${Math.floor(S.coll)} you are holding.`
+           : 'You have nothing collected to send yet.',
+   e:{prog:+sd, coll:-sd, pwr:-sendPower()},
+   why:'This is the only action that scores. Science that stays on the spacecraft is not science yet.'},
+
+  {id:'power', n: moon?'EXTEND THE SOLAR ARRAY':'CLEAN THE PANELS AND RECHARGE',
+   d:'Top up the power you need for everything else.',
+   e:{pwr:+powerGain(), shd:-9, life:-3},
+   why:'Someone has to work outside the shelter to do it, away from the shielding.'},
+
+  {id:'shield', n: moon?'PACK REGOLITH ON THE ROOF':'BURROW INTO THE REGOLITH',
+   d:'Pile soil over the habitat to block radiation.',
+   e:{shd:+20, pwr:-8, life:-4},
+   why:'Loose soil is surprisingly good at stopping radiation, and heavy to move.'},
+
+  {id:'life', n:'SERVICE LIFE SUPPORT',
+   d:'Scrub the air, fix the water loop.',
+   e:{life:+22, pwr:-9},
+   why:'Keeps the crew breathing, and the pumps run on electricity.'}
+ ];
+}
+
 /* ---------- STATE ---------- */
 let S = {players:1, crew:[], picking:1, pending:null, duty:null,
-         len:LENGTHS.std, diff:DIFFS.astro, anim:{}, ops:null, lastT:0,
+         len:LENGTHS.std, diff:DIFFS.astro, anim:{}, ops:null, lastT:0, coll:0,
          mission:null, sol:1, maxSol:24,
          pwr:70, life:75, shd:50, prog:0,
          deck:[], ev:null, votes:{}, pick:null, log:[]};
@@ -991,7 +1061,7 @@ function renderVerify(){
 /* ---------- RUN ---------- */
 function startRun(){
  S.sol=1;S.maxSol=S.len.sols;
- S.pwr=S.diff.pwr;S.life=S.diff.life;S.shd=S.diff.shd;S.prog=0;S.log=[];
+ S.pwr=S.diff.pwr;S.life=S.diff.life;S.shd=S.diff.shd;S.prog=0;S.coll=0;S.log=[];
  initAnim(); S.turnLines=[]; showResult();
  S.deck=shuffle([...(EVENTS.length?EVENTS:EVENTS_FALLBACK)]);
  logit(`Mission begins at ${S.mission.site}. Crew: ${S.crew.map(c=>c.name).join(', ')}.`);
@@ -1049,7 +1119,7 @@ function drawDuty(){
 function preview(){
  if(!S.pick) return null;
  const e=scaleE(traitE(S.pick.e));
- const d={pwr:0,life:0,shd:0,prog:0};
+ const d={pwr:0,life:0,shd:0,prog:0,coll:0};
  for(const k in e) d[k]+= e[k];
  if(S.ops){ const o=scaleE(S.ops.e); for(const k in o) d[k]+= o[k]; }
  else if(S.ev){
@@ -1065,8 +1135,7 @@ function preview(){
 function drawBars(){
  const p=preview();
  const G=[['PWR','f-pwr',S.pwr,'pwr'],['LIFE','f-life',S.life,'life'],
-          ['SHLD','f-shd',S.shd,'shd'],
-          [S.mission.unit.toUpperCase().slice(0,5),'f-prog',S.prog,'prog']];
+          ['SHLD','f-shd',S.shd,'shd'],['SENT','f-prog',S.prog,'prog']];
  document.getElementById('gauges').innerHTML=G.map(([n,c,v,k])=>{
   const low=v<=25&&k!=='prog';
   const cur=Math.max(0,Math.min(100,v));
@@ -1079,9 +1148,15 @@ function drawBars(){
     : '';
   const badge=p&&d!==0
     ? `<i class="${d>0?'up':'dn'}">${d>0?'+':''}${d}</i>` : '';
+  // on the science gauge, show what is still only collected as a striped tail
+  const held = k==='prog'
+    ? `<div class="held" style="left:${cur}%;width:${Math.max(0,Math.min(100-cur,S.coll||0))}%"></div>`
+    : '';
+  const sub = k==='prog' && (S.coll||0)>0
+    ? `<small class="heldlab">+${Math.floor(S.coll)} held</small>` : '';
   return `<div class="g${dead?' fatal':''}"><div class="gl"><span>${n}</span>
     <b>${Math.round(cur)}${badge}</b></div>
-  <div class="gt"><div class="gf ${c} ${low?'danger':''}" style="width:${cur}%"></div>${ghost}</div></div>`;
+  <div class="gt"><div class="gf ${c} ${low?'danger':''}" style="width:${cur}%"></div>${held}${ghost}</div>${sub}</div>`;
  }).join('');
 }
 
@@ -1131,7 +1206,7 @@ function drawEvent(){
 
 function drawActions(){
  const w=document.getElementById('actions');w.innerHTML='';
- ACTIONS[S.mission.key].forEach(a=>{
+ flightActions().forEach(a=>{
   const b=document.createElement('button');b.className='act';
   b.innerHTML=`<span class="an"><b>${a.n}</b><span class="ac">${costStr(scaleE(traitE(a.e)),true)}</span></span>
     <span class="ad">${a.d}</span>`;
@@ -1174,13 +1249,16 @@ function resolveTurn(){
 
  ['pwr','life','shd'].forEach(k=>S[k]=Math.max(0,Math.min(100,S[k])));
  S.prog=Math.max(0,Math.min(100,S.prog));
+ S.coll=Math.max(0,S.coll);
 
  S.life -= (S.diff.drain||0);
  ['pwr','life','shd'].forEach(k=>S[k]=Math.max(0,Math.min(100,S[k])));
- if(S.prog>=100) return finish(true,'Mission accomplished.');
+ if(S.prog>=100) return finish(true,'All the science reached Earth.');
  if(S.life<=0)  return finish(false,'Life support failed. The crew had to abort.');
- if(S.pwr<=0)   return finish(false,'Power ran out. The outpost went dark.');
- if(S.sol>=S.maxSol) return finish(false,'The mission window closed before the goal was reached.');
+ if(S.pwr<=0)   return finish(false,'Power ran out. Nothing can be sent from a dark outpost.');
+ if(S.sol>=S.maxSol) return finish(false, S.coll>=20
+   ? `The window closed with ${Math.floor(S.coll)} units of science still sitting in the spacecraft's memory, never sent.`
+   : 'The mission window closed before enough science reached Earth.');
  S.sol++; nextTurn(); showResult();
 }
 
@@ -1229,15 +1307,33 @@ function showResult(){
 /* ---------- END ---------- */
 function finish(win,msg){
  const m=S.mission;
+ const held=Math.floor(S.coll||0);
+ const b=budget();
  document.getElementById('endbody').innerHTML=`
- <div class="card"><h1 style="color:${win?'var(--life)':'var(--bad)'}">${win?'MISSION SUCCESS':'MISSION LOST'}</h1>
+ <div class="card"><h1 style="color:${win?'var(--life)':'var(--bad)'}">${
+   win?'WELCOME HOME, HEROES':'MISSION LOST'}</h1>
    <p>${msg}</p>
+   ${win?`<p class="small">You delivered <b>${Math.round(S.prog)} units of science</b> to Earth.
+     Scientists can now study it, publish it and argue about it \u2014 which is exactly what a
+     mission is for.</p>`:''}
+   ${held>0?`<div class="verdict warn" style="margin-top:10px">&#9888;
+     <b>${held} units of science never left the spacecraft.</b> You collected it, but it was still
+     sitting in memory when the mission ended. Collected is not delivered.</div>`:''}
    <div class="roster" style="margin:10px 0 0">${S.crew.map(c=>
      `<img src="${c.face}" class="on" title="${c.name}">`).join('')}</div>
    <p class="small dim" style="margin-top:6px">Crew: ${S.crew.map(c=>c.name).join(', ')}</p>
-   <p class="small dim">Sols used: ${S.sol} &middot; ${m.unit}: ${Math.round(S.prog)}%
+   <p class="small dim" style="margin-top:8px"><b style="color:var(--ink)">The mission you designed:</b>
+     ${S.design&&S.design.rocket?S.design.rocket.n.toLowerCase():'no rocket'},
+     ${S.design&&S.design.power?S.design.power.n.toLowerCase():'no power'},
+     ${((S.design&&S.design.inst)||[]).map(i=>i.n.toLowerCase()).join(' + ')||'no instruments'},
+     ${S.design&&S.design.comms?S.design.comms.n.toLowerCase():'no radio'}
+     \u00b7 ${b.mass} kg \u00b7 $${b.cost}M</p>
+   <p class="small dim">Sols used: ${S.sol} &middot; delivered to Earth: ${Math.round(S.prog)}%
    &middot; Power ${Math.round(S.pwr)}% &middot; Life ${Math.round(S.life)}% &middot; Shield ${Math.round(S.shd)}%</p></div>
  <div class="card"><h3>WHAT YOU JUST LEARNED</h3>
+   <p class="small"><b>Science only counts once it reaches Earth.</b> A spacecraft can fill its
+   memory with discoveries and still achieve nothing. Collecting is the easy half; sending it home
+   is the half that decides whether the mission mattered.</p>
    <p class="small">Every choice cost something else. That is the real job of a mission planner:
    there is never a free option. Even waiting costs oxygen.</p>
    <p class="small">The solar storms you faced were <b>real</b>, recorded by NASA between

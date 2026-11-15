@@ -102,6 +102,35 @@ ice found. These are in-game scenarios, deliberately *not* dressed as NASA
 records. Each carries a "Did you know?" line and, like every action, each one
 costs something.
 
+## The mission arc
+The game follows NASA's own six-step process (see `docs/NASA-SOURCES.md`),
+shaped as five questions a mission team has to answer:
+
+1. **Define the mission** — why go at all (illustrated story panels)
+2. **Define how to get there** — launch window, power, instruments, radio, rocket
+3. **Define how to collect the evidence** — your instruments set your collection rate
+4. **Define how to deliver it to Earth** — your radio sets your send rate
+5. **Come home** — only what reached Earth counts
+
+### Collected is not delivered
+The flight phase tracks two separate numbers:
+- **Collected** — science sitting in the spacecraft's memory (striped on the gauge)
+- **Sent** — science that actually reached Earth (solid, and the only way to win)
+
+A player who collects everything and never transmits **loses**, and the debrief
+tells them why. Verified: that strategy ends with 231 units stranded and 0
+delivered.
+
+Your design choices decide the flight:
+| Choice | Effect in flight |
+|---|---|
+| Instruments | Collection rate — drill + spectrometer collect 23/turn, camera + weather station 14 |
+| Radio | Send rate — orbiter relay 34, big dish 25, small antenna 10 |
+| Power source | Recharge — RTG 24 steady, solar 32 on a good day but 14 in dust or night |
+
+Measured win rates with balanced play: relay 6/6, big dish 5/6, small antenna 3/6.
+The radio you chose before launch is often what decides the mission.
+
 ## Mission story (the explainer)
 After the mission vote, a six-panel illustrated sequence runs before play. Each
 panel pairs a **real NASA photograph** (credited with title, date and NASA ID)
