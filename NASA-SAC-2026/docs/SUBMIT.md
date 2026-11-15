@@ -34,11 +34,11 @@ global one, and the Local Event's clock is the one that counts.
 | 1 | **Answers an official NASA challenge**, not Invent Your Own | ✅ **Done** | Game, README and title screen all name **Space Mission Design Game**. Confirm the team page has the same challenge selected. *Adult team lead* |
 | 2 | **Uses a NASA data source from the challenge**, visibly cited | ✅ **Done** | DONKI (132 real CMEs, real speed / half-angle / class), NASA Image and Video Library (10 photos with NASA IDs), NASA's six-step mission design process, CubeSat 101. All listed on the in-game **DATA, SOURCES & CREDITS** screen and in the NASA Data field below. **Still to check:** that at least one of these appears on the challenge's own Resources tab. *Crew* |
 | 3 | **Presented primarily in English** | ✅ **Done** | Game, README and all docs are English. Keep the form fields English too. |
-| 4 | **Demo: ≤30s video OR ≤7 slides** | ✅ **Built** | The 7-slide deck is made and ready to export. No audio, so no subtitle requirement. *Adult lead: export and host it* |
+| 4 | **Demo: ≤30s video OR ≤7 slides** | ✅ **Done** | 7 slides, exported to PDF, hosted on Drive as *Anyone with the link*, verified signed-out. No audio, so no subtitle requirement. |
 | 5 | **AI use declared and AI content labelled** | ✅ **Done in the build** | In-game credits screen, README, and the Use of AI field below. The two orbital diagrams carry an **AI-ASSISTED DIAGRAM** watermark; the six crew portraits carry an **AI-GENERATED IMAGE** watermark. **Still to do:** paste the declaration into the form. *Adult team lead* |
 | 6 | **All sources, tools, images and materials cited** | ✅ **Done** | New **DATA, SOURCES & CREDITS** screen in the game (title screen → link, and from the debrief), plus `docs/NASA-SOURCES.md` and the References field below. |
-| 7 | **All links public, no password** | ✅ **Done for the game** | Repo public; **GitHub Pages live and verified** from a clean signed-out browser — HTTP 200, 633 ms, byte-identical to the build, all assets render, no JS errors. Still to host: the demo PDF. *Adult team lead* |
-| 8 | **Team registered, 2–6 participants, same Local Event** | ⚠️ **Verify** | Six crew. Check all six are confirmed on the team page at the São Paulo event. **You cannot add anyone after submission closes.** *Adult team lead — do this first* |
+| 7 | **All links public, no password** | ✅ **Done** | Both links verified from a clean signed-out browser. Pages: HTTP 200 in 633 ms, byte-identical to the build, no JS errors. Demo PDF: HTTP 200, no login redirect, checksum matched. |
+| 8 | **Team registered, 2–6 participants, same Local Event** | ✅ **Confirmed** | Six members, all confirmed at the São Paulo event; the team page reads Space Mission Design Game. |
 | 9 | **Submitted by 15/11 23:59 São Paulo** | ⚠️ **Not yet** | See the code-freeze table above. *Adult team lead* |
 
 ### Risks, in the order they would sink the entry
@@ -116,13 +116,13 @@ JavaScript errors.** A judge clicks it and the game is playing.
 
 1. ~~Make the repo public~~ — **done.**
 2. ~~Turn on GitHub Pages~~ — **done and verified.**
-3. **Host the demo deck.** `docs/Space-Mission-Design-Game-demo.pdf` → Google
-   Drive, set **Anyone with the link**. That is your **Link to Project Demo**,
-   and it is the last link you need.
+3. ~~Host the demo deck~~ — **done and verified.**
 4. **Optional:** finish or discard the `v1.0` release draft. It is currently
    unpublished with no file attached, so it is invisible to the public either
    way. Notes are ready at `docs/release-notes-v1.0.md`.
 5. Copy `index.html` to a USB stick as the venue fallback.
+
+**Nothing is blocking the submission. Every field in Part 3 is ready to paste.**
 
 ### Build checks before freeze
 
@@ -235,14 +235,20 @@ account, so it works in a classroom with no network.
 ### Link to Project Demo
 
 ```
-[one link — the 7 slides or the 30-second video, hosted publicly, tested signed out]
+https://drive.google.com/file/d/11jp-XYTDQqBDQgYqzcziIgibUP2ViVfg/view
 ```
+The 7-slide deck. Shared as *Anyone with the link*; verified signed-out with no
+cookies — HTTP 200, no login redirect, downloads as a 7-page PDF with a
+matching checksum.
 
 ### Link to Final Project
 
 ```
-[the GitHub release URL for index.html]
+https://jjunqueiraf-bit.github.io/teste/NASA-SAC-2026/index.html
 ```
+Plays in the browser, no download needed. Verified signed-out — HTTP 200 in
+633 ms, byte-identical to the build, no failed requests, no JavaScript errors.
+Source code: `https://github.com/jjunqueiraf-bit/teste`
 
 ### Detailed Project Description
 
@@ -439,8 +445,9 @@ for. The References field above is written to make both true. Then click
 
 ## PART 4 — Final checks before you click
 
-- [ ] All six members confirmed on the team page, same Local Event
-- [ ] Challenge on the team page reads **Space Mission Design Game**
+- [x] All six members confirmed on the team page, same Local Event
+- [x] Challenge on the team page reads **Space Mission Design Game**
+- [x] Demo link and project link both verified signed-out
 - [ ] Every form field filled, all in English
 - [ ] Demo is ≤30 seconds or ≤7 slides
 - [ ] Demo link and project link open **in a private window, signed out**
