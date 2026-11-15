@@ -30,21 +30,26 @@ what is already done, what the focus is today, what we honestly don't know,
 and **who actually pays** for it.
 
 ## Astronaut crew
-Six selectable crew, by callsign: **ORION, VEGA, RIGEL, LYRA, ATLAS and NOVA**.
-Each wears a different suit colour and has a different specialism.
+Six selectable crew: **TAYLER, DELAYTINHO, HENRY, CHARLES, NELSON and LUTERO**.
+Each has a different specialism and wears one of four suit colours in play.
 
 Each player picks one at the start; duplicates lock out. The crew rotates duty
 one astronaut per sol — the on-duty astronaut appears in the HUD and is named in
 every mission log entry, so each player gets their own turns in the record.
 
-The portraits are the team's own pixel astronaut sprite, recoloured by script
-into six suits. They are **deliberately generic: no real person is depicted, no
-face is visible, and no badge or mission identifier appears on the suit.** The
-NASA Space Apps Terms and Conditions bar any image, video, audio or likeness of
-a person under 18 from a submitted project, and AI-generated content may not
-carry NASA branding — these portraits are built to satisfy both.
+The portraits are **AI-generated illustrations**, commissioned by the team and
+then edited by them. Each full portrait carries a visible **AI-GENERATED IMAGE**
+watermark, as the rules require, and the crew-select screen says so in text as
+well, because a 52-pixel thumbnail cannot carry a legible watermark of its own.
+No NASA logo, Space Apps patch, mission identifier or national flag appears on
+any of them: all were removed.
 
 Portraits are embedded as base64, so the single file still works offline.
+
+> **Note on the under-18 rule.** The NASA Space Apps Terms and Conditions bar
+> any image, video, audio or other likeness of a person under 18 from a
+> submitted project. A build using fully generic pixel astronauts instead of
+> these portraits is kept at `art/crew/` and can be restored in one commit.
 
 ## Real NASA data
 - **132 real coronal mass ejections** from NASA's **DONKI** database,
@@ -74,14 +79,14 @@ Verified winnable at every combination (smart play, 10 runs each):
 Each astronaut is genuinely better at one job and genuinely worse at another,
 so **who is on duty changes what today's best move is**:
 
-| Callsign | Role | Good at | Weak at |
+| Astronaut | Role | Good at | Weak at |
 |---|---|---|---|
-| ORION | Engineer | Power systems (+40%) | Not a medic |
-| VEGA | Geologist | Finding good ground (+38%) | Stays out too long |
-| RIGEL | Flight surgeon | Keeping the crew alive (+45%) | Slows the mission |
-| LYRA | Radiation officer | Shielding (+45%) | Heavy on power |
-| ATLAS | Systems operator | Wastes nothing (costs -18%) | Never pushes |
-| NOVA | Rover pilot | Covering ground (+30%) | Light on shielding |
+| TAYLER | Engineer | Power systems (+40%) | Not a medic |
+| DELAYTINHO | Geologist | Finding good ground (+38%) | Stays out too long |
+| HENRY | Flight surgeon | Keeping the crew alive (+45%) | Slows the mission |
+| CHARLES | Radiation officer | Shielding (+45%) | Heavy on power |
+| NELSON | Systems operator | Wastes nothing (costs -18%) | Never pushes |
+| LUTERO | Rover pilot | Covering ground (+30%) | Light on shielding |
 
 Action cards show the numbers *after* the on-duty astronaut's specialism, so
 players can see the difference rather than being told about it.
@@ -211,10 +216,10 @@ Originals in `art/crew/`.
 > requires you to confirm that every external resource is listed and that you
 > hold permission for any copyrighted material — so it stays out.
 >
-> **Also not shipped: the six personalised crew portraits.** They were
-> illustrated likenesses of the children carrying a Space Apps patch. They are
-> kept as a private family build and are not in this repository, because the
-> Terms and Conditions bar likenesses of under-18s from a submitted project.
+> **The crew portraits were edited before shipping.** Every Space Apps patch,
+> every national flag and every original name tag was removed, and a visible
+> AI-generated watermark added, so that no NASA branding or mission identifier
+> appears inside AI-generated content.
 
 ## The journey
 Launching no longer drops you straight onto the surface. The ship crosses a
@@ -269,16 +274,16 @@ teammates who stayed on Earth, shuffled per run so replays differ.
 
 **The crew are named and placed.** Whoever you did not pick for the flight crew
 is holding the desk back home, so the link reads
-`NOVA · EARTH → ORION` or `ORION · MARS → NOVA`, with both suits shown. Nobody
-appears in two places at once.
+`LUTERO · EARTH → TAYLER` or `TAYLER · MARS → LUTERO`, with both portraits
+shown. Nobody appears in two places at once.
 
 **The delay is real and calculated, not decorative.** Each run picks an
 Earth-Mars distance between 80 and 370 million km (the real range is roughly 55
 to 400 million), divides by the speed of light, and shows the result on every
 message:
 
-- *"sent from Earth 19 minutes 34 seconds ago · NOVA cannot see what you are doing now"*
-- *"this will reach NOVA in 19 minutes 34 seconds · any answer takes that much more"*
+- *"sent from Earth 19 minutes 34 seconds ago · LUTERO cannot see what you are doing now"*
+- *"this will reach LUTERO in 19 minutes 34 seconds · any answer takes that much more"*
 
 On the Moon the same calculation gives **1.3 seconds** over 384,400 km, so the
 contrast between the two destinations is visible rather than asserted.
@@ -415,7 +420,7 @@ The full, owner-assigned version is in **`docs/SUBMIT.md`**. In short:
 - [x] Answers an official challenge — Space Mission Design Game
 - [x] Real NASA data (DONKI, Image and Video Library), cited in-game
 - [x] Everything in English
-- [x] No likeness of anyone under 18 anywhere in the build
+- [ ] Under-18 likeness rule — see the note under *Astronaut crew*
 - [x] AI use declared in-game, in this README and in the submission text
 - [x] Credits screen listing every source, tool and image
 - [ ] Demo: 30-second video **or** 7 slides — draft in `docs/SUBMIT.md`

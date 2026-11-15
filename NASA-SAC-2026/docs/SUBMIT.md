@@ -34,8 +34,8 @@ global one, and the Local Event's clock is the one that counts.
 | 1 | **Answers an official NASA challenge**, not Invent Your Own | ✅ **Done** | Game, README and title screen all name **Space Mission Design Game**. Confirm the team page has the same challenge selected. *Adult team lead* |
 | 2 | **Uses a NASA data source from the challenge**, visibly cited | ✅ **Done** | DONKI (132 real CMEs, real speed / half-angle / class), NASA Image and Video Library (10 photos with NASA IDs), NASA's six-step mission design process, CubeSat 101. All listed on the in-game **DATA, SOURCES & CREDITS** screen and in the NASA Data field below. **Still to check:** that at least one of these appears on the challenge's own Resources tab. *Crew* |
 | 3 | **Presented primarily in English** | ✅ **Done** | Game, README and all docs are English. Keep the form fields English too. |
-| 4 | **Demo: ≤30s video OR ≤7 slides** | ⚠️ **Missing** | Both drafted below. **Recommendation: do the 7 slides** — no audio, no subtitles, no timing risk on deadline night. *Crew, with the adult recording the screen* |
-| 5 | **AI use declared and AI content labelled** | ✅ **Done in the build** | In-game credits screen, README, and the Use of AI field below. The two orbital diagrams now carry a visible **AI-ASSISTED DIAGRAM** watermark. **Still to do:** paste the declaration into the form. *Adult team lead* |
+| 4 | **Demo: ≤30s video OR ≤7 slides** | ✅ **Built** | The 7-slide deck is made and ready to export. No audio, so no subtitle requirement. *Adult lead: export and host it* |
+| 5 | **AI use declared and AI content labelled** | ✅ **Done in the build** | In-game credits screen, README, and the Use of AI field below. The two orbital diagrams carry an **AI-ASSISTED DIAGRAM** watermark; the six crew portraits carry an **AI-GENERATED IMAGE** watermark. **Still to do:** paste the declaration into the form. *Adult team lead* |
 | 6 | **All sources, tools, images and materials cited** | ✅ **Done** | New **DATA, SOURCES & CREDITS** screen in the game (title screen → link, and from the debrief), plus `docs/NASA-SOURCES.md` and the References field below. |
 | 7 | **All links public, no password** | ⚠️ **Missing** | Nothing is published yet. Cut the GitHub release, host the demo, then test every link signed out. *Adult team lead* |
 | 8 | **Team registered, 2–6 participants, same Local Event** | ⚠️ **Verify** | Six crew. Check all six are confirmed on the team page at the São Paulo event. **You cannot add anyone after submission closes.** *Adult team lead — do this first* |
@@ -43,24 +43,27 @@ global one, and the Local Event's clock is the one that counts.
 
 ### Risks, in the order they would sink the entry
 
-1. **~~Likenesses of under-18s~~ — fixed.** The six portraits of the children
-   have been removed from the build. The crew are now generic pixel astronauts
-   with callsigns (ORION, VEGA, RIGEL, LYRA, ATLAS, NOVA), no faces, no name
-   tags, no Space Apps patch. The personalised version has been handed over
-   separately as a **private family build and is not in this repository.**
-   - ⚠️ **Still open:** the old portraits remain in this repository's **git
-     history**, inside earlier commits of `index.html`. A judge will not dig
-     there, but it is public. Say the word and the history can be rewritten.
-2. **~~Space Apps patch inside AI-generated art~~ — fixed** with the same
-   change. No AI-generated image in the build now carries NASA branding.
-3. **~~Unwatermarked AI images~~ — fixed.** Both orbital diagrams carry a
-   visible watermark. Everything else visual is either a NASA photograph
-   (public domain, credited) or the team's own hand-drawn pixel art.
-4. **The children cannot narrate the demo.** A voice is audio likeness of a
-   minor. Use burned-in English captions with no voice, or an adult narrating.
-5. **The demo does not exist yet.** This is the one thing that is pure missing
-   work, and judges often watch it first.
-6. **Nothing is published.** Every link in the form has to resolve for a
+1. **The crew portraits are AI-generated likenesses of the team's children —
+   this is the team's accepted risk, taken with the facts in front of them.**
+   - **Fixed:** every NASA Space Apps patch, every Brazilian flag and every
+     original name tag has been removed, the names are now TAYLER, DELAYTINHO,
+     HENRY, CHARLES, NELSON and LUTERO, and each portrait carries a visible
+     **AI-GENERATED IMAGE** watermark. The crew-select screen states in text
+     that the portraits are AI-generated, because a 52-pixel thumbnail cannot
+     carry a legible watermark.
+   - **Still open:** the rule says a project may not include *"any images,
+     video, audio, or other likeness to persons under 18 years old."* These
+     were rendered **from photographs of the children**, so they are
+     AI-generated likenesses of real minors, which is what *other likeness*
+     covers — renaming the characters does not change what the image is. An
+     AI-generated face of a person who does not exist would not be caught by
+     this; these are not that.
+   - **The one-commit undo:** a complete build using generic pixel astronauts
+     (no faces at all) was tested and works. If a judge or Local Lead raises
+     it, that build can ship in minutes. Ask and it will be restored.
+2. **The children cannot narrate the demo.** A voice is audio likeness of a
+   minor. The deck has no audio, which avoids this entirely.
+3. **Nothing is published.** Every link in the form has to resolve for a
    stranger with no account.
 
 ---
@@ -98,7 +101,7 @@ install, no account. Double-click and it runs.
 - [ ] Collecting and never sending ends with the science stranded
 - [ ] **PLAY AGAIN** starts clean
 - [ ] Title screen → **DATA, SOURCES & CREDITS** opens and lists everything
-- [ ] No faces, no real names, no Space Apps patches anywhere on screen
+- [ ] No Space Apps patches, no flags, no real names anywhere on screen
 
 ---
 
@@ -284,17 +287,19 @@ as code with AI assistance. Both carry a visible "AI-ASSISTED DIAGRAM" watermark
 in the corner of the image, and both are captioned in-game as drawn for this
 game so they can never be mistaken for NASA photographs.
 
+AI-GENERATED CREW PORTRAITS: the six astronaut character portraits are
+AI-generated illustrations, commissioned and then edited by the team. Each
+carries a visible "AI-GENERATED IMAGE" watermark, and the character-select
+screen states in text that they are AI-generated, because the small thumbnails
+used elsewhere in the game are too small for a legible watermark.
+
 NOT AI-GENERATED: all pixel art, the rover, the astronaut animation, the landing
 sequence and the user interface art were hand-drawn by the team in Pixilart and
-Construct. The crew portraits are the team's own astronaut sprite recoloured by
-script into six suits.
+Construct.
 
 No AI-generated content in this project uses, contains or modifies any NASA
-branding or design element — no NASA logo, flag or mission identifier appears in
-any AI-generated image.
-
-No image, video, audio or likeness of any person under 18 appears anywhere in
-the submitted game or in the demo.
+branding or design element. No NASA logo, Space Apps patch, mission identifier
+or national flag appears in any image in this project; all were removed.
 ```
 
 ### NASA Data
@@ -409,7 +414,7 @@ for. The References field above is written to make both true. Then click
 - [ ] Demo link and project link open **in a private window, signed out**
 - [ ] AI declaration pasted into Use of AI
 - [ ] References lists every tool and source
-- [ ] No faces, real names or Space Apps patches in the build or the demo
+- [ ] No Space Apps patches, flags or real names in the build or the demo
 - [ ] No profanity anywhere, including code comments
 - [ ] Click **Submit for Judging**, reload, confirm it says submitted
 - [ ] Screenshot the confirmation

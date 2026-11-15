@@ -25,30 +25,32 @@ A judge checks these before scoring anything. Fail one and the project is scored
 
 ### Risks closed in this pass
 
-- **Likenesses of under-18s.** The six illustrated portraits of the children
-  are out of the build. Crew are now generic pixel astronauts by callsign —
-  ORION, VEGA, RIGEL, LYRA, ATLAS, NOVA — recoloured from the team's own
-  astronaut sprite. No face, no name tag, no patch. The personalised version was
-  handed over as a private family build and is **not in this repository**.
-- **NASA branding inside AI-generated art.** The patch went with the portraits.
-  Nothing AI-generated in the build now carries a NASA logo, flag or identifier.
-- **Unwatermarked AI images.** Both orbital diagrams now carry a visible
-  **AI-ASSISTED DIAGRAM** watermark.
+- **NASA branding inside AI-generated art.** Every Space Apps patch has been
+  removed from the six crew portraits, along with every Brazilian flag. No NASA
+  logo, flag or mission identifier appears in any image in the build.
+- **Unwatermarked AI images.** The two orbital diagrams carry a visible
+  **AI-ASSISTED DIAGRAM** watermark; the six crew portraits carry a visible
+  **AI-GENERATED IMAGE** watermark, and the crew-select screen says so in text
+  as well, for the thumbnails that are too small to carry one.
 - **Wrong challenge name.** Title screen, document title, README and the page
   banner all now say Space Mission Design Game.
 - **Demo length.** Earlier guidance in this repo said 60–90 seconds. The limit
   is 30 seconds or 7 slides, and judges stop at the limit.
+- **The demo.** A 7-slide deck is built.
 
 ### Risks still open
 
-1. **The old portraits are in this repository's git history**, inside earlier
-   commits of `index.html`. Not visible to a judge, but public. History can be
-   rewritten on request.
+1. **The crew portraits are AI-generated likenesses of real children.** The
+   team has decided to ship them, with the facts in front of them. The rule
+   bars *"any images, video, audio, or other likeness to persons under 18"*;
+   these were rendered from photographs of the children, so renaming the
+   characters does not change what the images are. Everything that could be
+   fixed without losing the artwork has been: patches, flags and original
+   names are gone, and the AI watermark is on. **A complete, tested build with
+   generic pixel astronauts and no faces exists and can ship in one commit.**
 2. **The children cannot narrate the demo** — a voice is audio likeness of a
-   minor. Use burned-in English captions, or an adult narrating.
-3. **The demo does not exist yet.** It is the one piece of pure missing work,
-   and it is often the first thing a judge opens.
-4. **Nothing is published.** Every link must resolve for a stranger with no
+   minor. The deck has no audio, so this is avoided.
+3. **Nothing is published.** Every link must resolve for a stranger with no
    account.
 
 ---
@@ -129,10 +131,10 @@ Everything checkable is checked, and disagreements are stated rather than hidden
 
 ## 5. What is still missing — none of it is code
 
-1. **The demo.** ≤30 second video or ≤7 slides. Both drafted in `SUBMIT.md`;
-   the slides are the safer choice tonight. Not narrated by the children.
-2. **Publish the links.** GitHub release for the game, public host for the
-   demo, both tested signed out in a private window.
+1. **Publish the links.** GitHub release for the game, public host for the
+   demo deck, both tested signed out in a private window.
+2. **Export and host the deck.** It is built; it needs to live somewhere a
+   stranger can open without signing in.
 3. **Write up a child testing it.** One player tried it and was fine; that needs
    to become a sentence a judge can read — who played, what confused them, what
    they could explain afterwards. It belongs in the Detailed Description, and it
