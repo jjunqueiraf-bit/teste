@@ -176,6 +176,7 @@ Three assets from the team's Construct project are used:
   the face of Mission Control in the radio panel
 - **landing.gif** — the 16x16 landing animation, played full-screen between the
   journey and the first day of work
+- **rover.png** — the 30x30 mission rover, driving the surface on both worlds
 - **astro_anim_*.png** — the hand-animated astronaut from the team's Pixilart
   video, lifted out of the 1900x1900 export, keyed to transparency and
   recoloured into the four suit colours
@@ -232,6 +233,20 @@ lander on legs with regolith banked against it.
 
 Weather sits on top of that: lunar night darkens everything and kills the
 panels; a Martian dust storm thickens the haze.
+
+## The rover
+The team's 30x30 rover drives the surface on both worlds, bumping over the
+rocks with a small dust puff behind it, and heads out to the sample site when
+the crew choose to collect. It faces whichever way it is travelling.
+
+Each mission also carries one radio message about the real machine it is based on:
+
+- **Moon** — the Lunar Roving Vehicle. The Apollo 17 crew covered about **36 km**
+  in theirs, still the furthest anyone has driven anywhere off Earth, and Gene
+  Cernan reached **18 km/h**, the unofficial lunar speed record.
+- **Mars** — Curiosity and Perseverance. Because a command from Earth takes
+  minutes to arrive, they drive themselves for much of the day. Perseverance is
+  the rover that drilled the Sapphire Canyon core this mission goes to fetch.
 
 ## Radio traffic
 Every phase brings one message between the crew on the surface and the
