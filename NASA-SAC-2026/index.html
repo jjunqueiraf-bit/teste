@@ -14,7 +14,13 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
     font-family:ui-monospace,"Courier New",monospace;-webkit-font-smoothing:none;}
-  body{display:flex;justify-content:center;padding:16px;min-height:100vh}
+  body{display:flex;justify-content:center;padding:16px;min-height:100vh;
+    transition:background .6s linear}
+  /* the whole page takes on the colour of the world you are standing on */
+  body.w-mars{background:#1a0b06}
+  body.w-mars{--panel:#2a1510;--panel2:#3a1d16;--line:#5c2e20;--dim:#c49a86}
+  body.w-moon{background:#0b0d12}
+  body.w-moon{--panel:#171a21;--panel2:#20242d;--line:#39404d;--dim:#9aa4b5}
   #app{width:100%;max-width:860px}
   canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block;width:100%;
     border:var(--px) solid var(--line);background:#05070f}
@@ -131,12 +137,31 @@
   .result .rl{display:block}
   .result .up{color:var(--life)} .result .dn{color:var(--bad)} .result .nu{color:var(--dim)}
   .result.empty{color:var(--dim)}
+  .votestate{display:none;background:#121a2c;border:var(--px) solid #2f4a7a;
+    padding:6px 9px;font-size:11.5px;line-height:1.5}
+  .vrow{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+  .vchip{display:inline-flex;align-items:center;gap:4px;background:#0a1020;
+    border:2px solid var(--line);padding:2px 6px;font-size:10px;color:var(--dim)}
+  .vchip img{width:16px;height:16px;display:block}
+  .vchip.win{border-color:var(--life);color:#b8f0dc}
   .radio{display:none;background:#04120c;border:var(--px) solid #1d5c3c;padding:7px 10px}
-  .radio .cwrap{display:flex;gap:9px;align-items:flex-start}
-  .radio .cbody{min-width:0;flex:1 1 auto}
-  .radio .cav{width:42px;height:42px;flex:0 0 auto;display:block;
-    border:2px solid #1d5c3c;image-rendering:auto}
-  .radio .cav.ctrl{image-rendering:pixelated;background:#07160f}
+  .radio .link{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .radio .lend{flex:0 0 auto;text-align:center;width:66px}
+  .radio .lend img{width:54px;height:54px;display:block;margin:0 auto 3px;
+    border:2px solid #2a7d55;background:#07160f}
+  .radio .lend b{display:block;font-size:11px;color:#eaf7f1;line-height:1.2}
+  .radio .lend span{display:block;font-size:9px;letter-spacing:1px;color:#4fd1a5}
+  .radio .lwire{flex:1 1 auto;min-width:0;text-align:center}
+  .radio .lsig{display:flex;align-items:center;gap:4px;justify-content:center;margin-bottom:3px}
+  .radio .lsig i{flex:1 1 auto;height:2px;background:#1d5c3c;position:relative;overflow:hidden}
+  .radio .lsig i:after{content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;
+    background:#4fd1a5;animation:sig 1.6s linear infinite}
+  .radio .lsig i:nth-child(2):after{animation-delay:.25s}
+  .radio .lsig i:nth-child(3):after{animation-delay:.5s}
+  @keyframes sig{to{left:110%}}
+  .radio .llag{font-size:10.5px;color:#cfeadd}
+  .radio .llag b{color:#fff}
+  .radio .ldist{font-size:9px;color:#5d7f70;letter-spacing:.5px}
   .radio .ch{font-size:9.5px;letter-spacing:1.5px;color:#4fd1a5;margin-bottom:3px}
   .radio .cto{color:#5d7f70;letter-spacing:1px}
   .radio .cdelay{font-size:10px;color:#9ed8bd;margin-top:5px;line-height:1.5}
@@ -257,6 +282,32 @@
   .verdict.bad{border-color:var(--bad);background:#2b1220;color:#ffb3b3}
   .verdict.warn{border-color:var(--pwr);background:#2a2110;color:#ffe2a0}
   .verdict.good{border-color:var(--life);background:#0e2a22;color:#b8f0dc}
+  .cmp{border:var(--px) solid var(--line);background:var(--panel);padding:8px 10px;margin:10px 0}
+  .cmp>b{display:block;font-size:12px;color:var(--ink);margin-bottom:7px}
+  .cmpg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+  .cmpc{background:#0a1020;border:2px solid var(--line);padding:6px 8px}
+  .cmpn{font-size:11px;color:var(--ink);margin-bottom:5px;line-height:1.3;min-height:2.3em}
+  .cmpr{display:flex;align-items:center;gap:5px;margin:3px 0;font-size:9.5px}
+  .cmpr span{flex:0 0 38px;color:var(--dim);letter-spacing:.5px}
+  .cmpr i{flex:1 1 auto;height:7px;background:#05070f;border:1px solid #000;display:block}
+  .cmpr i.none{border:none;background:none;color:#3c465c;font-style:normal;text-align:left}
+  .cmpr i em{display:block;height:100%}
+  .cmpr u{flex:0 0 auto;text-decoration:none;color:var(--ink);font-size:9.5px;min-width:42px;text-align:right}
+  .mbox,.wbox,.pbox{border:var(--px) solid var(--line);padding:8px 10px;margin-top:10px;font-size:11.5px;line-height:1.55}
+  .mbox{background:#0a1626;border-color:#2f4a7a}
+  .mbox b{display:block;color:#9fd0ff;font-size:12px;margin-bottom:5px}
+  .mbox code{display:block;font-family:ui-monospace,monospace;color:#cfe4ff;
+    background:#061020;padding:4px 7px;margin:3px 0;font-size:11px;border-left:3px solid #2f4a7a}
+  .wbox{background:#141028;border-color:#4a3f7a}
+  .wbox b{display:block;color:#c9b6ff;font-size:12px;margin-bottom:4px}
+  .wbox .wn{display:block;color:var(--ink);font-size:12px;margin-bottom:3px}
+  .wbox .wn i{color:var(--dim);font-style:normal}
+  .wbox .wt{display:block;color:var(--dim)}
+  .pbox{background:#2b1220;border-color:#7a2a42}
+  .pbox b{display:block;color:#ffb3b3;font-size:12px;margin-bottom:5px}
+  .pbox img{width:100%;max-width:240px;display:block;margin:0 0 6px;
+    border:2px solid #7a2a42}
+  .pbox span{display:block;color:#f0cfcf}
   .opt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
   @media(max-width:560px){.opt{grid-template-columns:1fr}}
   .opt button{background:var(--panel2);border:var(--px) solid var(--line);color:var(--ink);
@@ -364,6 +415,7 @@
     <div class="statusbar" id="statusbar"></div>
     <div class="gauges" id="gauges"></div>
     <div class="result empty" id="result">Pick a job for this phase.</div>
+    <div class="votestate" id="votestate"></div>
     <div class="radio" id="comms"></div>
   </div>
   <div class="gside">
@@ -478,6 +530,49 @@ const ACTIONS = {
    Space Mission Design Game: the player designs the mission before flying it.
    Every part costs MASS (kg), draws or makes POWER (W) and costs MONEY ($M).
    A design that breaks a limit cannot launch - which is the point. */
+
+/* Things that actually went wrong, and the people who worked the ideas out.
+   Attached to the decision each one belongs to. */
+const LORE = {
+ window:{
+  who:{n:'Walter Hohmann', y:'1925',
+   t:'A German engineer worked out the lowest-energy path between two orbits long before anyone could fly it. Every Mars mission still uses his curve.'},
+  math:{title:'How long is the crossing?',
+   lines:['transfer time ≈ half the orbit period of the transfer ellipse',
+          'for Earth → Mars that comes out at about 259 days',
+          'and the window repeats every 26 months']},
+  past:null},
+ power:{
+  who:{n:'Gerald Kulcinski, Layton Wittenberg and Harrison Schmitt', y:'1986',
+   t:'They published the first paper linking the helium-3 in lunar soil to fusion power. Schmitt is the Apollo 17 astronaut in the photograph two steps back — he scooped that soil himself in 1972, then spent decades arguing it could power Earth.'},
+  math:{title:'Why sunlight is weaker at Mars',
+   lines:['sunlight falls off as 1 ÷ distance²',
+          'Mars sits 1.52 times further from the Sun than Earth',
+          '1 ÷ 1.52² = 0.43, so about 43% of the light']},
+  past:{n:'Opportunity, 2018', img:'mars_selfie',
+   t:'A planet-wide dust storm blotted out the Sun. Opportunity ran on solar panels, could not charge, and fell silent on <b>10 June 2018</b> after nearly fifteen years of work. A nuclear battery would have kept running.'}},
+ inst:{
+  who:null,
+  math:{title:'The instrument budget',
+   lines:['every instrument costs mass, watts and money',
+          'mass you carry = mass you cannot spend on fuel',
+          'so the science question picks the instruments, not the other way round']},
+  past:null},
+ comms:{
+  who:null,
+  math:{title:'How long a message takes',
+   lines:['time = distance ÷ speed of light',
+          'light travels 299,792 km every second',
+          '225,000,000 km ÷ 299,792 ≈ 750 s ≈ 12.5 minutes, each way']},
+  past:null},
+ rocket:{
+  who:null,
+  math:{title:'The launch check',
+   lines:['total spacecraft mass must be ≤ what the rocket can lift',
+          'there is no partial credit: 1 kg over and it does not fly']},
+  past:{n:'Mars Climate Orbiter, 1999', img:'step_rocket',
+   t:'The spacecraft software expected thrust in <b>newtons</b>. The ground software sent it in <b>pound-force</b>. Nobody caught it. The orbiter arrived about <b>57 km</b> above Mars instead of the planned 140–150 km and was destroyed in the atmosphere. The orbiter alone cost around <b>$125 million</b>; published figures for the wider programme loss run higher. One unconverted number.'}}
+};
 
 const BUDGET = {cost:600, note:'$600 million is roughly a NASA Discovery-class budget.'};
 
@@ -860,7 +955,11 @@ let S = {players:1, crew:[], picking:1, pending:null, duty:null,
 
 /* ---------- SCREENS ---------- */
 function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
-  document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
+  document.getElementById(id).classList.add('on');window.scrollTo(0,0);paintWorld();}
+function paintWorld(){
+  const b=document.body; b.classList.remove('w-mars','w-moon');
+  if(S.mission) b.classList.add(S.mission.key==='mars'?'w-mars':'w-moon');
+}
 
 /* ---------- PLAYER COUNT ---------- */
 (function(){const w=document.getElementById('pcount');
@@ -921,32 +1020,51 @@ function crewNext(){
  else{S.picking++;paintCrew();}
 }
 
+/* ---------- VOTING ----------
+   Everyone votes. Most votes wins. If two choices tie, the one that reached
+   that number FIRST wins - so being quick matters when the crew disagrees. */
+function tallyWinner(votes){
+ // votes: [{key, t}] in the order they were cast
+ const count={}, firstAt={};
+ votes.forEach(v=>{ count[v.key]=(count[v.key]||0)+1; if(firstAt[v.key]===undefined) firstAt[v.key]=v.t; });
+ let best=null;
+ for(const k in count){
+  if(!best) { best=k; continue; }
+  if(count[k]>count[best] || (count[k]===count[best] && firstAt[k]<firstAt[best])) best=k;
+ }
+ return {key:best, count, firstAt, tied:Object.keys(count).filter(k=>count[k]===count[best]).length>1};
+}
+
 /* ---------- MISSION VOTE ---------- */
 function renderVote(){
  const w=document.getElementById('voteui');w.innerHTML='';S.votes={};
  for(let p=1;p<=S.players;p++){
   const d=document.createElement('div');d.style.marginBottom='14px';
-  d.innerHTML=`<div class="small dim" style="margin-bottom:5px">ASTRONAUT ${p}</div>`;
+  const nm=S.crew[p-1]?S.crew[p-1].name.toUpperCase():`ASTRONAUT ${p}`;
+  d.innerHTML=`<div class="small dim" style="margin-bottom:5px">${nm}</div>`;
   const r=document.createElement('div');r.className='row';
   Object.values(MISSIONS).forEach(m=>{
    const b=document.createElement('button');b.className='btn';
    b.innerHTML=`<b>${m.key==='moon'?'&#127769; MOON':'&#128308; MARS'}</b><small>${m.key==='moon'?'Helium-3 for Earth':'Recover the sample'}</small>`;
-   b.onclick=()=>{S.votes[p]=m.key;[...r.children].forEach(c=>c.classList.remove('sel'));
+   b.onclick=()=>{S.votes[p]={key:m.key,t:performance.now()};
+     [...r.children].forEach(c=>c.classList.remove('sel'));
      b.classList.add('sel');tally();};
    r.appendChild(b);});
   d.appendChild(r);w.appendChild(d);}
  tally();
 }
 function tally(){
- const v=Object.values(S.votes),mo=v.filter(x=>x==='moon').length,ma=v.filter(x=>x==='mars').length;
- document.getElementById('votetally').textContent=
-   `Moon ${mo} — Mars ${ma}   (${v.length}/${S.players} voted)`;
+ const v=Object.values(S.votes);
+ const mo=v.filter(x=>x.key==='moon').length, ma=v.filter(x=>x.key==='mars').length;
+ const tie = v.length===S.players && mo===ma && mo>0;
+ document.getElementById('votetally').innerHTML=
+   `Moon ${mo} \u2014 Mars ${ma}   (${v.length}/${S.players} voted)` +
+   (tie?` <b style="color:var(--pwr)">\u00b7 tied, so the quickest vote decides</b>`:'');
  document.getElementById('vgo').disabled = v.length<S.players;
 }
 function lockMission(){
- const v=Object.values(S.votes),mo=v.filter(x=>x==='moon').length,ma=v.filter(x=>x==='mars').length;
- let k = mo>ma?'moon':ma>mo?'mars':(Math.random()<.5?'moon':'mars');
- S.mission=MISSIONS[k];startStory();
+ const w=tallyWinner(Object.values(S.votes));
+ S.mission=MISSIONS[w.key||'moon'];paintWorld();startStory();
 }
 
 /* ---------- MISSION STORY ---------- */
@@ -1069,6 +1187,7 @@ function renderDesign(){
     return `<button class="pick ${on?'sel':''}" onclick="pickOpt('${st.key}','${o.id}')">
       <span class="pn"><b>${o.n}</b><span class="pc">${bits.join(' \u00b7 ')||'no cost'}</span></span>
       <span class="pd">${o.d}</span></button>`;}).join('')}</div>
+  ${compareHTML(st)}
   ${chosen.length?`<div class="outcome">${chosen.map(c=>
      `<b>${c.n}:</b> ${c.out}`).join('<br>')}</div>`:''}
   ${S.shown?`<div class="panelwrap">
@@ -1080,6 +1199,7 @@ function renderDesign(){
         <div class="sb">${why.say}<em>\u2014 ${crew.name}${tr?`, ${tr.role}`:''}</em></div></div>`:''}
       <h3 style="font-size:14px;margin-top:4px">${why.title}</h3>
       <p class="small">${why.body}</p>
+      ${loreHTML(st.key)}
     </div></div>`:''}
   <div class="sp-nav">
     ${S.step>0?`<button class="btn ghost" onclick="designStep(-1)">\u25c0 BACK</button>`:''}
@@ -1088,6 +1208,53 @@ function renderDesign(){
       : (!S.shown ? 'WHY? \u25b6'
       : (S.step===STEPS.length-1?'BUILD &amp; VERIFY \u25b6':'NEXT STEP \u25b6'))}</button>
   </div>`;
+}
+function compareHTML(st){
+ const opts=st.opts;
+ const rows=[
+  {k:'cap',  lab:'LIFTS',  unit:' kg', col:'#9fd0ff'},
+  {k:'mass', lab:'MASS',   unit:' kg', col:'#cfd8ee'},
+  {k:'pw',   lab:'POWER',  unit:' W',  col:'#ffc93c'},
+  {k:'cost', lab:'COST',   unit:'',    col:'#ff7ab8', pre:'$', post:'M'},
+  {k:'rate', lab:'SPEED',  unit:'',    col:'#4fd1a5'}
+ ].filter(r=>opts.some(o=>o[r.k]));
+ if(!rows.length) return '';
+ let out=`<div class="cmp"><b>⚖ Side by side</b><div class="cmpg">`;
+ opts.forEach(o=>{
+  out+=`<div class="cmpc"><div class="cmpn">${o.n}</div>`;
+  rows.forEach(r=>{
+   const v=Math.abs(o[r.k]||0);
+   if(!v) { out+=`<div class="cmpr"><span>${r.lab}</span><i class="none">—</i></div>`; return; }
+   const max=Math.max(...opts.map(x=>Math.abs(x[r.k]||0)));
+   const pct=max? Math.round(v/max*100):0;
+   const txt=(r.pre||'')+v+(r.post||'')+(r.unit||'');
+   out+=`<div class="cmpr"><span>${r.lab}</span>
+     <i><em style="width:${pct}%;background:${r.col}"></em></i>
+     <u>${txt}</u></div>`;
+  });
+  out+=`</div>`;
+ });
+ return out+`</div></div>`;
+}
+function loreHTML(key){
+ const L=LORE[key]; if(!L) return '';
+ let out='';
+ if(L.math){
+  out+=`<div class="mbox"><b>∑ ${L.math.title}</b>${
+    L.math.lines.map(l=>`<code>${l}</code>`).join('')}</div>`;
+ }
+ if(L.who){
+  out+=`<div class="wbox"><b>★ Who worked this out</b>
+    <span class="wn">${L.who.n} <i>(${L.who.y})</i></span>
+    <span class="wt">${L.who.t}</span></div>`;
+ }
+ if(L.past){
+  const im=NASAIMG[L.past.img];
+  out+=`<div class="pbox"><b>⚠ It has gone wrong before — ${L.past.n}</b>
+    ${im?`<img src="${im.data}" alt="${im.title}">`:''}
+    <span>${L.past.t}</span></div>`;
+ }
+ return out;
 }
 function pickOpt(key,id){
  const st=STEPS.find(s=>s.key===key);
@@ -1300,7 +1467,8 @@ function nextTurn(){
    const g=geometry(S.ev);
    if((S.ev.severity||1)>=3 || g.k==='direct') S.fx='storm';
  }
- drawDuty();drawBars();drawEvent();drawActions();drawScene();drawFxTag();drawComms();
+ S.pvotes=null; S.voteResult=null;
+ drawDuty();drawBars();drawEvent();drawActions();drawScene();drawFxTag();drawComms();drawVoteState();
  document.getElementById('actGo').disabled=true;
 }
 
@@ -1311,33 +1479,64 @@ function drawComms(){
  el.style.display='block';
  const fromEarth = m.from==='HOUSTON';
 
- // a named person at each end: teammates who stayed home, and the crew on duty
  const home = (S.earth&&S.earth.length) ? S.earth[(S.sol-1)%S.earth.length] : null;
  const away = S.duty;
- const sender = fromEarth ? home : away;
- const name = sender ? sender.name.toUpperCase() : (fromEarth?'MISSION CONTROL':'CREW');
- const where = fromEarth ? 'EARTH' : placeName();
- const face = sender ? sender.face : (fromEarth ? CREWART.control : '');
+ const sec = lightTime(), d = sayDelay(sec);
 
- const sec = lightTime();
- const d = sayDelay(sec);
+ // Both people are shown, with the signal crossing between them.
+ const L = fromEarth ? home : away;                 // who is talking
+ const R = fromEarth ? away : home;                 // who is listening
+ const Lface = L ? L.face : CREWART.control;
+ const Rface = R ? R.face : CREWART.control;
+ const Lwhere = fromEarth ? 'EARTH' : placeName();
+ const Rwhere = fromEarth ? placeName() : 'EARTH';
  const stamp = fromEarth
-   ? `sent from Earth <b>${d} ago</b> \u00b7 ${name} cannot see what you are doing now`
-   : `this will reach ${home?home.name:'Earth'} in <b>${d}</b> \u00b7 any answer takes ${d} more`;
+   ? `left Earth <b>${d}</b> ago`
+   : `arrives on Earth in <b>${d}</b>`;
 
- el.innerHTML=`<div class="cwrap">
-   ${face?`<img class="cav${sender?'':' ctrl'}" src="${face}" alt="">`:''}
-   <div class="cbody">
-     <div class="ch">\u25cf ${name} \u00b7 ${where}
-       <span class="cto">\u2192 ${fromEarth?(away?away.name.toUpperCase():'CREW'):(home?home.name.toUpperCase():'EARTH')}</span></div>
-     <div class="ct">\u201c${m.t}\u201d</div>
-     <div class="cdelay">\u23f1 ${stamp}</div>
-     <details><summary>Why this happens</summary><div class="cw">${m.k}<br>
-       <span class="dim">Right now ${S.mission.key==='moon'?'the Moon':'Mars'} is about
-       ${sayDistance()} away, and radio travels at the speed of light \u2014 about 300,000 km every
-       second. Nothing can carry a message faster.</span>
-     </div></details>
-   </div></div>`;
+ el.innerHTML=`
+  <div class="link">
+    <div class="lend">
+      <img src="${Lface}" alt="">
+      <b>${L?L.name:'Control'}</b><span>${Lwhere}</span>
+    </div>
+    <div class="lwire">
+      <div class="lsig"><i></i><i></i><i></i></div>
+      <div class="llag">\u23f1 ${stamp}</div>
+      <div class="ldist">${sayDistance()}</div>
+    </div>
+    <div class="lend">
+      <img src="${Rface}" alt="">
+      <b>${R?R.name:'Crew'}</b><span>${Rwhere}</span>
+    </div>
+  </div>
+  <div class="ct">\u201c${m.t}\u201d</div>
+  <details><summary>Why this happens</summary><div class="cw">${m.k}<br>
+    <span class="dim">A reply cannot come back faster than ${d}, so nobody is having a
+    conversation \u2014 they are leaving each other messages.</span></div></details>`;
+}
+function drawVoteState(){
+ const el=document.getElementById('votestate'); if(!el) return;
+ if(S.crew.length<2){ el.style.display='none'; return; }
+ el.style.display='block';
+ const cast=S.pvotes||[];
+ if(S.voteResult){
+  const win=S.voteResult;
+  const act=flightActions().find(x=>x.id===win.key);
+  el.innerHTML=`<b>Crew decided:</b> ${act?act.n:win.key}` +
+   (win.tied?` <span style="color:var(--pwr)">\u00b7 tied, so the first vote won</span>`:'') +
+   `<div class="vrow">${cast.map(v=>{
+      const m=S.crew.find(c=>c.name===v.who);
+      const a2=flightActions().find(x=>x.id===v.key);
+      return `<span class="vchip${v.key===win.key?' win':''}">${m?`<img src="${m.face}" alt="">`:''}${
+        v.who} \u2192 ${a2?a2.n.split(' ')[0]:v.key}</span>`;}).join('')}</div>`;
+  return;
+ }
+ const next=S.crew[cast.length];
+ el.innerHTML=`<b style="color:${next?SUITS[next.suit].rgb:'var(--ink)'}">${
+   next?next.name:'Crew'}</b>, your vote \u00b7 ${cast.length}/${S.crew.length} in` +
+  (cast.length?`<div class="vrow">${cast.map(v=>
+     `<span class="vchip">${v.who} voted</span>`).join('')}</div>`:'');
 }
 function drawFxTag(){
  const m={storm:['\u26a0 SOLAR STORM \u00b7 CREW SHELTERING','#ff5c5c'],
@@ -1453,6 +1652,9 @@ function drawEvent(){
 
 function drawActions(){
  const w=document.getElementById('actions');w.innerHTML='';
+ const multi = S.crew.length>1;
+ if(multi && !S.pvotes) S.pvotes=[];
+ const voter = multi ? S.crew[(S.pvotes||[]).length] : null;
  flightActions().forEach(a=>{
   const b=document.createElement('button');b.className='act';
   const need=-(scaleE(traitE(a.e)).pwr||0);
@@ -1463,10 +1665,18 @@ function drawActions(){
     <span class="ad">${broke?`<b style="color:var(--bad)">Not enough power \u2014 needs ${need} W, you have ${Math.round(S.pwr)}.</b>`
       : idle?`<b style="color:var(--dim)">Nothing collected to send.</b>` : a.d}</span>`;
   if(broke||idle) b.disabled=true;
-  b.onclick=()=>{S.pick=a;S.site=SITE[a.id]!==undefined?SITE[a.id]:null;
+  b.onclick=()=>{
+    if(multi){
+     S.pvotes.push({key:a.id, t:performance.now(), who:voter?voter.name:''});
+     if(S.pvotes.length<S.crew.length){ drawActions(); drawVoteState(); return; }
+     const win=tallyWinner(S.pvotes);
+     a = flightActions().find(x=>x.id===win.key) || a;
+     S.voteResult=win;
+    }
+    S.pick=a;S.site=SITE[a.id]!==undefined?SITE[a.id]:null;
     [...w.children].forEach(c=>c.classList.remove('sel'));
     b.classList.add('sel');document.getElementById('actGo').disabled=false;
-    drawBars(); showForecast(a);};
+    drawBars(); showForecast(a); drawVoteState();};
   w.appendChild(b);});
 }
 function costStr(e,short){
