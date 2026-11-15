@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 300" role="img"
+ aria-label="Why the Moon can be reached almost any week">
+<rect width="460" height="300" fill="#05070f"/>
+<ellipse cx="150" cy="160" rx="96" ry="96" fill="none" stroke="#2f4a7a"
+ stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="150" cy="160" r="20" fill="#2a6fd4"/>
+<circle cx="144" cy="155" r="6" fill="#3f8f5a"/>
+<text x="150" y="196" fill="#9fd0ff" font-size="11" text-anchor="middle"
+ font-family="monospace">EARTH</text>
+<circle cx="246" cy="160" r="9" fill="#9aa4b5"/>
+<text x="260" y="164" fill="#cfd8ee" font-size="11" font-family="monospace">MOON</text>
+<path d="M 172 154 Q 210 120 236 154" fill="none"
+ stroke="#4fd1a5" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="184" y="114" fill="#4fd1a5" font-size="11" font-family="monospace">about 3 days</text>
+<text x="16" y="26" fill="#e8eeff" font-size="13" font-family="monospace">THE MOON IS ALWAYS NEARBY.</text>
+<text x="16" y="43" fill="#8fa0c4" font-size="11" font-family="monospace">It circles Earth every 27 days.</text>
+<text x="16" y="248" fill="#4fd1a5" font-size="10.5" font-family="monospace">A launch chance comes round every few days, and the trip takes 3.</text>
+<text x="16" y="263" fill="#6f87ad" font-size="10" font-family="monospace">That is why we can practise at the Moon but not at Mars.</text>
+</svg>

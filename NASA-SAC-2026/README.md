@@ -279,6 +279,24 @@ Both missions follow the same arc:
 5. **Who pays for it** - government money vs private money, and why both
 6. **What is hard** - the honest limits, leading into the trade-off loop
 
+### Pictures that answer the question
+Each design step shows something that explains *that* decision:
+
+| Step | Image |
+|---|---|
+| When do we launch? | A drawn orbital diagram — Earth at launch, the transfer arc, and where Mars will be in 259 days (a separate Earth–Moon version for the lunar run) |
+| Where does the power come from? | Mars 2020's MMRTG (PIA23306) |
+| What science do we carry? | PIXL finding vivianite and greigite (PIA26640) |
+| How does the evidence get home? | The Deep Space Network at Goldstone (PIA23214) |
+| Which rocket? | Mars 2020 lifting off on an Atlas V (KSC-20200730) |
+
+The launch-window diagram is drawn rather than photographed, because NASA's
+image library has no picture that shows *why you must wait*. It is captioned
+"drawn for this game" so it is never mistaken for a NASA photograph. It is
+geometrically honest: the transfer arc is half an ellipse with the Sun at one
+focus, and Mars is placed 136 degrees short of the arrival point, which is how
+far it travels in 259 days of its 687-day year.
+
 ### Real NASA images used
 | File | NASA ID | Subject |
 |---|---|---|
