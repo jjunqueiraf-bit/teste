@@ -37,7 +37,7 @@ global one, and the Local Event's clock is the one that counts.
 | 4 | **Demo: ≤30s video OR ≤7 slides** | ✅ **Built** | The 7-slide deck is made and ready to export. No audio, so no subtitle requirement. *Adult lead: export and host it* |
 | 5 | **AI use declared and AI content labelled** | ✅ **Done in the build** | In-game credits screen, README, and the Use of AI field below. The two orbital diagrams carry an **AI-ASSISTED DIAGRAM** watermark; the six crew portraits carry an **AI-GENERATED IMAGE** watermark. **Still to do:** paste the declaration into the form. *Adult team lead* |
 | 6 | **All sources, tools, images and materials cited** | ✅ **Done** | New **DATA, SOURCES & CREDITS** screen in the game (title screen → link, and from the debrief), plus `docs/NASA-SOURCES.md` and the References field below. |
-| 7 | **All links public, no password** | 🟡 **Unblocked, not finished** | Repo is now **public** and verified reachable signed-out (200). You have a usable Link to Final Project today. Still missing: a link that **plays** the game, and a host for the demo PDF. *Adult team lead — see Part 1* |
+| 7 | **All links public, no password** | ✅ **Done for the game** | Repo public; **GitHub Pages live and verified** from a clean signed-out browser — HTTP 200, 633 ms, byte-identical to the build, all assets render, no JS errors. Still to host: the demo PDF. *Adult team lead* |
 | 8 | **Team registered, 2–6 participants, same Local Event** | ⚠️ **Verify** | Six crew. Check all six are confirmed on the team page at the São Paulo event. **You cannot add anyone after submission closes.** *Adult team lead — do this first* |
 | 9 | **Submitted by 15/11 23:59 São Paulo** | ⚠️ **Not yet** | See the code-freeze table above. *Adult team lead* |
 
@@ -94,30 +94,35 @@ takes a few minutes and a force-push. Ask if you want it.
 
 ### Which link goes in "Link to Final Project"
 
+### ✅ Use this one
+
+```
+https://jjunqueiraf-bit.github.io/teste/NASA-SAC-2026/index.html
+```
+
+Verified from a clean browser, signed out, no token: HTTP 200 in 633 ms,
+byte-identical to the build, all six portraits render, 132 DONKI events and ten
+NASA photographs present, the credits screen opens, **no failed requests and no
+JavaScript errors.** A judge clicks it and the game is playing.
+
 | Option | Link | What a judge gets |
 |---|---|---|
-| **Pages** ⭐ | `https://jjunqueiraf-bit.github.io/teste/NASA-SAC-2026/index.html` | **The game, playing, in one click.** Needs Pages switched on. |
-| **Release** | the `v1.0` release page | Downloads `index.html`; plays on double-click. Conventional for a hackathon. |
-| Repo | `https://github.com/jjunqueiraf-bit/teste` | Works **now**. They must find and download the file themselves. |
-| ~~Raw file~~ | `raw.githubusercontent.com/...` | **Do not use.** GitHub serves it as `text/plain`, so a judge sees a wall of base64, not a game. Verified. |
+| **Pages** ⭐ | the URL above | **The game, playing, in one click.** Live and tested. |
+| Repo | `https://github.com/jjunqueiraf-bit/teste` | Works. They must find and download the file themselves. Good as a *source code* link. |
+| Release | `v1.0` | **Still an unpublished draft with no file attached.** Optional now that Pages works — finish it or discard it. |
+| ~~Raw file~~ | `raw.githubusercontent.com/...` | **Do not use.** GitHub serves it as `text/plain`, so a judge sees a wall of base64. Verified. |
 
 ### Steps left
 
-1. **Turn on GitHub Pages.** Settings → **Pages** → Source: *Deploy from a
-   branch* → `main` / `/ (root)` → Save. Wait a minute, then open the Pages URL
-   above in a private window. This is the single highest-value five seconds of
-   work left.
-2. **Cut the release.** GitHub → **Releases** → *Draft a new release* → tag
-   `v1.0` → attach `NASA-SAC-2026/index.html` → Publish. Notes ready to paste:
-   `docs/release-notes-v1.0.md`.
-   *(This session cannot: GitHub returns 403 — releases are not permitted for
-   this session type, whatever the repo's visibility.)*
-3. **Upload the demo deck.** `docs/Space-Mission-Design-Game-demo.pdf` → Google
-   Drive, set **Anyone with the link**, or attach it to the release. That link
-   is your **Link to Project Demo**.
-4. **Download the file fresh** and play one full mission **with the Wi-Fi off**.
-5. **Test every link in a private window, signed out**, before you paste it.
-6. Copy the file to a second device or a USB stick.
+1. ~~Make the repo public~~ — **done.**
+2. ~~Turn on GitHub Pages~~ — **done and verified.**
+3. **Host the demo deck.** `docs/Space-Mission-Design-Game-demo.pdf` → Google
+   Drive, set **Anyone with the link**. That is your **Link to Project Demo**,
+   and it is the last link you need.
+4. **Optional:** finish or discard the `v1.0` release draft. It is currently
+   unpublished with no file attached, so it is invisible to the public either
+   way. Notes are ready at `docs/release-notes-v1.0.md`.
+5. Copy `index.html` to a USB stick as the venue fallback.
 
 ### Build checks before freeze
 
