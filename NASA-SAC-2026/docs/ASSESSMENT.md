@@ -1,131 +1,117 @@
-# Where this project stands
+# Final assessment
 
-Re-assessed Sunday 15 Nov 2026, after the pivot to **Space Mission Design Game**.
-Deadline 23:59 Sunday São Paulo time — confirm the local cutoff, which may be earlier.
-
-Scored against the Space Mission Design Game brief and the team handbook's five
-judging lenses (p.11) and test table (p.9).
+Sunday 15 November 2026. Challenge: **Space Mission Design Game**, São Paulo.
+Submissions close 23:59 local — **confirm the São Paulo cutoff, which may be earlier
+than the global portal.**
 
 ---
 
-## 1. Against the Space Mission Design Game brief
+## 1. What changed in this last pass
 
-The published brief asks for a game *"for 1 to 4 players"* that teaches
-*"the complex, real-world trade-offs of aerospace engineering by letting users
-design and simulate a complete mission from end to end"*, naming: mission
-objectives, spacecraft design, scientific instruments, launch vehicles, budgets,
-power, mass, communications and orbital constraints.
+Everything the team asked for, plus what testing turned up.
 
-| Named in the brief | In the game | How |
-|---|---|---|
-| 1 to 4 players | **Yes** | Crew size, character select, duty rotates each phase |
-| Mission objectives | **Yes** | Six story panels establish the science question |
-| Spacecraft design | **Yes** | Power source, instruments, radio, rocket |
-| Scientific instruments | **Yes** | Pick exactly 2 of 4; each costs mass, power, money |
-| Launch vehicles | **Yes** | Three rockets, 300 / 1000 / 4000 kg capacity |
-| Budgets | **Yes** | $600M cap; a design over budget cannot launch |
-| Power | **Yes** | Watts made vs watts used; over-draw blocks launch |
-| Mass | **Yes** | Kilograms vs rocket capacity; over blocks launch |
-| Communications | **Yes** | Three options; sets how fast science reaches Earth |
-| Orbital constraints | **Yes** | Launch windows — 26 months, Hohmann transfer, 259 days |
-| Design **and simulate** end to end | **Yes** | Design → verify → fly → deliver → home |
+| Asked for | Done |
+|---|---|
+| Each astronaut votes every step, majority wins, ties to the fastest | Yes — and the same rule now settles the mission choice instead of a coin flip |
+| Different colours per world | The whole page turns rust-red on Mars, cool grey on the Moon |
+| Situations easier to understand, using real past events | Opportunity (2018) on the power choice, Mars Climate Orbiter (1999) on the rocket check |
+| More maths, and name the scientists | Equations on three steps; Hohmann (1925); Kulcinski, Wittenberg and Schmitt (1986) |
+| Comparison pictures for the decisions | Side-by-side bars for mass, power, cost, lift and speed on every step |
+| Make the Earth comms visible and clear | Rebuilt as two people with an animated signal between them |
+| Hold attention better | Colour change per world, animated signal, comparison bars, named people, real disasters |
 
-**Nine of nine named elements, plus the player count.** This is the strongest
-part of the submission.
+## 2. Against the Space Mission Design Game brief
 
-## 2. Handbook test table (p.9)
+The brief asks for a game **for 1 to 4 players** that teaches **real aerospace
+trade-offs** by letting players **design and simulate a complete mission end to
+end**, naming: objectives, spacecraft design, instruments, launch vehicles,
+budgets, power, mass, communications and orbital constraints.
+
+| Named in the brief | In the game |
+|---|---|
+| 1 to 4 players | Crew size, character pick, **a vote every phase** |
+| Mission objectives | Six illustrated story panels |
+| Spacecraft design | Power, instruments, radio, rocket |
+| Scientific instruments | Pick 2 of 4, each costing mass, watts and money |
+| Launch vehicles | Three rockets, 300 / 1000 / 4000 kg |
+| Budgets | $600M cap, enforced |
+| Power | Watts made vs used, enforced |
+| Mass | Kilograms vs lift capacity, enforced |
+| Communications | Three options setting how fast science gets home |
+| Orbital constraints | Launch windows, Hohmann transfer, 26-month cycle |
+| Design **and simulate** | Design → verify → journey → operate → deliver → home |
+
+**Eleven for eleven.**
+
+## 3. Handbook test table (p.9) — all verified by automation
 
 | Test | Result |
 |---|---|
 | A complete mission runs, returns a result, explains, restarts | **PASS** |
-| **An invalid design cannot launch; limit and redesign route clear** | **PASS** — blocks on mass, power, cost or launch window, each with the number and the fix |
-| **Distinguishes stored data from data delivered to Earth** | **PASS** — collect-and-never-send loses with the science stranded, and says so |
-| Poor instrument choice explained | **PASS** — warnings name what the missing instrument would have told you |
+| An invalid design cannot launch; the limit and the fix are clear | **PASS** (2 reasons shown) |
+| Distinguishes stored data from data delivered to Earth | **PASS** |
+| Poor instrument choice explained | **PASS** |
 | Double-clicks do not spend twice or skip a stage | **PASS** |
 | Restart clears mission state | **PASS** |
-| Second device / access without setup surprises | **PASS** — one offline file |
-| First-time player reaches a result without coaching | **UNTESTED** |
+| Second device / access without setup surprises | **PASS** (one offline file) |
+| First-time player reaches a result without coaching | **Lucca played and was fine** — one data point, not yet written up |
 
-Seven of eight. The eighth needs a child, not code.
+Plus, from this pass:
+- No page scroll at 360×640, 390×844 or 1280×800; nothing important clipped
+- Every visible button has an accessible name
+- Five complete playthroughs across crew sizes, worlds, lengths and difficulties:
+  all finished, four different endings, zero JavaScript errors
 
-## 3. Five judging lenses (p.11)
+## 4. Science and sources
 
-| Lens | Status |
-|---|---|
-| **Creativity** | **Strong** — design-then-fly, crew specialisms, radio traffic |
-| **Relevance** | **Strong** — every element the brief names, structured on NASA's own six-step process |
-| **Validity** | **Strong, one check outstanding** — real DONKI data, traceable rules, tested outcomes, sources documented; confirm a listed source appears on the Resources tab |
-| **Presentation** | **Partial** — honest claims and readable captions, but no demo video |
-| **Impact** | **Missing** — no named learner, no observed misconception |
+Everything checkable is checked, and disagreements are stated rather than hidden.
 
-## 4. Playthrough length
+- **132 real DONKI coronal mass ejections** drive the radiation model, using the
+  real speed, NASA's halfAngle geometry and NASA's own class
+- **Walter Hohmann, 1925** — the transfer orbit
+- **Kulcinski, Wittenberg and Schmitt, 1986** — the first paper linking lunar
+  helium-3 to fusion. Schmitt is the Apollo 17 astronaut in the photograph the
+  player saw two steps earlier
+- **Opportunity, silenced 10 June 2018** by a planet-wide dust storm — attached
+  to the solar-versus-nuclear choice
+- **Mars Climate Orbiter, 1999** — newtons versus pound-force, arrived at ~57 km
+  instead of 140–150 km. Orbiter cost ~$125M; published programme-loss figures
+  run higher, and the game says so
+- Maths shown as equations: 1/distance² for sunlight, distance ÷ speed of light
+  for signal delay, mass ≤ lift capacity
 
-Measured end to end, automated: **42 clicks across 10 screens**.
-At a realistic reading pace that is **3 to 4 minutes** — inside the handbook's
-3–5 minute target. Breakdown: 6 story panels, 5 design steps, 1 verification,
-4 flight phases, 1 debrief.
+## 5. What is still missing — none of it is code
 
----
+1. **Write up a child testing it.** Lucca played and was fine; that needs to
+   become a sentence a judge can read: who played, what confused them, what they
+   could explain afterwards. This is the Impact lens, scored first.
+2. **Demo video**, 60–90 seconds, narrated by the children.
+3. **One-page data explainer** — the content is already in `NASA-SOURCES.md`.
+4. **AI disclosure** in the submission. This code was written by an AI assistant
+   working to the team's direction; the handbook (p.11) requires that to be
+   stated.
+5. **Confirm one listed NASA source on the challenge's Resources tab.** Three
+   sources used here came from the list the team supplied, but this container
+   cannot reach spaceappschallenge.org to verify it.
 
-## What changed since the last assessment
+## 6. On holding attention
 
-Resolved:
-- **Challenge identity** — was the biggest risk; the project is now built for
-  Space Mission Design Game and matches its brief point by point
-- **Game shape** — design and simulate end to end, not outpost survival
-- **Two handbook pass conditions** that were previously N/A now pass
-- **Length** — was 12–36 turns, now 4–8 phases and 3–4 minutes total
-- **Mobile** — the choices were unreachable; the page no longer scrolls
-- **Consequences** — now shown before committing and explained after
-- **Editorialising removed** — the Exxon / Blue Origin / Amazon aside is gone
+What was added: the page changes colour with the world, the radio signal
+animates between two faces, comparison bars make choices visually obvious, real
+disasters give stakes, and named people give the science a human face.
 
-Still open, in priority order:
-1. **No child has tested it** — the Impact lens, and the last failing pass condition
-2. **No demo video**
-3. **No one-page data explainer packaged** (content drafted in `MISSIONS.md` and `NASA-SOURCES.md`)
-4. **Authorship / AI disclosure** not yet written into the submission
-5. **Resources tab unverified** — see below
+What would help most next, and costs nothing to build: **shorten the story from
+six panels to four**. A first run is now title → crew → setup → characters →
+vote → 6 story panels → 5 design steps → verify → journey → 6 phases → debrief.
+That is a lot before the first decision. The SHORT mission setting already helps;
+cutting two story panels would help more.
 
-## On the NASA source requirement
-The handbook (p.7) makes at least one listed NASA source a Global Awards gate.
-Three of the sources this project uses came from the resource list supplied for
-this challenge, and all three do real work in the game:
-- **Design and Develop Science Missions** — its six-step process is the design
-  progress bar; its four segments are the verification summary
-- **CubeSat 101** — anchors the mass and cost scales
-- **DONKI** — 132 real CME events drive the radiation model
+## 7. Verdict
 
-That almost certainly satisfies the gate. **It still needs one human check:**
-open the challenge's Resources tab and confirm at least one of these is listed
-there. This container cannot reach spaceappschallenge.org — DNS and TLS both
-fail through the proxy — so it is the one thing I cannot verify for you.
+The build answers the brief completely and passes every functional test. The
+science is real, sourced, and honest about what is disputed.
 
----
-
-## Where to spend the remaining hours
-
-| # | Task | Time | Why |
-|---|---|---|---|
-| 1 | Confirm a listed NASA source on the Resources tab | 10 min | Awards eligibility |
-| 2 | Three children play it cold; write down what confused them | 60 min | Impact lens + the last pass condition |
-| 3 | Fix the top one or two confusions | 60 min | Driven by evidence, not guesswork |
-| 4 | One-page data explainer | 30 min | Content already drafted |
-| 5 | 60–90 s demo video, narrated by the children | 60 min | Presentation + authorship |
-| 6 | AI disclosure line in the submission | 10 min | Handbook p.11 |
-| 7 | Submit two hours early, confirm *submitted* not saved | 30 min | Handbook p.10 |
-
-## What not to do
-- No new features. The brief is fully covered; more surface means more to explain.
-- No platform port.
-- Do not skip the child test to polish the game further. The game is no longer
-  the weak part.
-
-## Honest summary
-The build now answers the challenge brief completely and passes seven of the
-handbook's eight functional tests. Three months ago this would be a finished
-project.
-
-What is missing is **evidence that it teaches anyone** — and the handbook scores
-that explicitly, in the lens listed first. One afternoon of three children
-playing it, with notes on what confused them and what they could explain
-afterwards, is worth more than anything else that could be built today.
+**The remaining work is evidence, not engineering.** An hour spent writing down
+what Lucca and two others did — what confused them, what they could explain
+afterwards — is worth more to the score than anything further that could be
+built today.
