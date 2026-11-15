@@ -172,6 +172,8 @@ Three assets from the team's Construct project are used:
   warm for the Mars run)
 - **ship.png** — the pixel shuttle, flown across the star field in transit
 - **start.png** — the START button on the title screen
+- **control.png** — the astronaut NPC, cropped head-and-shoulders, who is now
+  the face of Mission Control in the radio panel
 
 Originals in `art/crew/`.
 
@@ -216,8 +218,11 @@ panels; a Martian dust storm thickens the haze.
 
 ## Radio traffic
 Every phase brings one message between the crew on the surface and Mission
-Control on Earth, shuffled per run so replays differ. Each carries a real
-difficulty of working off-world, with the explanation behind a disclosure:
+Control on Earth, shuffled per run so replays differ. Both ends of the link
+have a face: the team's pixel astronaut speaks for Mission Control, and the
+on-duty crew member's own portrait speaks from the surface. Each message
+carries a real difficulty of working off-world, with the explanation behind a
+disclosure:
 
 - signal delay, and deciding alone because nobody is watching live
 - lunar dust wrecking visors and seals
