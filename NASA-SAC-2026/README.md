@@ -102,6 +102,48 @@ ice found. These are in-game scenarios, deliberately *not* dressed as NASA
 records. Each carries a "Did you know?" line and, like every action, each one
 costs something.
 
+## Mission story (the explainer)
+After the mission vote, a six-panel illustrated sequence runs before play. Each
+panel pairs a **real NASA photograph** (credited with title, date and NASA ID)
+with one of the chosen astronauts speaking in a comic-style bubble, then a short
+explanation. A different crew member narrates each panel.
+
+Both missions follow the same arc:
+1. **Why we go** - the problem on Earth
+2. **The discovery** - what was actually found, and how
+3. **The evidence / what is already happening** - contracts, instruments, dates
+4. **Why it matters on Earth** - the concrete payoff today, not just someday
+5. **Who pays for it** - government money vs private money, and why both
+6. **What is hard** - the honest limits, leading into the trade-off loop
+
+### Real NASA images used
+| File | NASA ID | Subject |
+|---|---|---|
+| moon_scoop | as17-145-22157 | Harrison Schmitt scooping lunar samples, Apollo 17 |
+| moon_earth | art002e021278 | Earthset seen from Orion |
+| moon_private | KSC-20231121-PH-ULA01_0002 | Astrobotic lander encapsulation |
+| mars_spots | PIA26368 | The 'leopard spots' rock |
+| mars_selfie | PIA26344 | Perseverance selfie with Cheyava Falls |
+| mars_jezero | PIA24485 | The delta in Jezero Crater |
+| mars_pixl | PIA26640 | PIXL finding vivianite and greigite |
+
+Pulled from the NASA Image and Video Library, compressed and embedded so the
+single file still runs offline. Originals in `art/nasa/`.
+
+## Private sector
+A dedicated panel in each mission explains that governments fund what is too
+risky or too slow for a business - the science, the first landers, the proof -
+while private money turns one mission into an industry. Named with real roles:
+Interlune, Vermeer, Astrobotic, Intuitive Machines, SpaceX, and buyers Bluefors
+and Maybell Quantum. It also states plainly that Blue Origin is funded by Jeff
+Bezos rather than Amazon, and that Exxon has no role in space.
+
+## Cause and consequence at every step
+The result readout explains *why*, not just what. Each action carries its own
+reason ("baking helium-3 out of regolith needs heat, and heat needs power"), and
+radiation outcomes are explained from the real numbers - the cloud's width, your
+shielding level, and why the damage lands on life support.
+
 ## Screen layout
 The game screen is built to fit **one screen with no page scrolling**, so a
 player never loses sight of the outpost or of what their last decision did.
