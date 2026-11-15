@@ -138,6 +138,9 @@
     border:2px solid #1d5c3c;image-rendering:auto}
   .radio .cav.ctrl{image-rendering:pixelated;background:#07160f}
   .radio .ch{font-size:9.5px;letter-spacing:1.5px;color:#4fd1a5;margin-bottom:3px}
+  .radio .cto{color:#5d7f70;letter-spacing:1px}
+  .radio .cdelay{font-size:10px;color:#9ed8bd;margin-top:5px;line-height:1.5}
+  .radio .cdelay b{color:#eaf7f1}
   .radio .ct{font-size:12px;line-height:1.5;color:#cfe9dd}
   .radio details{margin-top:4px}
   .radio summary{font-size:10.5px;color:#4fd1a5;cursor:pointer;list-style:none}
@@ -1174,6 +1177,31 @@ const TRIP = {
         'been in that capsule longer than a school year.',
    say:'Day 100. Earth is a bright dot now. We will not see it up close again for years.'}
 };
+// The astronauts nobody picked are the ones holding the desk on Earth.
+function earthCrew(){
+ const flown=new Set(S.crew.map(c=>c.id));
+ return AVATARS.filter(a=>!flown.has(a.id));
+}
+// Real light-time. Mars swings between about 55 and 400 million km from Earth,
+// so a run picks a distance and sticks with it.
+const LIGHT_KMS = 299792.458;
+function linkDistance(){
+ if(S.mission.key==='moon') return 384400;
+ return S.marsKm || 225000000;
+}
+function lightTime(){ return linkDistance()/LIGHT_KMS; }
+function sayDistance(){
+ const km=linkDistance();
+ return km<1000000 ? `${km.toLocaleString('en-GB')} km`
+                   : `${Math.round(km/1000000).toLocaleString('en-GB')} million km`;
+}
+function sayDelay(sec){
+ if(sec<60) return `${sec.toFixed(1)} seconds`;
+ const m=Math.floor(sec/60), s=Math.round(sec%60);
+ return `${m} minute${m===1?'':'s'}${s?` ${s} seconds`:''}`;
+}
+function placeName(){ return S.mission.key==='moon' ? 'THE MOON' : 'MARS'; }
+
 function startTransit(){ S.tphase=0; go('s-transit'); renderTransit(); }
 function renderTransit(){
  const k=S.mission.key, tr=TRIP[k];
@@ -1241,6 +1269,8 @@ function startRun(){
  S.pwr=S.diff.pwr;S.life=S.diff.life;S.shd=S.diff.shd;S.prog=0;S.coll=0;S.log=[];
  initAnim(); S.turnLines=[]; showResult();
  S.msgs = shuffle([...COMMS]);
+ S.marsKm = 80000000 + Math.floor(Math.random()*290000000);   // this run's Earth-Mars gap
+ S.earth  = shuffle(earthCrew());
  S.deck=shuffle([...(EVENTS.length?EVENTS:EVENTS_FALLBACK)]);
  logit(`Mission begins at ${S.mission.site}. Crew: ${S.crew.map(c=>c.name).join(', ')}.`);
  go('s-game');nextTurn();
@@ -1278,16 +1308,33 @@ function drawComms(){
  if(!m){ el.style.display='none'; return; }
  el.style.display='block';
  const fromEarth = m.from==='HOUSTON';
- const crew = S.duty ? S.duty.name.toUpperCase() : 'CREW';
- const who  = fromEarth ? 'MISSION CONTROL \u00b7 EARTH' : `${crew}, ON THE SURFACE`;
- // Earth speaks through the controller; the surface speaks with the crew's own face
- const face = fromEarth ? CREWART.control : (S.duty ? S.duty.face : '');
+
+ // a named person at each end: teammates who stayed home, and the crew on duty
+ const home = (S.earth&&S.earth.length) ? S.earth[(S.sol-1)%S.earth.length] : null;
+ const away = S.duty;
+ const sender = fromEarth ? home : away;
+ const name = sender ? sender.name.toUpperCase() : (fromEarth?'MISSION CONTROL':'CREW');
+ const where = fromEarth ? 'EARTH' : placeName();
+ const face = sender ? sender.face : (fromEarth ? CREWART.control : '');
+
+ const sec = lightTime();
+ const d = sayDelay(sec);
+ const stamp = fromEarth
+   ? `sent from Earth <b>${d} ago</b> \u00b7 ${name} cannot see what you are doing now`
+   : `this will reach ${home?home.name:'Earth'} in <b>${d}</b> \u00b7 any answer takes ${d} more`;
+
  el.innerHTML=`<div class="cwrap">
-   ${face?`<img class="cav${fromEarth?' ctrl':''}" src="${face}" alt="">`:''}
+   ${face?`<img class="cav${sender?'':' ctrl'}" src="${face}" alt="">`:''}
    <div class="cbody">
-     <div class="ch">\u25cf ${who}</div>
+     <div class="ch">\u25cf ${name} \u00b7 ${where}
+       <span class="cto">\u2192 ${fromEarth?(away?away.name.toUpperCase():'CREW'):(home?home.name.toUpperCase():'EARTH')}</span></div>
      <div class="ct">\u201c${m.t}\u201d</div>
-     <details><summary>Why this happens</summary><div class="cw">${m.k}</div></details>
+     <div class="cdelay">\u23f1 ${stamp}</div>
+     <details><summary>Why this happens</summary><div class="cw">${m.k}<br>
+       <span class="dim">Right now ${S.mission.key==='moon'?'the Moon':'Mars'} is about
+       ${sayDistance()} away, and radio travels at the speed of light \u2014 about 300,000 km every
+       second. Nothing can carry a message faster.</span>
+     </div></details>
    </div></div>`;
 }
 function drawFxTag(){

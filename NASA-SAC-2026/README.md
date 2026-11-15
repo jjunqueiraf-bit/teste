@@ -232,12 +232,27 @@ Weather sits on top of that: lunar night darkens everything and kills the
 panels; a Martian dust storm thickens the haze.
 
 ## Radio traffic
-Every phase brings one message between the crew on the surface and Mission
-Control on Earth, shuffled per run so replays differ. Both ends of the link
-have a face: the team's pixel astronaut speaks for Mission Control, and the
-on-duty crew member's own portrait speaks from the surface. Each message
-carries a real difficulty of working off-world, with the explanation behind a
-disclosure:
+Every phase brings one message between the crew on the surface and the
+teammates who stayed on Earth, shuffled per run so replays differ.
+
+**The people are named and placed.** Whoever you did not pick for the crew is
+holding the desk back home, so the link reads
+`LUCA · EARTH → THEO` or `THEO · MARS → LUCA`, with both faces shown. Nobody
+appears in two places at once.
+
+**The delay is real and calculated, not decorative.** Each run picks an
+Earth-Mars distance between 80 and 370 million km (the real range is roughly 55
+to 400 million), divides by the speed of light, and shows the result on every
+message:
+
+- *"sent from Earth 19 minutes 34 seconds ago · LUCA cannot see what you are doing now"*
+- *"this will reach Luca in 19 minutes 34 seconds · any answer takes that much more"*
+
+On the Moon the same calculation gives **1.3 seconds** over 384,400 km, so the
+contrast between the two destinations is visible rather than asserted.
+
+Each message also carries a real difficulty of working off-world, with the
+explanation behind a disclosure:
 
 - signal delay, and deciding alone because nobody is watching live
 - lunar dust wrecking visors and seals
