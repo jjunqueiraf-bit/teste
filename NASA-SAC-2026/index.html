@@ -128,6 +128,15 @@
   .result .rl{display:block}
   .result .up{color:var(--life)} .result .dn{color:var(--bad)} .result .nu{color:var(--dim)}
   .result.empty{color:var(--dim)}
+  .radio{display:none;background:#04120c;border:var(--px) solid #1d5c3c;padding:7px 10px}
+  .radio .ch{font-size:9.5px;letter-spacing:1.5px;color:#4fd1a5;margin-bottom:3px}
+  .radio .ct{font-size:12px;line-height:1.5;color:#cfe9dd}
+  .radio details{margin-top:4px}
+  .radio summary{font-size:10.5px;color:#4fd1a5;cursor:pointer;list-style:none}
+  .radio summary::-webkit-details-marker{display:none}
+  .radio summary::before{content:'\25b8 '}
+  .radio details[open] summary::before{content:'\25be '}
+  .radio .cw{font-size:11px;color:#8fb8a6;line-height:1.55;margin-top:4px}
 
   .act{background:var(--panel2);border:var(--px) solid var(--line);color:var(--ink);
     font:inherit;width:100%;text-align:left;padding:8px 10px;cursor:pointer;display:block}
@@ -330,7 +339,8 @@
     <div id="fxtag"></div>
     <div class="statusbar" id="statusbar"></div>
     <div class="gauges" id="gauges"></div>
-    <div class="result empty" id="result">Pick a job for today.</div>
+    <div class="result empty" id="result">Pick a job for this phase.</div>
+    <div class="radio" id="comms"></div>
   </div>
   <div class="gside">
     <div class="gflow">
@@ -581,9 +591,9 @@ const STEPS = [
 
 /* ---------- CONFIG ---------- */
 const LENGTHS = {
- quick:{k:'quick', n:'QUICK', sols:12, d:'3-5 min. Good for a demo.'},
- std:  {k:'std',   n:'STANDARD', sols:24, d:'The full mission.'},
- long: {k:'long',  n:'EXPEDITION', sols:36, d:'Long haul. More storms.'}
+ quick:{k:'quick', n:'SHORT', sols:4, d:'4 phases. A quick demo run.'},
+ std:  {k:'std',   n:'STANDARD', sols:6, d:'6 phases. The usual mission.'},
+ long: {k:'long',  n:'EXTENDED', sols:8, d:'8 phases. More weather, more radio traffic.'}
 };
 const DIFFS = {
  cadet:{k:'cadet', n:'CADET', d:'Forgiving. Learn the trade-offs.',
@@ -610,11 +620,11 @@ const TRAITS = {
  davi:{role:'GEOLOGIST', icon:'\u26cf',
    good:'Finding the good ground', bad:'Stays out too long',
    d:'Reads the terrain better than anyone, and keeps working past the safe hour.',
-   gain:{prog:1.38}, cost:{life:1.22}},
+   gain:{coll:1.38}, cost:{life:1.22}},
  henrique:{role:'FLIGHT SURGEON', icon:'\u2695',
    good:'Keeping the crew alive', bad:'Slows the mission',
    d:'Runs life support beautifully, and calls a halt whenever anyone looks tired.',
-   gain:{life:1.45, prog:0.86}},
+   gain:{life:1.45, coll:0.86}},
  caio:{role:'RADIATION OFFICER', icon:'\u2622',
    good:'Shielding', bad:'Heavy on power',
    d:'Builds shielding nobody else could, and runs the equipment hard to do it.',
@@ -622,11 +632,11 @@ const TRAITS = {
  nathan:{role:'SYSTEMS OPERATOR', icon:'\u2699',
    good:'Wastes nothing', bad:'Never pushes',
    d:'Everything costs less when Nathan runs it, but he will not take a risk.',
-   gain:{prog:0.86, pwr:0.95, life:0.95, shd:0.95}, cost:{pwr:0.82, life:0.82, shd:0.82}},
+   gain:{coll:0.86, pwr:0.95, life:0.95, shd:0.95}, cost:{pwr:0.82, life:0.82, shd:0.82}},
  luca:{role:'ROVER PILOT', icon:'\u2708',
    good:'Covering ground', bad:'Light on shielding',
    d:'Moves the mission forward fast, and skips the slow job of piling regolith.',
-   gain:{prog:1.30, shd:0.82}}
+   gain:{coll:1.30, shd:0.82}}
 };
 
 /* ---------- OPERATIONAL EVENTS ----------
@@ -670,7 +680,7 @@ const OPS = {
 };
 
 // a shorter mission must advance faster per action, or it cannot be finished
-function pk(){ return Math.pow(24 / (S.len ? S.len.sols : 24), 0.6); }
+function pk(){ return 6 / (S.len ? S.len.sols : 6); }
 function traitE(e){
   const t = S.duty && TRAITS[S.duty.id];
   if(!t) return e;
@@ -683,9 +693,51 @@ function traitE(e){
 }
 function scaleE(e){
   const o={...e};
-  if(o.prog>0) o.prog = Math.round(o.prog * pk());
+  if(o.coll>0) o.coll = Math.round(o.coll * pk());
   return o;
 }
+
+/* ---------- RADIO TRAFFIC ----------
+   One message per phase, alternating between the crew in the field and Mission
+   Control on Earth. Each carries a real difficulty of working off-world. */
+const COMMS = [
+ {from:'HOUSTON', to:'crew',
+  t:'Be advised, this message left Earth some minutes ago. We are not watching you live. Whatever you are doing now, you decided it on your own.',
+  k:'A radio signal takes 4 to 24 minutes to reach Mars, and the same again to come back. There is no live conversation.'},
+ {from:'CREW', to:'earth',
+  t:'Spent the first forty minutes of the shift cleaning dust off the visor and the seals. Again.',
+  k:'Lunar dust is jagged and clings to everything because there is no weather to wear it smooth. It scratches visors and wears out seals.'},
+ {from:'HOUSTON', to:'crew',
+  t:'Your radiation badge reads higher than yesterday. Keep the shift short and get back under cover.',
+  k:'Astronauts wear dosimeters that record the radiation they absorb. Mission rules cap how much a crew member may take in a career.'},
+ {from:'CREW', to:'earth',
+  t:'Dropped a bolt. In these gloves I cannot feel anything smaller than my thumb. It took eleven minutes to pick it up.',
+  k:'A pressurised glove is stiff, like squeezing a tennis ball all day. Hand fatigue is one of the real limits on how long a spacewalk can last.'},
+ {from:'HOUSTON', to:'crew',
+  t:'Temperature outside your shelter swung about 200 degrees between sunlight and shadow today. Watch the equipment, not just yourselves.',
+  k:'With no thick atmosphere to even things out, surfaces in sunlight and shadow differ enormously. Metal expands, contracts and cracks.'},
+ {from:'CREW', to:'earth',
+  t:'Water reclaimer is running. Today we are drinking yesterday.',
+  k:'On the Space Station around 90% of water is recycled, including moisture from breath and sweat. Nothing is wasted because nothing can be replaced.'},
+ {from:'HOUSTON', to:'crew',
+  t:'The part you need is not on the manifest. Work the problem with what is in the locker.',
+  k:'There is no delivery. Crews repair with what they launched with, which is why they train to improvise and why spares are chosen so carefully.'},
+ {from:'CREW', to:'earth',
+  t:'Nobody slept well. The light never does what our bodies expect.',
+  k:'A Martian day is 24 hours 39 minutes, so a crew drifts out of step with Earth. On the Station the Sun rises every 90 minutes and sleep has to be scheduled.'},
+ {from:'HOUSTON', to:'crew',
+  t:'We lose line of sight with you shortly. Next contact in several hours. You are on your own until then.',
+  k:'Spacecraft and ground stations move. Contact comes in windows, and between them the crew decides alone.'},
+ {from:'CREW', to:'earth',
+  t:'Buffer is filling up faster than we can send. We are choosing what matters and deleting the rest.',
+  k:'Real missions collect more than they can transmit. Scientists have to decide in advance which data is worth the bandwidth.'},
+ {from:'HOUSTON', to:'crew',
+  t:'Good news. The sample you sent is in the lab and the first results are in.',
+  k:'This is the whole point. An instrument in space can hint at an answer; a laboratory on Earth can settle it.'},
+ {from:'CREW', to:'earth',
+  t:'Everything here is trying to kill us slowly and politely. Still the best job anyone has ever had.',
+  k:'Astronauts train for years for a few weeks of this. Most describe the view of Earth as the part that changes them.'}
+];
 
 /* ---------- FLIGHT, BUILT FROM YOUR DESIGN ----------
    prog = science DELIVERED to Earth (the only thing that counts)
@@ -700,17 +752,17 @@ function powerGain(){
 }
 function collectRate(){
  const i=(S.design&&S.design.inst)||[];
- let r=10;
- if(i.some(x=>x.id==='drill')) r+=7;
- if(i.some(x=>x.id==='spec'))  r+=6;
- if(i.some(x=>x.id==='cam'))   r+=3;
- if(i.some(x=>x.id==='met'))   r+=1;
+ let r=24;
+ if(i.some(x=>x.id==='drill')) r+=17;
+ if(i.some(x=>x.id==='spec'))  r+=14;
+ if(i.some(x=>x.id==='cam'))   r+=7;
+ if(i.some(x=>x.id==='met'))   r+=2;
  return r;
 }
 function sendRate(){
  const c=S.design&&S.design.comms;
  if(!c) return 18;
- return c.id==='relay' ? 34 : c.id==='hga' ? 25 : 10;
+ return c.id==='relay' ? 55 : c.id==='hga' ? 40 : 20;
 }
 function sendPower(){
  const c=S.design&&S.design.comms;
@@ -722,7 +774,7 @@ function sendable(){ return Math.min(Math.round(sendRate()*pk()), Math.floor(S.c
 
 function flightActions(){
  const moon=S.mission.key==='moon';
- const cr=Math.round(collectRate()*pk());
+ const cr=collectRate();
  const sd=sendable();
  return [
   {id:'collect', n: moon?'HARVEST AND MEASURE':'DRILL AND SCAN',
@@ -1063,6 +1115,7 @@ function startRun(){
  S.sol=1;S.maxSol=S.len.sols;
  S.pwr=S.diff.pwr;S.life=S.diff.life;S.shd=S.diff.shd;S.prog=0;S.coll=0;S.log=[];
  initAnim(); S.turnLines=[]; showResult();
+ S.msgs = shuffle([...COMMS]);
  S.deck=shuffle([...(EVENTS.length?EVENTS:EVENTS_FALLBACK)]);
  logit(`Mission begins at ${S.mission.site}. Crew: ${S.crew.map(c=>c.name).join(', ')}.`);
  go('s-game');nextTurn();
@@ -1078,6 +1131,7 @@ function nextTurn(){
    S.ops=null; S.ev=S.deck[(S.sol-1) % S.deck.length];
  }
  S.duty = S.crew.length ? S.crew[(S.sol-1) % S.crew.length] : null;
+ S.msg = S.msgs && S.msgs.length ? S.msgs[(S.sol-1) % S.msgs.length] : null;
  S.pick=null; S.site=null;
  // what the surface should look like this sol
  S.fx=null;
@@ -1089,10 +1143,21 @@ function nextTurn(){
    const g=geometry(S.ev);
    if((S.ev.severity||1)>=3 || g.k==='direct') S.fx='storm';
  }
- drawDuty();drawBars();drawEvent();drawActions();drawScene();drawFxTag();
+ drawDuty();drawBars();drawEvent();drawActions();drawScene();drawFxTag();drawComms();
  document.getElementById('actGo').disabled=true;
 }
 
+function drawComms(){
+ const el=document.getElementById('comms'); if(!el) return;
+ const m=S.msg;
+ if(!m){ el.style.display='none'; return; }
+ el.style.display='block';
+ const crew = S.duty ? S.duty.name.toUpperCase() : 'CREW';
+ const who  = m.from==='HOUSTON' ? 'MISSION CONTROL' : `${crew}, ON THE SURFACE`;
+ el.innerHTML=`<div class="ch">\u25cf ${who}</div>
+   <div class="ct">\u201c${m.t}\u201d</div>
+   <details><summary>Why this happens</summary><div class="cw">${m.k}</div></details>`;
+}
 function drawFxTag(){
  const m={storm:['\u26a0 SOLAR STORM \u00b7 CREW SHELTERING','#ff5c5c'],
           dust: ['\u2601 DUST STORM \u00b7 LOW LIGHT','#ffc93c'],
@@ -1113,7 +1178,7 @@ function drawDuty(){
     <b style="color:${S.duty?SUITS[S.duty.suit].rgb:'var(--ink)'}">${S.duty?S.duty.name:'Crew'}</b>
     <span>${t?`${t.icon} ${t.role} \u00b7 +${t.good.toLowerCase()} \u00b7 \u2212${t.bad.toLowerCase()}`:''}</span>
   </div>
-  <div class="sb-sol"><b>SOL ${S.sol}/${S.maxSol}</b>
+  <div class="sb-sol"><b>PHASE ${S.sol}/${S.maxSol}</b>
     <span>${S.mission.key==='moon'?'MOON \u00b7 HE-3':'MARS \u00b7 SAMPLE'}</span></div>`;
 }
 function preview(){
@@ -1217,8 +1282,8 @@ function drawActions(){
   w.appendChild(b);});
 }
 function costStr(e,short){
- const L=short?{prog:'GOAL',pwr:'PWR',life:'LIFE',shd:'SHLD'}
-              :{prog:'progress',pwr:'power',life:'life support',shd:'shielding'};
+ const L=short?{prog:'SENT',coll:'HELD',pwr:'PWR',life:'LIFE',shd:'SHLD'}
+              :{prog:'sent to Earth',coll:'collected',pwr:'power',life:'life support',shd:'shielding'};
  return Object.entries(e).map(([k,v])=>
    `<span style="color:${v>0?'var(--life)':'var(--bad)'}">${v>0?'+':''}${v} ${L[k]}</span>`)
    .join(short?' ':'  ');
@@ -1265,9 +1330,9 @@ function resolveTurn(){
 function showForecast(a){
  const el=document.getElementById('result'); if(!el) return;
  const p=preview(); if(!p) return;
- const L={pwr:'power',life:'life support',shd:'shielding',prog:'the goal'};
+ const L={pwr:'power',life:'life support',shd:'shielding',prog:'sent to Earth',coll:'collected'};
  const parts=[];
- for(const k of ['prog','pwr','life','shd']){
+ for(const k of ['coll','prog','pwr','life','shd']){
   const d=Math.round(p[k]); if(!d) continue;
   parts.push(`<span class="${d>0?'up':'dn'}">${d>0?'+':''}${d} ${L[k]}</span>`);
  }
@@ -1299,7 +1364,7 @@ function logit(t){S.log.unshift(t); (S.turnLines=S.turnLines||[]).push(t);}
 function showResult(){
  const el=document.getElementById('result'); if(!el) return;
  const lines=S.turnLines||[];
- if(!lines.length){el.className='result empty';el.textContent='Pick a job for today.';return;}
+ if(!lines.length){el.className='result empty';el.textContent='Pick a job for this phase.';return;}
  el.className='result';
  el.innerHTML=lines.map(t=>`<span class="rl">${t}</span>`).join('');
 }
@@ -1328,7 +1393,7 @@ function finish(win,msg){
      ${((S.design&&S.design.inst)||[]).map(i=>i.n.toLowerCase()).join(' + ')||'no instruments'},
      ${S.design&&S.design.comms?S.design.comms.n.toLowerCase():'no radio'}
      \u00b7 ${b.mass} kg \u00b7 $${b.cost}M</p>
-   <p class="small dim">Sols used: ${S.sol} &middot; delivered to Earth: ${Math.round(S.prog)}%
+   <p class="small dim">Phases used: ${S.sol} &middot; delivered to Earth: ${Math.round(S.prog)}%
    &middot; Power ${Math.round(S.pwr)}% &middot; Life ${Math.round(S.life)}% &middot; Shield ${Math.round(S.shd)}%</p></div>
  <div class="card"><h3>WHAT YOU JUST LEARNED</h3>
    <p class="small"><b>Science only counts once it reaches Earth.</b> A spacecraft can fill its

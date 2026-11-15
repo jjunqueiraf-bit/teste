@@ -128,8 +128,29 @@ Your design choices decide the flight:
 | Radio | Send rate — orbiter relay 34, big dish 25, small antenna 10 |
 | Power source | Recharge — RTG 24 steady, solar 32 on a good day but 14 in dust or night |
 
-Measured win rates with balanced play: relay 6/6, big dish 5/6, small antenna 3/6.
 The radio you chose before launch is often what decides the mission.
+
+### Mission length
+Short **4 phases**, Standard **6**, Extended **8** — a run takes a few minutes,
+not twenty. Collection and send rates scale with length, so every setting is
+winnable (verified 6/6 at all three) and the time goes into learning rather
+than repetition.
+
+## Radio traffic
+Every phase brings one message between the crew on the surface and Mission
+Control on Earth, shuffled per run so replays differ. Each carries a real
+difficulty of working off-world, with the explanation behind a disclosure:
+
+- signal delay, and deciding alone because nobody is watching live
+- lunar dust wrecking visors and seals
+- dosimeters and career radiation limits
+- how little you can feel through a pressurised glove
+- ~200 degree temperature swings between sunlight and shadow
+- recycling about 90% of water, including breath and sweat
+- repairing with only what you launched with
+- a 24 h 39 min Martian day pulling the crew out of step with Earth
+- losing line of sight and working through the gap
+- filling the buffer faster than it can be sent
 
 ## Mission story (the explainer)
 After the mission vote, a six-panel illustrated sequence runs before play. Each
