@@ -157,7 +157,7 @@ big visuals, few words.
 
 | # | Slide | Content |
 |---|---|---|
-| 1 | **Title** | *Space Mission Design Game* · team name · all member names · challenge: Space Mission Design Game · NASA Space Apps 2026, São Paulo |
+| 1 | **Title** | *Space Mission Design Game* · **Rocket Minds 6** · all six members with their handles · challenge: Space Mission Design Game · NASA Space Apps 2026, São Paulo |
 | 2 | **The problem** | "Children are taught that space is amazing. They are not taught that it is a budget." One line on who it is for: 1–4 players, ages 7–12. |
 | 3 | **What you do** | Screenshot of a design step. The five decisions: launch window, power, two instruments, radio, rocket. |
 | 4 | **The moment it teaches** | Screenshot of **BUILD & VERIFY refusing to launch**, with the reasons listed. Caption: "Too heavy for this rocket. That is a real design review." *This is your strongest slide — do not cut it.* |
@@ -235,11 +235,14 @@ account, so it works in a classroom with no network.
 ### Link to Project Demo
 
 ```
-https://drive.google.com/file/d/11jp-XYTDQqBDQgYqzcziIgibUP2ViVfg/view
+https://drive.google.com/file/d/17EL3g2JD-zt0ziwmJsrbxD_IwDFmNy02/view
 ```
-The 7-slide deck. Shared as *Anyone with the link*; verified signed-out with no
-cookies — HTTP 200, no login redirect, downloads as a 7-page PDF with a
-matching checksum.
+The 7-slide deck, cover carrying **Team Rocket Minds 6** and all six members.
+Shared as *Anyone with the link*; verified signed-out with no cookies — HTTP
+200, no login redirect, downloads as a 7-page PDF with a matching checksum.
+
+> An earlier upload (`11jp-XYT…`) has placeholder team details and has been
+> renamed **SUPERSEDED — do not submit** in Drive. Use the link above.
 
 ### Link to Final Project
 
