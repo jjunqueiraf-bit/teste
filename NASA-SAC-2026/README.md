@@ -136,6 +136,36 @@ not twenty. Collection and send rates scale with length, so every setting is
 winnable (verified 6/6 at all three) and the time goes into learning rather
 than repetition.
 
+## Every action has to earn its phase
+The flight loop used to be two buttons. It is not any more:
+
+- **Power** — drilling costs 22 W and transmitting 18 W, more than the outpost
+  makes in a phase. You cannot run two science actions back to back without
+  recharging, and an action you cannot power is greyed out with the numbers shown.
+- **Life support** — the crew consumes it every phase whatever you do. Below 45
+  they tire and **collect and transmit less**, so neglect costs output long
+  before it costs lives.
+- **Shielding** — decays every phase on its own as soil settles and seals age.
+  Let it reach zero during a strong CME and the mission ends immediately.
+
+So a run is a judgement call: you cannot afford every upkeep action *and* all
+the science, and which one you skip depends on the design you flew.
+
+## Seven ways a mission can end
+| Ending | Cause |
+|---|---|
+| **FLAWLESS MISSION** | All science delivered, early, crew in good shape |
+| **WELCOME HOME, HEROES** | All science delivered |
+| **PARTIAL SUCCESS** | 60%+ delivered when the window closed — real science, not the whole answer |
+| **DATA STRANDED** | Plenty collected, too little sent |
+| **MISSION INCOMPLETE** | Too many phases went on upkeep |
+| **BLACKOUT** | Power reached zero |
+| **CREW EVACUATED** | Life support reached zero |
+| **RADIATION EMERGENCY** | Shielding at zero when a strong CME arrived |
+
+Each ending names what to change next time. All eight are reachable and were
+observed in testing.
+
 ## Two worlds that look like two worlds
 The scenes are built separately, from the physical differences rather than a
 palette swap:
