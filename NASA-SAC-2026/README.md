@@ -166,6 +166,35 @@ the science, and which one you skip depends on the design you flew.
 Each ending names what to change next time. All eight are reachable and were
 observed in testing.
 
+## Team artwork (Construct)
+Three assets from the team's Construct project are used:
+- **cockpit.jpg** — the flight-deck window, shown during the journey (tinted
+  warm for the Mars run)
+- **ship.png** — the pixel shuttle, flown across the star field in transit
+- **start.png** — the START button on the title screen
+
+Originals in `art/crew/`.
+
+> **Not used: `fundo1`.** It carries a visible *shutterstock.com* watermark, so
+> it is third-party licensed material and cannot ship. The handbook (p.11)
+> requires third-party rights to be checked and an original-content licence.
+> Also unused for now: the generic astronaut NPC (the six portraits already
+> cover the crew) and the UI boxes.
+
+## The journey
+Launching no longer drops you straight onto the surface. The ship crosses a
+star field toward a growing destination while the cockpit view and an astronaut
+explain how long the crossing takes and why:
+
+- **Moon** — about 3 days, 384,400 km, and you can still turn round
+- **Mars** — about 259 days on the Hohmann path, no turning round, no resupply,
+  longer in the capsule than a school year
+
+## Side-by-side panels
+On screens 760px and wider, the NASA photograph sits beside the text rather
+than above it, so a reader sees the picture and the explanation together.
+Narrow screens still stack.
+
 ## Two worlds that look like two worlds
 The scenes are built separately, from the physical differences rather than a
 palette swap:
