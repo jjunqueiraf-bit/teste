@@ -200,6 +200,31 @@
   .dots{display:flex;gap:5px;justify-content:center;margin:10px 0 0}
   .dots i{width:8px;height:8px;background:#2c3a5c;display:block}
   .dots i.on{background:var(--shd)}
+  /* ---- design phase ---- */
+  .procbar{display:flex;gap:3px;margin-bottom:10px;font-size:9px;letter-spacing:.3px}
+  .procbar div{flex:1 1 0;background:var(--panel2);border:2px solid var(--line);
+    padding:4px 2px;text-align:center;color:var(--dim);line-height:1.25;min-width:0}
+  .procbar div.on{background:var(--shd);color:#04101f;border-color:#9fd0ff;font-weight:bold}
+  .procbar div.done{border-color:var(--life);color:var(--life)}
+  .bud{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+  .bud .bi{background:var(--panel);border:var(--px) solid var(--line);padding:6px 8px}
+  .bud .bi span{display:block;font-size:10px;color:var(--dim);letter-spacing:.5px}
+  .bud .bi b{font-size:15px}
+  .bud .bi.over b{color:var(--bad)} .bud .bi.ok b{color:var(--life)}
+  .bud .bi small{display:block;font-size:10px;color:var(--dim)}
+  .pick{background:var(--panel2);border:var(--px) solid var(--line);color:var(--ink);
+    font:inherit;width:100%;text-align:left;padding:9px 11px;cursor:pointer;margin-bottom:6px;display:block}
+  .pick:hover{border-color:#4a5f93}
+  .pick.sel{background:#2f4a7a;border-color:var(--shd)}
+  .pick .pn{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .pick .pn b{font-size:13px}
+  .pick .pc{font-size:10.5px;color:var(--dim);white-space:nowrap;flex:0 0 auto}
+  .pick .pd{display:block;color:var(--dim);font-size:11px;margin-top:3px}
+  .outcome{background:#06101c;border:var(--px) solid #24405c;padding:9px 11px;margin:10px 0;font-size:12px}
+  .verdict{border:var(--px) solid;padding:10px 12px;margin:8px 0;font-size:12.5px;line-height:1.55}
+  .verdict.bad{border-color:var(--bad);background:#2b1220;color:#ffb3b3}
+  .verdict.warn{border-color:var(--pwr);background:#2a2110;color:#ffe2a0}
+  .verdict.good{border-color:var(--life);background:#0e2a22;color:#b8f0dc}
   .opt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
   @media(max-width:560px){.opt{grid-template-columns:1fr}}
   .opt button{background:var(--panel2);border:var(--px) solid var(--line);color:var(--ink);
@@ -288,6 +313,12 @@
 <!-- BRIEFING -->
 <section id="s-brief" class="screen"><div id="briefbody"></div>
   <button class="btn go" onclick="startRun()">BEGIN MISSION &#9654;</button></section>
+
+<!-- DESIGN -->
+<section id="s-design" class="screen"><div class="card" id="designbody"></div></section>
+
+<!-- VERIFY -->
+<section id="s-verify" class="screen"><div class="card" id="verifybody"></div></section>
 
 <!-- GAME -->
 <section id="s-game" class="screen">
@@ -404,6 +435,146 @@ const ACTIONS = {
    e:{life:-4,pwr:-3}, why:'Nothing is free in space. The crew keeps breathing and the heaters keep running whether you act or not.'}
  ]
 };
+
+
+/* ================= MISSION DESIGN =================
+   Space Mission Design Game: the player designs the mission before flying it.
+   Every part costs MASS (kg), draws or makes POWER (W) and costs MONEY ($M).
+   A design that breaks a limit cannot launch - which is the point. */
+
+const BUDGET = {cost:600, note:'$600 million is roughly a NASA Discovery-class budget.'};
+
+const STEPS = [
+ /* ---------- 1. LAUNCH WINDOW ---------- */
+ {key:'window', title:'WHEN DO WE LAUNCH?', img:'mars_jezero',
+  q:'The rocket is ready. Can we go whenever we like?',
+  opts:[
+   {id:'now',  n:'Launch next month',
+    d:'Everyone is ready. Why wait?',
+    mass:0, pw:0, cost:0, ok:false,
+    out:'Mars is on the far side of the Sun. You would need far more fuel than any rocket carries — and arrive after the rover has run out of power.'},
+   {id:'wait', n:'Wait for the transfer window',
+    d:'Launch when Earth and Mars line up.',
+    mass:0, pw:0, cost:0, ok:true,
+    out:'Correct. You launch into a Hohmann transfer — the lowest-energy path between two orbits.'},
+   {id:'fast', n:'Launch any day, burn more fuel',
+    d:'Brute force it with a bigger rocket.',
+    mass:0, pw:0, cost:260, ok:false,
+    out:'Physically possible, financially not. The extra fuel costs more than the whole science mission.'}],
+  why:{
+   title:'Why you cannot go to Mars on any day you like',
+   body:'Earth takes <b>365 days</b> to go round the Sun. Mars takes <b>687 days</b>. ' +
+        'Because they move at different speeds, the two planets only line up for a cheap trip ' +
+        'about <b>every 26 months</b>.<br><br>' +
+        'When they do, you can fly a <b>Hohmann transfer</b> — the lowest-energy curve between ' +
+        'two orbits. It takes about <b>259 days</b> (roughly 8½ months) and needs about ' +
+        '<b>3.6 km/s</b> of extra speed.<br><br>' +
+        'Miss the window and you wait more than two years for the next one. This is why every Mars ' +
+        'mission you have heard of launched in a cluster, then nothing for two years.<br><br>' +
+        '<b>Right now a window is open: late November 2026 to early January 2027.</b> ' +
+        'The next one is in 2029.',
+   say:'This is the one thing you cannot buy your way out of. The planets decide, not us.'},
+  moonWhy:{
+   title:'The Moon is different',
+   body:'The Moon goes round Earth every <b>27 days</b>, so launch chances come round every few days ' +
+        'and the trip takes about <b>3 days</b> instead of 8½ months. That is why we can practise at ' +
+        'the Moon in a way we never could at Mars.',
+   say:'Three days to the Moon. Eight and a half months to Mars. Same rocket.'}},
+
+ /* ---------- 2. POWER ---------- */
+ {key:'power', title:'WHERE DOES THE POWER COME FROM?', img:'moon_scoop',
+  q:'Nothing works without electricity. What do you fly?',
+  opts:[
+   {id:'solar', n:'Solar array',
+    d:'Light and cheap. Needs sunlight.',
+    mass:40, pw:+300, cost:25, ok:true,
+    out:'Lots of power when the Sun shines. Dust and night are your enemy.'},
+   {id:'rtg',   n:'Nuclear battery (RTG)',
+    d:'Heavy and costly. Never stops.',
+    mass:45, pw:+110, cost:75, ok:true,
+    out:'Steady power through dust storms and the long night — but far less of it.'},
+   {id:'batt',  n:'Batteries only',
+    d:'Cheapest and lightest.',
+    mass:15, pw:+40, cost:8, ok:true,
+    out:'Fine for a few days. Then the mission is over.'}],
+  why:{
+   title:'Sunlight gets weaker the further out you go',
+   body:'Mars is about 1.5 times further from the Sun than Earth, so a solar panel there collects ' +
+        'roughly <b>43%</b> of the light it would at home. Add a dust storm and output can collapse.<br><br>' +
+        'That is why NASA flies <b>RTGs</b> on rovers like Curiosity and Perseverance. An RTG makes ' +
+        'electricity from the heat of decaying plutonium — around <b>110 watts</b>, about the same as ' +
+        'a bright lightbulb, but it keeps going for years, at night, in a storm.<br><br>' +
+        'The catch: 110 W is not much. With an RTG you cannot run everything at once.',
+   say:'Solar gives you more power on a good day. Nuclear gives you power on every day.'}},
+
+ /* ---------- 3. INSTRUMENTS ---------- */
+ {key:'inst', title:'WHAT SCIENCE DO WE CARRY?', img:'mars_pixl', multi:2,
+  q:'Pick exactly two. Each one costs mass, power and money.',
+  opts:[
+   {id:'cam',  n:'Camera', d:'See the ground and choose where to work.',
+    mass:10, pw:-15, cost:30, ok:true, out:'Eyes. Almost every mission carries them.'},
+   {id:'drill',n:'Drill and sample tube', d:'Cut a core and seal it.',
+    mass:35, pw:-50, cost:120, ok:true, out:'The only way to bring a physical sample home.'},
+   {id:'spec', n:'Spectrometer', d:'Read what a rock is made of.',
+    mass:12, pw:-20, cost:60, ok:true, out:'This is the instrument that found vivianite and greigite.'},
+   {id:'met',  n:'Weather station', d:'Track dust, wind and temperature.',
+    mass:5,  pw:-5,  cost:15, ok:true, out:'Useful, but it will not answer your science question.'}],
+  why:{
+   title:'Instruments are chosen by the question, not by what is cool',
+   body:'NASA starts every mission with a <b>science objective</b> and then asks which instruments ' +
+        'can answer it. Anything that does not help gets cut, because every kilogram and every watt ' +
+        'has to be carried there.<br><br>' +
+        'Your objective is to find out whether the rock holds signs of ancient life. A camera helps ' +
+        'you choose the rock. A spectrometer reads its chemistry. A drill lets you keep it. ' +
+        'A weather station, however interesting, answers a different question.',
+   say:'Every instrument you add is one you have to power, cool, carry and pay for.'}},
+
+ /* ---------- 4. COMMUNICATIONS ---------- */
+ {key:'comms', title:'HOW DOES THE EVIDENCE GET HOME?', img:'mars_selfie',
+  q:'Data sitting on Mars helps nobody. How do you send it?',
+  opts:[
+   {id:'hga', n:'Big dish straight to Earth',
+    d:'Talk to Earth directly.',
+    mass:25, pw:-100, cost:40, ok:true, rate:3,
+    out:'Fast and independent — and it eats power you may not have.'},
+   {id:'relay', n:'Relay through an orbiter',
+    d:'Send it up to a satellite already in orbit.',
+    mass:8, pw:-30, cost:15, ok:true, rate:5,
+    out:'Light, cheap and fast. This is how the real rovers do it.'},
+   {id:'lga', n:'Small antenna only',
+    d:'Minimal equipment.',
+    mass:3, pw:-10, cost:5, ok:true, rate:1,
+    out:'You will collect far more than you can ever send.'}],
+  why:{
+   title:'Collected is not the same as delivered',
+   body:'This is the trap that catches people. A rover can fill its memory with discoveries and still ' +
+        'achieve nothing, because <b>science only counts once it reaches Earth</b>.<br><br>' +
+        'Real rovers mostly do not talk to Earth directly. They send data up to orbiters already ' +
+        'circling Mars, which relay it home. The orbiter is high up with a big antenna and plenty of ' +
+        'solar power, so the rover can use a small, light, low-power radio.<br><br>' +
+        'A signal takes between <b>4 and 24 minutes</b> each way, depending on where the planets are. ' +
+        'There is no live conversation with Mars.',
+   say:'If you cannot send it, you did not discover it.'}},
+
+ /* ---------- 5. LAUNCH VEHICLE ---------- */
+ {key:'rocket', title:'WHICH ROCKET?', img:'moon_private',
+  q:'The rocket must lift everything you just chose.',
+  opts:[
+   {id:'small', n:'Small rocket', d:'Lifts 300 kg.', mass:0, pw:0, cost:60,  cap:300,  ok:true,
+    out:'Cheap. Only works if your spacecraft is genuinely small.'},
+   {id:'med',   n:'Medium rocket', d:'Lifts 1000 kg.', mass:0, pw:0, cost:150, cap:1000, ok:true,
+    out:'The usual choice for a science mission this size.'},
+   {id:'heavy', n:'Heavy rocket', d:'Lifts 4000 kg.', mass:0, pw:0, cost:350, cap:4000, ok:true,
+    out:'Lifts anything. Spends money you could have spent on science.'}],
+  why:{
+   title:'The rocket sets the hard limit',
+   body:'Everything else is a trade. This is a wall. If your spacecraft weighs more than the rocket ' +
+        'can lift, <b>it does not launch</b> — there is no clever workaround.<br><br>' +
+        'This is why engineers argue over grams. Adding a heavier instrument can force a bigger ' +
+        'rocket, which costs more than the instrument did, which means cutting something else. ' +
+        'Mass, power and money are all the same argument wearing different clothes.',
+   say:'Pick the rocket last, when you know what you are actually lifting.'}}
+];
 
 /* ---------- CONFIG ---------- */
 const LENGTHS = {
@@ -617,7 +788,7 @@ function storyStep(d){
  const pages=STORY[S.mission.key];
  S.panel+=d;
  if(S.panel<0) S.panel=0;
- if(S.panel>=pages.length){ renderBrief(); go('s-brief'); return; }
+ if(S.panel>=pages.length){ startDesign(); return; }
  renderStory();
  window.scrollTo(0,0);
 }
@@ -643,7 +814,7 @@ function renderStory(){
   </div>
   <p class="small dim" style="margin-top:10px;text-align:center">
     Panel ${S.panel+1} of ${pages.length} \u00b7
-    <a href="#" onclick="renderBrief();go('s-brief');return false;">skip to the mission</a></p>`;
+    <a href="#" onclick="startDesign();return false;">skip to designing the mission</a></p>`;
 }
 
 /* ---------- BRIEFING ---------- */
@@ -662,6 +833,159 @@ function renderBrief(){
    <table>${m.sponsors.map(s=>`<tr><th style="width:110px">${s[0]}</th><td>${s[1]}</td></tr>`).join('')}</table></div>
  <div class="card small dim"><b style="color:var(--ink)">YOUR GOAL:</b> ${m.goal} within ${S.maxSol} sols,
    without running out of power, life support or shielding.</div>`;
+}
+
+/* ---------- MISSION DESIGN ----------
+   Structured on NASA's own six-step process:
+   Identify Need & Goals - Define Concept - Define Requirements - Design -
+   Build & Verify - Implement.  (NASA, "Design and Develop Science Missions",
+   Access to Space for All Systems Engineering Webinar Series, 26 March 2025) */
+const PROCESS = ['IDENTIFY NEED &amp; GOALS','DEFINE CONCEPT','DEFINE REQUIREMENTS',
+                 'DESIGN','BUILD &amp; VERIFY','IMPLEMENT'];
+
+function startDesign(){
+ S.design={}; S.step=0; S.shown=false; renderDesign(); go('s-design');
+}
+function budget(){
+ let mass=0, gen=0, use=0, cost=0, cap=0;
+ STEPS.forEach(st=>{
+  const sel=S.design[st.key]; if(!sel) return;
+  (Array.isArray(sel)?sel:[sel]).forEach(o=>{
+    mass+=o.mass||0; cost+=o.cost||0;
+    if((o.pw||0)>0) gen+=o.pw; else use+=-(o.pw||0);
+    if(o.cap) cap=o.cap;
+  });
+ });
+ return {mass,gen,use,cost,cap};
+}
+function budgetHTML(){
+ const b=budget();
+ const massOver=b.cap&&b.mass>b.cap, pwOver=b.gen>0&&b.use>b.gen, costOver=b.cost>BUDGET.cost;
+ return `<div class="bud">
+  <div class="bi ${massOver?'over':(b.cap?'ok':'')}"><span>MASS</span><b>${b.mass} kg</b>
+    <small>${b.cap?`rocket lifts ${b.cap}`:'rocket not chosen'}</small></div>
+  <div class="bi ${pwOver?'over':(b.gen?'ok':'')}"><span>POWER</span><b>${b.use} / ${b.gen} W</b>
+    <small>used / made</small></div>
+  <div class="bi ${costOver?'over':'ok'}"><span>COST</span><b>$${b.cost}M</b>
+    <small>of $${BUDGET.cost}M</small></div></div>`;
+}
+function renderDesign(){
+ const st=STEPS[S.step];
+ const sel=S.design[st.key];
+ const crew=S.crew.length?S.crew[S.step % S.crew.length]:null;
+ const tr=crew&&TRAITS[crew.id];
+ const chosen=Array.isArray(sel)?sel:(sel?[sel]:[]);
+ const need=st.multi||1;
+ const ready=chosen.length===need;
+ const why = (st.key==='window'&&S.mission.key==='moon'&&st.moonWhy)?st.moonWhy:st.why;
+ const im=NASAIMG[st.img];
+
+ document.getElementById('designbody').innerHTML=`
+  <div class="procbar">${PROCESS.map((p,i)=>
+    `<div class="${i===3?'on':(i<3?'done':'')}">${p}</div>`).join('')}</div>
+  <span class="sp-tag">STEP ${S.step+1} OF ${STEPS.length}</span>
+  <h2>${st.title}</h2>
+  <p class="small dim">${st.q}</p>
+  ${budgetHTML()}
+  <div>${st.opts.map(o=>{
+    const on=chosen.some(c=>c.id===o.id);
+    const bits=[];
+    if(o.mass) bits.push(`${o.mass} kg`);
+    if(o.pw)   bits.push(`${o.pw>0?'+':''}${o.pw} W`);
+    if(o.cost) bits.push(`$${o.cost}M`);
+    if(o.cap)  bits.push(`lifts ${o.cap} kg`);
+    return `<button class="pick ${on?'sel':''}" onclick="pickOpt('${st.key}','${o.id}')">
+      <span class="pn"><b>${o.n}</b><span class="pc">${bits.join(' \u00b7 ')||'no cost'}</span></span>
+      <span class="pd">${o.d}</span></button>`;}).join('')}</div>
+  ${chosen.length?`<div class="outcome">${chosen.map(c=>
+     `<b>${c.n}:</b> ${c.out}`).join('<br>')}</div>`:''}
+  ${S.shown?`
+    ${im?`<div class="sp-img"><img src="${im.data}" alt="${im.title}">
+      <div class="cap"><b>${im.title}</b> \u00b7 ${im.date} \u00b7 NASA \u00b7 ${im.id}</div></div>`:''}
+    ${crew?`<div class="bubble"><img src="${crew.face}" alt="${crew.name}">
+      <div class="sb">${why.say}<em>\u2014 ${crew.name}${tr?`, ${tr.role}`:''}</em></div></div>`:''}
+    <h3 style="font-size:14px;margin-top:4px">${why.title}</h3>
+    <p class="small">${why.body}</p>`:''}
+  <div class="sp-nav">
+    ${S.step>0?`<button class="btn ghost" onclick="designStep(-1)">\u25c0 BACK</button>`:''}
+    <button class="btn go" ${ready?'':'disabled'} onclick="designStep(1)">${
+      !ready ? (need>1?`CHOOSE ${need}`:'CHOOSE ONE')
+      : (!S.shown ? 'WHY? \u25b6'
+      : (S.step===STEPS.length-1?'BUILD &amp; VERIFY \u25b6':'NEXT STEP \u25b6'))}</button>
+  </div>`;
+}
+function pickOpt(key,id){
+ const st=STEPS.find(s=>s.key===key);
+ const o=st.opts.find(x=>x.id===id);
+ if(st.multi){
+  let cur=S.design[key]||[];
+  cur = cur.some(c=>c.id===id) ? cur.filter(c=>c.id!==id)
+      : (cur.length>=st.multi ? [...cur.slice(1), o] : [...cur, o]);
+  S.design[key]=cur;
+ } else S.design[key]=o;
+ S.shown=false;
+ renderDesign();
+}
+function designStep(d){
+ if(d>0 && !S.shown){ S.shown=true; renderDesign(); window.scrollTo(0,0); return; }
+ S.step+=d; S.shown=false;
+ if(S.step<0) S.step=0;
+ if(S.step>=STEPS.length){ renderVerify(); go('s-verify'); return; }
+ renderDesign(); window.scrollTo(0,0);
+}
+
+/* ---------- BUILD & VERIFY ---------- */
+function renderVerify(){
+ const b=budget();
+ const fail=[], warn=[];
+ const win=S.design.window, inst=S.design.inst||[];
+
+ if(b.cap && b.mass>b.cap)
+   fail.push(`Your spacecraft weighs <b>${b.mass} kg</b> but the rocket can only lift
+     <b>${b.cap} kg</b>. It does not launch. Choose a bigger rocket or carry less.`);
+ if(b.gen && b.use>b.gen)
+   fail.push(`Your instruments need <b>${b.use} W</b> but your power source makes
+     <b>${b.gen} W</b>. You cannot run everything at once.`);
+ if(b.cost>BUDGET.cost)
+   fail.push(`The mission costs <b>$${b.cost}M</b>. The budget is <b>$${BUDGET.cost}M</b>.`);
+ if(S.mission.key==='mars' && win && win.id!=='wait')
+   fail.push(`You chose to ${win.n.toLowerCase()}. Mars is not in the right place.
+     The spacecraft never arrives.`);
+
+ const hasDrill=inst.some(i=>i.id==='drill'), hasSpec=inst.some(i=>i.id==='spec');
+ if(!hasDrill) warn.push('Without a <b>drill</b> you cannot take a physical sample \u2014 only look at one.');
+ if(!hasSpec)  warn.push('Without a <b>spectrometer</b> you cannot tell what the rock is made of.');
+ if(S.design.power && S.design.power.id==='batt')
+   warn.push('Batteries alone will run flat within days. Expect a very short mission.');
+ if(S.design.power && S.design.power.id==='solar' && S.mission.key==='mars')
+   warn.push('Solar on Mars collects about <b>43%</b> of the light it would on Earth, and dust storms cut it further.');
+
+ const ok=!fail.length;
+ document.getElementById('verifybody').innerHTML=`
+  <div class="procbar">${PROCESS.map((p,i)=>
+    `<div class="${i===4?'on':(i<4?'done':'')}">${p}</div>`).join('')}</div>
+  <h2>BUILD &amp; VERIFY</h2>
+  <p class="small dim">Before anything flies, engineers check the design against the limits.</p>
+  ${budgetHTML()}
+  ${fail.map(f=>`<div class="verdict bad">&#10007; ${f}</div>`).join('')}
+  ${warn.map(w=>`<div class="verdict warn">&#9888; ${w}</div>`).join('')}
+  ${ok?`<div class="verdict good">&#10003; The design closes. Mass, power and cost are all within
+     limits${S.mission.key==='mars'?', and you launch inside the transfer window':''}.</div>`:''}
+  <div class="small dim" style="margin:10px 0">
+    <b style="color:var(--ink)">Your mission, in NASA's four segments:</b><br>
+    <b>Launch segment</b> \u2014 ${S.design.rocket?S.design.rocket.n.toLowerCase():'not chosen'}<br>
+    <b>Space segment</b> \u2014 ${(inst.map(i=>i.n.toLowerCase()).join(', ')||'no instruments')},
+      powered by ${S.design.power?S.design.power.n.toLowerCase():'nothing'}<br>
+    <b>Ground segment</b> \u2014 ${S.design.comms?S.design.comms.n.toLowerCase():'no radio'}<br>
+    <b>User segment</b> \u2014 scientists on Earth waiting for the evidence
+  </div>
+  <div class="sp-nav">
+    <button class="btn ghost" onclick="S.step=STEPS.length-1;S.shown=true;renderDesign();go('s-design');">\u25c0 CHANGE</button>
+    ${ok?`<button class="btn go" onclick="startRun()">LAUNCH \u25b6</button>`
+        :`<button class="btn go" disabled>CANNOT LAUNCH</button>`}
+  </div>
+  ${ok?'':`<p class="small dim" style="margin-top:8px;text-align:center">
+     Fix what is marked above, then launch. This is exactly what a real design review does.</p>`}`;
 }
 
 /* ---------- RUN ---------- */
