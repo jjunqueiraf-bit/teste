@@ -174,6 +174,8 @@ Three assets from the team's Construct project are used:
 - **start.png** — the START button on the title screen
 - **control.png** — the astronaut NPC, cropped head-and-shoulders, who is now
   the face of Mission Control in the radio panel
+- **landing.gif** — the 16x16 landing animation, played full-screen between the
+  journey and the first day of work
 - **astro_anim_*.png** — the hand-animated astronaut from the team's Pixilart
   video, lifted out of the 1900x1900 export, keyed to transparency and
   recoloured into the four suit colours
